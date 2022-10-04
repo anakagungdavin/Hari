@@ -36,6 +36,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3017647128EAB4C500E14A7D /* Heal.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Heal.entitlements; sourceTree = "<group>"; };
 		30F91E1628E2B5A7008F2C99 /* Heal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Heal.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		30F91E1928E2B5A7008F2C99 /* HealApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealApp.swift; sourceTree = "<group>"; };
 		30F91E1B28E2B5A7008F2C99 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -75,6 +76,67 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3017647528EC21A700E14A7D /* Themes */ = {
+			isa = PBXGroup;
+			children = (
+				3017647828EC21E300E14A7D /* Colors */,
+				3017647728EC21D400E14A7D /* UI */,
+			);
+			path = Themes;
+			sourceTree = "<group>";
+		};
+		3017647628EC21BF00E14A7D /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Helper;
+			sourceTree = "<group>";
+		};
+		3017647728EC21D400E14A7D /* UI */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
+		3017647828EC21E300E14A7D /* Colors */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Colors;
+			sourceTree = "<group>";
+		};
+		3017647928EC319300E14A7D /* Features */ = {
+			isa = PBXGroup;
+			children = (
+				3017647A28EC3BDE00E14A7D /* Onboarding */,
+			);
+			path = Features;
+			sourceTree = "<group>";
+		};
+		3017647A28EC3BDE00E14A7D /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				3017647B28EC3C0400E14A7D /* View */,
+				3017647C28EC3C0E00E14A7D /* ViewModel */,
+			);
+			path = Onboarding;
+			sourceTree = "<group>";
+		};
+		3017647B28EC3C0400E14A7D /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		3017647C28EC3C0E00E14A7D /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 		30F91E0D28E2B5A7008F2C99 = {
 			isa = PBXGroup;
 			children = (
@@ -98,12 +160,16 @@
 		30F91E1828E2B5A7008F2C99 /* Heal */ = {
 			isa = PBXGroup;
 			children = (
+				3017647928EC319300E14A7D /* Features */,
+				3017647528EC21A700E14A7D /* Themes */,
+				3017647628EC21BF00E14A7D /* Helper */,
+				30F91E1F28E2B5AB008F2C99 /* Preview Content */,
+				30F91E2428E2B5AB008F2C99 /* Heal.xcdatamodeld */,
+				3017647128EAB4C500E14A7D /* Heal.entitlements */,
 				30F91E1928E2B5A7008F2C99 /* HealApp.swift */,
 				30F91E1B28E2B5A7008F2C99 /* ContentView.swift */,
 				30F91E1D28E2B5AB008F2C99 /* Assets.xcassets */,
 				30F91E2228E2B5AB008F2C99 /* Persistence.swift */,
-				30F91E2428E2B5AB008F2C99 /* Heal.xcdatamodeld */,
-				30F91E1F28E2B5AB008F2C99 /* Preview Content */,
 			);
 			path = Heal;
 			sourceTree = "<group>";
@@ -143,6 +209,7 @@
 				30F91E1228E2B5A7008F2C99 /* Sources */,
 				30F91E1328E2B5A7008F2C99 /* Frameworks */,
 				30F91E1428E2B5A7008F2C99 /* Resources */,
+				3017643528EAB1F000E14A7D /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -257,6 +324,26 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		3017643528EAB1F000E14A7D /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "export PATH=\"$PATH:/opt/homebrew/bin\"\nif which swiftlint > /dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		30F91E1228E2B5A7008F2C99 /* Sources */ = {
@@ -422,6 +509,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Heal/Heal.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Heal/Preview Content\"";
@@ -451,6 +539,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Heal/Heal.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Heal/Preview Content\"";
