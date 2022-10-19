@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		30E962F328F4678600A29E29 /* HealthEcgs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30E962F228F4678600A29E29 /* HealthEcgs.swift */; };
+		30E962F828F5577E00A29E29 /* PreAlertPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30E962F728F5577E00A29E29 /* PreAlertPage.swift */; };
+		30E962FC28FAA64C00A29E29 /* CustomTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30E962FB28FAA64C00A29E29 /* CustomTabBar.swift */; };
+		30E962FF28FE61A400A29E29 /* HealthAuthorizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30E962FE28FE61A400A29E29 /* HealthAuthorizer.swift */; };
+		30E9630128FE65AA00A29E29 /* HealthProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30E9630028FE65AA00A29E29 /* HealthProfile.swift */; };
+		30E9630328FFBF3800A29E29 /* CoreDataHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30E9630228FFBF3800A29E29 /* CoreDataHelper.swift */; };
 		30F91E1A28E2B5A7008F2C99 /* HealApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30F91E1928E2B5A7008F2C99 /* HealApp.swift */; };
 		30F91E1C28E2B5A7008F2C99 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30F91E1B28E2B5A7008F2C99 /* ContentView.swift */; };
 		30F91E1E28E2B5AB008F2C99 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 30F91E1D28E2B5AB008F2C99 /* Assets.xcassets */; };
@@ -37,6 +43,13 @@
 
 /* Begin PBXFileReference section */
 		3017647128EAB4C500E14A7D /* Heal.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Heal.entitlements; sourceTree = "<group>"; };
+		30E962F228F4678600A29E29 /* HealthEcgs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthEcgs.swift; sourceTree = "<group>"; };
+		30E962F428F4691300A29E29 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		30E962F728F5577E00A29E29 /* PreAlertPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreAlertPage.swift; sourceTree = "<group>"; };
+		30E962FB28FAA64C00A29E29 /* CustomTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBar.swift; sourceTree = "<group>"; };
+		30E962FE28FE61A400A29E29 /* HealthAuthorizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthAuthorizer.swift; sourceTree = "<group>"; };
+		30E9630028FE65AA00A29E29 /* HealthProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthProfile.swift; sourceTree = "<group>"; };
+		30E9630228FFBF3800A29E29 /* CoreDataHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataHelper.swift; sourceTree = "<group>"; };
 		30F91E1628E2B5A7008F2C99 /* Heal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Heal.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		30F91E1928E2B5A7008F2C99 /* HealApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealApp.swift; sourceTree = "<group>"; };
 		30F91E1B28E2B5A7008F2C99 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -88,6 +101,7 @@
 		3017647628EC21BF00E14A7D /* Helper */ = {
 			isa = PBXGroup;
 			children = (
+				30E9630228FFBF3800A29E29 /* CoreDataHelper.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -110,6 +124,8 @@
 			isa = PBXGroup;
 			children = (
 				3017647A28EC3BDE00E14A7D /* Onboarding */,
+				30E962F528F5536200A29E29 /* PreAlert */,
+				30E962F028F4672D00A29E29 /* HealthKitProvider */,
 			);
 			path = Features;
 			sourceTree = "<group>";
@@ -137,6 +153,50 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
+		30E962F028F4672D00A29E29 /* HealthKitProvider */ = {
+			isa = PBXGroup;
+			children = (
+				30E962FD28FD42CA00A29E29 /* View */,
+				30E962F128F4677200A29E29 /* ViewModel */,
+			);
+			path = HealthKitProvider;
+			sourceTree = "<group>";
+		};
+		30E962F128F4677200A29E29 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				30E962FE28FE61A400A29E29 /* HealthAuthorizer.swift */,
+				30E9630028FE65AA00A29E29 /* HealthProfile.swift */,
+				30E962F228F4678600A29E29 /* HealthEcgs.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		30E962F528F5536200A29E29 /* PreAlert */ = {
+			isa = PBXGroup;
+			children = (
+				30E962F628F5537A00A29E29 /* View */,
+			);
+			path = PreAlert;
+			sourceTree = "<group>";
+		};
+		30E962F628F5537A00A29E29 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				30E962F728F5577E00A29E29 /* PreAlertPage.swift */,
+				30E962FB28FAA64C00A29E29 /* CustomTabBar.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		30E962FD28FD42CA00A29E29 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				30F91E1B28E2B5A7008F2C99 /* ContentView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		30F91E0D28E2B5A7008F2C99 = {
 			isa = PBXGroup;
 			children = (
@@ -160,6 +220,7 @@
 		30F91E1828E2B5A7008F2C99 /* Heal */ = {
 			isa = PBXGroup;
 			children = (
+				30E962F428F4691300A29E29 /* Info.plist */,
 				3017647928EC319300E14A7D /* Features */,
 				3017647528EC21A700E14A7D /* Themes */,
 				3017647628EC21BF00E14A7D /* Helper */,
@@ -167,7 +228,6 @@
 				30F91E2428E2B5AB008F2C99 /* Heal.xcdatamodeld */,
 				3017647128EAB4C500E14A7D /* Heal.entitlements */,
 				30F91E1928E2B5A7008F2C99 /* HealApp.swift */,
-				30F91E1B28E2B5A7008F2C99 /* ContentView.swift */,
 				30F91E1D28E2B5AB008F2C99 /* Assets.xcassets */,
 				30F91E2228E2B5AB008F2C99 /* Persistence.swift */,
 			);
@@ -350,8 +410,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				30E9630328FFBF3800A29E29 /* CoreDataHelper.swift in Sources */,
 				30F91E2328E2B5AB008F2C99 /* Persistence.swift in Sources */,
+				30E962F328F4678600A29E29 /* HealthEcgs.swift in Sources */,
+				30E962FC28FAA64C00A29E29 /* CustomTabBar.swift in Sources */,
 				30F91E1C28E2B5A7008F2C99 /* ContentView.swift in Sources */,
+				30E962FF28FE61A400A29E29 /* HealthAuthorizer.swift in Sources */,
+				30E9630128FE65AA00A29E29 /* HealthProfile.swift in Sources */,
+				30E962F828F5577E00A29E29 /* PreAlertPage.swift in Sources */,
 				30F91E1A28E2B5A7008F2C99 /* HealApp.swift in Sources */,
 				30F91E2628E2B5AB008F2C99 /* Heal.xcdatamodeld in Sources */,
 			);
@@ -516,6 +582,7 @@
 				DEVELOPMENT_TEAM = 2RNK62DS26;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Heal/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -546,6 +613,7 @@
 				DEVELOPMENT_TEAM = 2RNK62DS26;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Heal/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

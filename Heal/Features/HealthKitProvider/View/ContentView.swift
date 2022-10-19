@@ -3,7 +3,8 @@
 //  Heal
 //
 //  Created by Anak Agung Gede Agung Davin on 27/09/22.
-//
+// swiftlint:disable unused_closure_parameter
+// swiftlint:disable line_length
 
 import SwiftUI
 import CoreData
@@ -12,18 +13,27 @@ struct ContentView: View {
     @Environment(\.managedObjectContext) private var viewContext
 
     @FetchRequest(
-        sortDescriptors: [NSSortDescriptor(keyPath: \Item.timestamp, ascending: true)],
+        sortDescriptors: [NSSortDescriptor(keyPath: \Ecg.timeStampECG, ascending: true)],
         animation: .default)
-    private var items: FetchedResults<Item>
+    private var items: FetchedResults<Ecg>
+    private var healthEcg: HKEcgs?
+    private var authProc: HKAuthorize?
+    let dateFormatter = DateFormatter()
+
+    @ObservedObject var ecgDates1 = HKEcgs()
+
+    init() {
+        authProc = HKAuthorize()
+    }
 
     var body: some View {
         NavigationView {
             List {
                 ForEach(items) { item in
                     NavigationLink {
-                        Text("Item at \(item.timestamp!, formatter: itemFormatter)")
+                        Text("Item at \(item.timeStampECG!, formatter: itemFormatter)")
                     } label: {
-                        Text(item.timestamp!, formatter: itemFormatter)
+                        Text(item.timeStampECG!, formatter: itemFormatter)
                     }
                 }
                 .onDelete(perform: deleteItems)
@@ -37,6 +47,15 @@ struct ContentView: View {
                         Label("Add Item", systemImage: "plus")
                     }
                 }
+                ToolbarItem {
+                    Button(action: {
+                        authProc?.authorizeHealthKit(viewContext: viewContext, completion: { success, error in
+                        })
+                        print(ecgDates1.ecgDates)
+                    }) {
+                        Label("Add Item", systemImage: "heart.text.square")
+                    }
+                }
             }
             Text("Select an item")
         }
@@ -44,8 +63,8 @@ struct ContentView: View {
 
     private func addItem() {
         withAnimation {
-            let newItem = Item(context: viewContext)
-            newItem.timestamp = Date()
+            let newItem = Ecg(context: viewContext)
+            newItem.timeStampECG = Date()
 
             do {
                 try viewContext.save()
