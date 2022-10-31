@@ -3,7 +3,7 @@
 //  Heal
 //
 //  Created by Anak Agung Gede Agung Davin on 11/10/22.
-//  swiftlint:disable multiple_closures_with_trailing_closure
+//  swiftlint: disable multiple_closures_with_trailing_closure
 
 import Foundation
 import SwiftUI
@@ -25,7 +25,8 @@ struct PreAlertView: View {
                         Rectangle(
                         )
                         .frame(width: 100, height: 100)
-                        .cornerRadius(10)
+//                        .cornerRadius(10)
+                        .custCornerRadius(10, corners: .allCorners)
                         .foregroundColor(.white)
 
                         Image("HeartAsset")
@@ -42,7 +43,7 @@ struct PreAlertView: View {
 
             VStack {
                 Spacer()
-                CustomTabBar(selectedTab: $selectedTab)
+//                CustomTabBar(selectedTab: $selectedTab)
             }
         })
     }
@@ -91,7 +92,7 @@ struct CardBig: View {
                     .font(.system(size: 20))
                     .foregroundColor(Color(red: 34/255, green: 34/255, blue: 86/255))
                     .background(Color(red: 255/255, green: 240/255, blue: 217/255))
-                    .cornerRadius(10)
+                    .custCornerRadius(10, corners: .allCorners)
                     .padding()
             }).padding()
 

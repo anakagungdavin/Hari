@@ -90,7 +90,7 @@ class HKProfile {
                                            sortDescriptors: nil) { (query, results, error) in
 
             if let result = results?.last as? HKCategorySample {
-                print("Hasil \(result.description)")
+                print("Hasil IRREGULAR ** \(result.description)")
             }
         }
 

@@ -19,12 +19,12 @@ struct CustomTabBar: View {
             TabBarButton(image: "house", selectedTab: $selectedTab)
             TabBarButton(image: "doc.text.below.ecg", selectedTab: $selectedTab)
             TabBarButton(image: "books.vertical", selectedTab: $selectedTab)
-            TabBarButton(image: "gear", selectedTab: $selectedTab)
 
         }
         .padding()
         .background(Color.white)
-        .cornerRadius(40)
+        .custCornerRadius(40, corners: .allCorners)
+//        .cornerRadius(40)
         .padding(.horizontal)
     }
 }

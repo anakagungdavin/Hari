@@ -13,6 +13,9 @@
 		30E962FF28FE61A400A29E29 /* HealthAuthorizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30E962FE28FE61A400A29E29 /* HealthAuthorizer.swift */; };
 		30E9630128FE65AA00A29E29 /* HealthProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30E9630028FE65AA00A29E29 /* HealthProfile.swift */; };
 		30E9630328FFBF3800A29E29 /* CoreDataHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30E9630228FFBF3800A29E29 /* CoreDataHelper.swift */; };
+		30E963092902549600A29E29 /* CustomUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30E96306290252B200A29E29 /* CustomUI.swift */; };
+		30E9630D290256F000A29E29 /* ProfilePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30E9630C290256F000A29E29 /* ProfilePage.swift */; };
+		30E9630F2902A8EF00A29E29 /* HexColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30E9630E2902A8EF00A29E29 /* HexColorExtension.swift */; };
 		30F91E1A28E2B5A7008F2C99 /* HealApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30F91E1928E2B5A7008F2C99 /* HealApp.swift */; };
 		30F91E1C28E2B5A7008F2C99 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30F91E1B28E2B5A7008F2C99 /* ContentView.swift */; };
 		30F91E1E28E2B5AB008F2C99 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 30F91E1D28E2B5AB008F2C99 /* Assets.xcassets */; };
@@ -22,6 +25,8 @@
 		30F91E3028E2B5AC008F2C99 /* HealTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30F91E2F28E2B5AC008F2C99 /* HealTests.swift */; };
 		30F91E3A28E2B5AC008F2C99 /* HealUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30F91E3928E2B5AC008F2C99 /* HealUITests.swift */; };
 		30F91E3C28E2B5AC008F2C99 /* HealUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30F91E3B28E2B5AC008F2C99 /* HealUITestsLaunchTests.swift */; };
+		30FE0F4A290A4B3400AD1AAE /* HealthSymptoms.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30FE0F49290A4B3400AD1AAE /* HealthSymptoms.swift */; };
+		30FE0F4E290F830C00AD1AAE /* ProfilePageNew.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30FE0F4D290F830C00AD1AAE /* ProfilePageNew.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,6 +55,9 @@
 		30E962FE28FE61A400A29E29 /* HealthAuthorizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthAuthorizer.swift; sourceTree = "<group>"; };
 		30E9630028FE65AA00A29E29 /* HealthProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthProfile.swift; sourceTree = "<group>"; };
 		30E9630228FFBF3800A29E29 /* CoreDataHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataHelper.swift; sourceTree = "<group>"; };
+		30E96306290252B200A29E29 /* CustomUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomUI.swift; sourceTree = "<group>"; };
+		30E9630C290256F000A29E29 /* ProfilePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePage.swift; sourceTree = "<group>"; };
+		30E9630E2902A8EF00A29E29 /* HexColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HexColorExtension.swift; sourceTree = "<group>"; };
 		30F91E1628E2B5A7008F2C99 /* Heal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Heal.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		30F91E1928E2B5A7008F2C99 /* HealApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealApp.swift; sourceTree = "<group>"; };
 		30F91E1B28E2B5A7008F2C99 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -62,6 +70,8 @@
 		30F91E3528E2B5AC008F2C99 /* HealUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HealUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		30F91E3928E2B5AC008F2C99 /* HealUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealUITests.swift; sourceTree = "<group>"; };
 		30F91E3B28E2B5AC008F2C99 /* HealUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		30FE0F49290A4B3400AD1AAE /* HealthSymptoms.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthSymptoms.swift; sourceTree = "<group>"; };
+		30FE0F4D290F830C00AD1AAE /* ProfilePageNew.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePageNew.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,6 +112,7 @@
 			isa = PBXGroup;
 			children = (
 				30E9630228FFBF3800A29E29 /* CoreDataHelper.swift */,
+				30F91E2228E2B5AB008F2C99 /* Persistence.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -109,6 +120,7 @@
 		3017647728EC21D400E14A7D /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				30E96306290252B200A29E29 /* CustomUI.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -116,6 +128,7 @@
 		3017647828EC21E300E14A7D /* Colors */ = {
 			isa = PBXGroup;
 			children = (
+				30E9630E2902A8EF00A29E29 /* HexColorExtension.swift */,
 			);
 			path = Colors;
 			sourceTree = "<group>";
@@ -126,6 +139,7 @@
 				3017647A28EC3BDE00E14A7D /* Onboarding */,
 				30E962F528F5536200A29E29 /* PreAlert */,
 				30E962F028F4672D00A29E29 /* HealthKitProvider */,
+				30E9630A290256B700A29E29 /* ProfilePage */,
 			);
 			path = Features;
 			sourceTree = "<group>";
@@ -168,6 +182,7 @@
 				30E962FE28FE61A400A29E29 /* HealthAuthorizer.swift */,
 				30E9630028FE65AA00A29E29 /* HealthProfile.swift */,
 				30E962F228F4678600A29E29 /* HealthEcgs.swift */,
+				30FE0F49290A4B3400AD1AAE /* HealthSymptoms.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -193,6 +208,23 @@
 			isa = PBXGroup;
 			children = (
 				30F91E1B28E2B5A7008F2C99 /* ContentView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		30E9630A290256B700A29E29 /* ProfilePage */ = {
+			isa = PBXGroup;
+			children = (
+				30E9630B290256DC00A29E29 /* View */,
+			);
+			path = ProfilePage;
+			sourceTree = "<group>";
+		};
+		30E9630B290256DC00A29E29 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				30E9630C290256F000A29E29 /* ProfilePage.swift */,
+				30FE0F4D290F830C00AD1AAE /* ProfilePageNew.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -229,7 +261,6 @@
 				3017647128EAB4C500E14A7D /* Heal.entitlements */,
 				30F91E1928E2B5A7008F2C99 /* HealApp.swift */,
 				30F91E1D28E2B5AB008F2C99 /* Assets.xcassets */,
-				30F91E2228E2B5AB008F2C99 /* Persistence.swift */,
 			);
 			path = Heal;
 			sourceTree = "<group>";
@@ -412,14 +443,19 @@
 			files = (
 				30E9630328FFBF3800A29E29 /* CoreDataHelper.swift in Sources */,
 				30F91E2328E2B5AB008F2C99 /* Persistence.swift in Sources */,
+				30FE0F4E290F830C00AD1AAE /* ProfilePageNew.swift in Sources */,
 				30E962F328F4678600A29E29 /* HealthEcgs.swift in Sources */,
+				30E963092902549600A29E29 /* CustomUI.swift in Sources */,
 				30E962FC28FAA64C00A29E29 /* CustomTabBar.swift in Sources */,
 				30F91E1C28E2B5A7008F2C99 /* ContentView.swift in Sources */,
+				30E9630D290256F000A29E29 /* ProfilePage.swift in Sources */,
 				30E962FF28FE61A400A29E29 /* HealthAuthorizer.swift in Sources */,
 				30E9630128FE65AA00A29E29 /* HealthProfile.swift in Sources */,
 				30E962F828F5577E00A29E29 /* PreAlertPage.swift in Sources */,
 				30F91E1A28E2B5A7008F2C99 /* HealApp.swift in Sources */,
 				30F91E2628E2B5AB008F2C99 /* Heal.xcdatamodeld in Sources */,
+				30E9630F2902A8EF00A29E29 /* HexColorExtension.swift in Sources */,
+				30FE0F4A290A4B3400AD1AAE /* HealthSymptoms.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

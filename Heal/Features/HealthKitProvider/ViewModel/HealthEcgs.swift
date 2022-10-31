@@ -16,42 +16,53 @@ class HKEcgs: ObservableObject {
 
     @Published var ecgDates = [Date]()
     @Published var indices = [(Int, Int)]()
+    @Published var avgBpms = [Double]()
 
     var healthStore = HKHealthStore()
     var ecgSamples = [[(Double, Double)]]()
+    var xAxis = [Double]()
+    var yAxis = [Double]()
 
-    func getECGs(counter: Int, completion: @escaping ([(Double, Double)], Date) -> Void) {
+    func getECGs(counter: Int, completion: @escaping (Double, [(Double, Double)], Date) -> Void) {
 
         var ecgSamples = [(Double, Double)]()
         let predicate = HKQuery.predicateForSamples(withStart: Date.distantPast,
                                                     end: Date.distantFuture,
                                                     options: .strictEndDate)
         let sortDescriptor = NSSortDescriptor(key: HKSampleSortIdentifierStartDate, ascending: false)
+
         let ecgQuery = HKSampleQuery(sampleType: HKObjectType.electrocardiogramType(),
                                      predicate: predicate,
                                      limit: HKObjectQueryNoLimit,
                                      sortDescriptors: [sortDescriptor]) { (query, samples, error) in guard
                                         let samples = samples,
                                             let mostRecentSample = samples.first as? HKElectrocardiogram else {
+
                 return
             }
             print("******** Recent \(mostRecentSample)")
 
-            let query = HKElectrocardiogramQuery(samples[counter] as! HKElectrocardiogram) { [self] (query, result) in
+            let electroCardiogram = samples[counter] as! HKElectrocardiogram
+            let query = HKElectrocardiogramQuery(electroCardiogram) { [self] (query, result) in
 
                 switch result {
                 case .error(let error):
                     print("error: ", error)
 
                 case .measurement(let value):
-                    let sample = (value.quantity(for: .appleWatchSimilarToLeadI)!.doubleValue(for: HKUnit.volt()), value.timeSinceSampleStart)
+                    let sample = (value.quantity(for: .appleWatchSimilarToLeadI)!.doubleValue(for: HKUnit.volt()),
+                                  value.timeSinceSampleStart)
                     ecgSamples.append(sample)
 
                 case .done:
+                    let averageBPM = electroCardiogram.averageHeartRate?.doubleValue(for: HKUnit.count().unitDivided(by: .minute())) ?? 0
                     // print("done")
+
                     DispatchQueue.main.async {
-                        completion(ecgSamples, samples[counter].startDate)
+                        completion(averageBPM, ecgSamples, samples[counter].startDate)
                     }
+                @unknown default:
+                    return
                 }
             }
             self.healthStore.execute(query)
@@ -80,7 +91,7 @@ class HKEcgs: ObservableObject {
         self.healthStore.execute(ecgQuery)
     }
 
-    func readECGs(_ viewContext : NSManagedObjectContext) {
+    func readECGs(_ viewContext: NSManagedObjectContext) {
         var counter = 0
 
         self.getECGsCount { (ecgsCount) in
@@ -90,12 +101,29 @@ class HKEcgs: ObservableObject {
                 return
             } else {
                 for i in 0...ecgsCount - 1 {
-                    self.getECGs(counter: i) { (ecgResults, ecgDate)  in
+                    self.getECGs(counter: i) { (ecgBPM, ecgResults, ecgDate)  in
                         DispatchQueue.main.async {
                             self.ecgSamples.append(ecgResults)
                             self.ecgDates.append(ecgDate)
+                            for j in 0...ecgResults.count - 1 {
+                                self.yAxis.append(ecgResults[j].0)
+                                self.xAxis.append(ecgResults[j].1)
+                            }
+                            CoreHelper().addItemECG(viewContext,
+                                                    ecgDate,
+                                                    counter,
+                                                    ecgBPM,
+                                                    " ",
+                                                    " ",
+                                                    " ",
+                                                    self.xAxis,
+                                                    self.yAxis)
                             counter += 1
-                            CoreHelper().addItem(viewContext, ecgDate)
+                            print("************ \(ecgBPM)")
+                            print("************ \(ecgDate)")
+//                            print("\()")
+                            print("****AAAAA \(ecgResults.count)")
+                            print("****** \(ecgResults[0].0)")
 
 //                            // the last thread will enter here, meaning all of them are finished
 //                            if counter == ecgsCount {
@@ -105,7 +133,8 @@ class HKEcgs: ObservableObject {
 //                                var newDates = self.ecgDates
 //                                newDates.sort { $0 > $1 }
 //                                for element in newDates {
-//                                    self.indices.append((self.ecgDates.firstIndex(of: element)!, newDates.firstIndex(of: element)!))
+//                                    self.indices.append((self.ecgDates.firstIndex(of: element)!,
+                            // newDates.firstIndex(of: element)!))
 //                                }
 //
 //                                self.ecgDates = newDates

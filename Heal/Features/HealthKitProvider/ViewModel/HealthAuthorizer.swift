@@ -32,8 +32,9 @@ class HKAuthorize {
                                    HKQuantityType(HKQuantityTypeIdentifier.bodyMass)]
 
         let typesToWrite: Set = [HKCategoryType(HKCategoryTypeIdentifier.chestTightnessOrPain),
-                                 HKCategoryType(HKCategoryTypeIdentifier.rapidPoundingOrFlutteringHeartbeat),
-                                 HKCategoryType(HKCategoryTypeIdentifier.shortnessOfBreath)]
+                                 HKCategoryType(HKCategoryTypeIdentifier.vomiting),
+                                 HKCategoryType(HKCategoryTypeIdentifier.shortnessOfBreath),
+                                 HKCategoryType(HKCategoryTypeIdentifier.headache)]
 
         healthStore?.requestAuthorization(toShare: typesToWrite, read: healthKitTypes, completion: { (success, error) in
             if !success {

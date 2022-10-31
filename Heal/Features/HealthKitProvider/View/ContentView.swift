@@ -5,6 +5,7 @@
 //  Created by Anak Agung Gede Agung Davin on 27/09/22.
 // swiftlint:disable unused_closure_parameter
 // swiftlint:disable line_length
+// swiftlint:multiple_closures_with_trailing_closure
 
 import SwiftUI
 import CoreData
@@ -51,7 +52,13 @@ struct ContentView: View {
                     Button(action: {
                         authProc?.authorizeHealthKit(viewContext: viewContext, completion: { success, error in
                         })
+                        HealthSymptoms().writeSymptoms(symptoms: ["vomit", "headAche", "chestPain"], now: .now) { success, error in
+                            print(success)
+                        }
                         print(ecgDates1.ecgDates)
+//                        for item in items {
+//                            print(item.voltageECG ?? "")
+//                        }
                     }) {
                         Label("Add Item", systemImage: "heart.text.square")
                     }
