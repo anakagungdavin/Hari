@@ -19,7 +19,7 @@ struct OnboardingView: View {
                 WalkthroughScreen(
                     currentView: $currentView,
                     title: "20% Off For New Customers",
-                    description: "On Shopping Cart Cup Holders At Zooblie",
+                    description: "On Shopping Cart Cup Holders At Zooblie.",
                     bgColor: "PastelColor",
                     img: "intro_1"
                 )
@@ -177,5 +177,23 @@ struct WalkthroughScreen: View {
                            Color(bgColor),Color("BgNextBtn")]
                                       ,startPoint: .top, endPoint: .bottom)
                    )
+        .gesture(DragGesture(minimumDistance: 3.0, coordinateSpace: .local)
+            .onEnded { value in
+                print(value.translation)
+                switch(value.translation.width, value.translation.height) {
+                    case (...0, -30...30):
+                    print("left swipe")
+                    currentView += 1
+                    case (0..., -30...30):
+                    print("right swipe")
+                    currentView -= 1
+                    case (-100...100, ...0):
+                    print("up swipe")
+                    case (-100...100, 0...):
+                    print("down swipe")
+                    default:  print("no clue")
+                }
+            }
+        )
     }
 }
