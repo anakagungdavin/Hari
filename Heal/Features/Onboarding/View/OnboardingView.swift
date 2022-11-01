@@ -42,7 +42,6 @@ struct OnboardingView: View {
                 )
             }
             
-            
             if currentView == 4 {
                 Home()
             }
@@ -110,19 +109,6 @@ struct WalkthroughScreen: View {
                         }
                         
                         RoundedCorner().frame(width: 50, height: 50)
-                        
-//                        withAnimation(.spring(response: 1, dampingFraction: 10, blendDuration: 0)) {
-//                            ContainerRelativeShape()
-//                                .foregroundColor(currentView == 1 ? .white : .white.opacity(0.5))
-//                                .frame(width: currentView == 1 ? 25 : 12, height: 5)
-//                                .onTapGesture {
-//                                    withAnimation(.easeOut) {
-//                                        if currentView != 1 {
-//                                            currentView = 1
-//                                        }
-//                                    }
-//                                }
-//                        }
                         
                         withAnimation(.spring(response: 1, dampingFraction: 10, blendDuration: 0)) {
                             ContainerRelativeShape()
