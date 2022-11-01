@@ -14,38 +14,45 @@ struct PreAlertView: View {
     @State var selectedTab = "house"
 
     var body: some View {
-
-        ZStack(content: {
-            Color(uiColor: .systemPink)
-                .ignoresSafeArea()
-
-            VStack {
-                HStack {
-                    ZStack {
-                        Rectangle(
-                        )
-                        .frame(width: 100, height: 100)
-//                        .cornerRadius(10)
-                        .custCornerRadius(10, corners: .allCorners)
-                        .foregroundColor(.white)
-
-                        Image("HeartAsset")
-                            .resizable()
-                            .frame(width: 70, height: 70)
+        NavigationView {
+            ZStack(content: {
+                Color(uiColor: .systemPink)
+                    .ignoresSafeArea()
+                VStack {
+                    HStack {
+                        ZStack {
+                            Rectangle(
+                            )
+                            .frame(width: 100, height: 100)
+    //                        .cornerRadius(10)
+                            .custCornerRadius(10, corners: .allCorners)
                             .foregroundColor(.white)
 
-                    }
+                            Image("HeartAsset")
+                                .resizable()
+                                .frame(width: 70, height: 70)
+                                .foregroundColor(.white)
+
+                        }
+                        Spacer()
+                    }.offset(CGSize(width: 25, height: 10))
+
+                    CardBig()
+                    NavigationLink {
+                        ProfilePageNew()
+                    } label: {
+                        Text("Next Screen")
+                            .navigationTitle("")
+                            .navigationBarHidden(true)
+                    }.navigationBarBackButtonHidden(true)
+                }
+
+                VStack {
                     Spacer()
-                }.offset(CGSize(width: 25, height: 10))
-
-                CardBig()
-            }
-
-            VStack {
-                Spacer()
-//                CustomTabBar(selectedTab: $selectedTab)
-            }
-        })
+    //                CustomTabBar(selectedTab: $selectedTab)
+                }
+            })
+        }
     }
 }
 // }
@@ -75,12 +82,12 @@ struct CardBig: View {
                 Image(systemName: "waveform.path.ecg.rectangle.fill").font(.system(size: 30))
                 Text("Lorem ipsum dolor sit amet, consectetur adipiscing elit")
             }
-
+            
             HStack(alignment: .top) {
                 Image(systemName: "cross.case.fill")
                     .font(.system(size: 30))
                 Text("Lorem ipsum dolor sit amet, consectetur adipiscing elit  sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,")
-
+                
             }
             Button(action: {
                 authProc?.authorizeHealthKit(viewContext: viewContext, completion: { success, error in
@@ -93,16 +100,16 @@ struct CardBig: View {
                     .foregroundColor(Color(red: 34/255, green: 34/255, blue: 86/255))
                     .background(Color(red: 255/255, green: 240/255, blue: 217/255))
                     .custCornerRadius(10, corners: .allCorners)
-                    .padding()
-            }).padding()
-
+                //                    .padding()
+            })
+            
             Spacer()
         }
         .padding()
         .background()
         .mask(RoundedRectangle(cornerRadius: 10, style: .continuous))
         .padding(20)
-        Spacer(minLength: 80)
+        //        Spacer(minLength: 80)
     }
 }
 

@@ -6,8 +6,16 @@
 //
 
 import SwiftUI
+import CoreData
 
 struct ProfilePageNew: View {
+
+    @Environment(\.managedObjectContext) private var viewContext
+
+    @FetchRequest(
+        sortDescriptors: [NSSortDescriptor(keyPath: \Profile.name, ascending: true)],
+        animation: .default)
+    private var itemsProfile: FetchedResults<Profile>
 
     @State private var name = ""
     @State private var doBirth = Date()
@@ -47,14 +55,19 @@ struct ProfilePageNew: View {
                     Field(title: "Tinggi", text: $height)
                     Field(title: "Berat", text: $weight)
                     Field(title: "Penyakit Bawaan", text: $commorbit)
-                    
+
                     Button("Sinkronisasi dengan Apple Health") {
+                                gender = HKProfile().sexs
+                                height = String(HKProfile().height)
+                                weight = String(HKProfile().weight)
+                                doBirth = HKProfile().dob
                         // calling function autofill after tapped
                         // brt masukin dulu healthkit profile ke coredata yg profile, ntar tarik dari situ masukin ke state aja
                     }
-
                 }.padding()
             }.navigationTitle("Profile")
+                .navigationBarBackButtonHidden(true)
+                .navigationBarHidden(true)
         }
     }
 }

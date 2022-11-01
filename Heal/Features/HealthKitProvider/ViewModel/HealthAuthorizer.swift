@@ -44,7 +44,9 @@ class HKAuthorize {
                     print("Succesfully read data")
                 }
                 self.getECG.readECGs(viewContext)
-                self.getProfile.readRecentData()
+                self.getProfile.readRecentData { success, error in
+                    print("Success read data")
+                }
             }
         })
     }

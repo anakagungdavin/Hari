@@ -64,6 +64,7 @@ class CoreHelper {
     func addItemProfile(_ viewContext: NSManagedObjectContext,
                         _ name: String,
                         _ age: Int32,
+                        _ doBirth: Date,
                         _ weight: Int32,
                         _ height: Int32,
                         _ sex: String) {
@@ -71,6 +72,7 @@ class CoreHelper {
         let newItem = Profile(context: viewContext)
         newItem.name = name
         newItem.age = age
+        newItem.doBirth = doBirth
         newItem.weight = weight
         newItem.height = height
         newItem.sex = sex
@@ -88,7 +90,7 @@ class CoreHelper {
         }
     }
 
-    func updateItem() {
+    func updateItem(profile: Profile) {
         return
     }
 
