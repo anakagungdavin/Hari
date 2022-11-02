@@ -8,7 +8,7 @@
 import Foundation
 import HealthKit
 
-class HKProfile {
+class HKProfile: ObservableObject {
 
     var healthStore = HKHealthStore()
     var height = Int32()

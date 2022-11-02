@@ -17,6 +17,7 @@ struct ProfilePageNew: View {
         animation: .default)
     private var itemsProfile: FetchedResults<Profile>
 
+    @EnvironmentObject var authProc: HKAuthorize
     @State private var name = ""
     @State private var doBirth = Date()
     @State private var gender = ""
@@ -57,18 +58,21 @@ struct ProfilePageNew: View {
                     Field(title: "Penyakit Bawaan", text: $commorbit)
 
                     Button("Sinkronisasi dengan Apple Health") {
-                                gender = HKProfile().sexs
-                                height = String(HKProfile().height)
-                                weight = String(HKProfile().weight)
-                                doBirth = HKProfile().dob
+                        gender = authProc.getProfile.sexs
+                        height = String(authProc.getProfile.height)
+                        weight = String(authProc.getProfile.weight)
+                        doBirth = authProc.getProfile.dob
                         // calling function autofill after tapped
-                        // brt masukin dulu healthkit profile ke coredata yg profile, ntar tarik dari situ masukin ke state aja
+                        // brt masukin dulu healthkit profile
+                        // ke coredata yg profile, ntar tarik dari situ masukin ke state aja
                     }
                 }.padding()
             }.navigationTitle("Profile")
                 .navigationBarBackButtonHidden(true)
                 .navigationBarHidden(true)
         }
+        //        .onAppear(){
+        //            self.profile = HKProfile()
     }
 }
 

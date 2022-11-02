@@ -10,7 +10,7 @@ import SwiftUI
 import CoreData
 
 struct PreAlertView: View {
-
+    @EnvironmentObject var authProc: HKAuthorize
     @State var selectedTab = "house"
 
     var body: some View {
@@ -37,9 +37,9 @@ struct PreAlertView: View {
                         Spacer()
                     }.offset(CGSize(width: 25, height: 10))
 
-                    CardBig()
+                    CardBig().environmentObject(authProc)
                     NavigationLink {
-                        ProfilePageNew()
+                        ProfilePageNew().environmentObject(authProc)
                     } label: {
                         Text("Next Screen")
                             .navigationTitle("")
@@ -53,17 +53,20 @@ struct PreAlertView: View {
                 }
             })
         }
+//        .onAppear() {
+//            NotificationHelper().notifPermission()
+//        }
     }
 }
 // }
 
 struct CardBig: View {
-    private var authProc: HKAuthorize?
+    @EnvironmentObject var authProc: HKAuthorize
     @Environment(\.managedObjectContext) var viewContext
 
-    init() {
-        authProc = HKAuthorize()
-    }
+    //    init() {
+    //        authProc = HKAuthorize()
+    //    }
 
     var body: some View {
         VStack(alignment: .leading, spacing: 15) {
@@ -82,16 +85,18 @@ struct CardBig: View {
                 Image(systemName: "waveform.path.ecg.rectangle.fill").font(.system(size: 30))
                 Text("Lorem ipsum dolor sit amet, consectetur adipiscing elit")
             }
-            
+
             HStack(alignment: .top) {
                 Image(systemName: "cross.case.fill")
                     .font(.system(size: 30))
                 Text("Lorem ipsum dolor sit amet, consectetur adipiscing elit  sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,")
-                
+
             }
             Button(action: {
-                authProc?.authorizeHealthKit(viewContext: viewContext, completion: { success, error in
-                    print("done get data")
+                authProc.authorizeHealthKit(viewContext: viewContext, completion: { success, error in
+                    if !success {
+                        print("The error \(String(describing: error))")
+                    }
                 })
             }, label: {
                 Text("Connect to Apple Health")
@@ -102,7 +107,7 @@ struct CardBig: View {
                     .custCornerRadius(10, corners: .allCorners)
                 //                    .padding()
             })
-            
+
             Spacer()
         }
         .padding()
