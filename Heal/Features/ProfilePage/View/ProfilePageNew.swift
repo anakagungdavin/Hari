@@ -18,6 +18,7 @@ struct ProfilePageNew: View {
     private var itemsProfile: FetchedResults<Profile>
 
     @EnvironmentObject var authProc: HKAuthorize
+    @ObservedObject var notification: NotificationHelper
     @State private var name = ""
     @State private var doBirth = Date()
     @State private var gender = ""
@@ -57,6 +58,10 @@ struct ProfilePageNew: View {
                     Field(title: "Berat", text: $weight)
                     Field(title: "Penyakit Bawaan", text: $commorbit)
 
+                    Toggle("Notification", isOn: self.$notification.isOn).onChange(of: self.notification.isOn) { newValue in
+                        notification.notifSchedule(isOn: newValue)
+                    }
+
                     Button("Sinkronisasi dengan Apple Health") {
                         gender = authProc.getProfile.sexs
                         height = String(authProc.getProfile.height)
@@ -78,7 +83,7 @@ struct ProfilePageNew: View {
 
 struct ProfilePageNew_Previews: PreviewProvider {
     static var previews: some View {
-        ProfilePageNew()
+        ProfilePageNew(notification: NotificationHelper())
     }
 }
 

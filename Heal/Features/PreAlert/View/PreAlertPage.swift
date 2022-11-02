@@ -12,6 +12,7 @@ import CoreData
 struct PreAlertView: View {
     @EnvironmentObject var authProc: HKAuthorize
     @State var selectedTab = "house"
+    @ObservedObject var notification: NotificationHelper
 
     var body: some View {
         NavigationView {
@@ -39,7 +40,7 @@ struct PreAlertView: View {
 
                     CardBig().environmentObject(authProc)
                     NavigationLink {
-                        ProfilePageNew().environmentObject(authProc)
+                        ProfilePageNew(notification: self.notification).environmentObject(authProc)
                     } label: {
                         Text("Next Screen")
                             .navigationTitle("")
@@ -53,9 +54,9 @@ struct PreAlertView: View {
                 }
             })
         }
-//        .onAppear() {
-//            NotificationHelper().notifPermission()
-//        }
+        .onAppear() {
+            NotificationHelper().notifPermission()
+        }
     }
 }
 // }
@@ -120,6 +121,6 @@ struct CardBig: View {
 
 struct PreAlertView_Previews: PreviewProvider {
     static var previews: some View {
-        PreAlertView()
+        PreAlertView(notification: NotificationHelper())
     }
 }
