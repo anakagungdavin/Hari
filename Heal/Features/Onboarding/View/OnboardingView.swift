@@ -171,10 +171,9 @@ struct WalkthroughScreen: View {
                 )
             }
         }
-        //.background(Color(bgColor).ignoresSafeArea())
         .background(
                        LinearGradient(colors: [
-                           Color(bgColor),Color("BgNextBtn")]
+                           Color(hex: "FFFFFF"),Color(hex: "FFCED2")]
                                       ,startPoint: .top, endPoint: .bottom)
                    )
         .gesture(DragGesture(minimumDistance: 3.0, coordinateSpace: .local)
@@ -187,10 +186,6 @@ struct WalkthroughScreen: View {
                     case (0..., -30...30):
                     print("right swipe")
                     currentView -= 1
-                    case (-100...100, ...0):
-                    print("up swipe")
-                    case (-100...100, 0...):
-                    print("down swipe")
                     default:  print("no clue")
                 }
             }
