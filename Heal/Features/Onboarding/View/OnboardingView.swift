@@ -181,11 +181,13 @@ struct WalkthroughScreen: View {
                 print(value.translation)
                 switch(value.translation.width, value.translation.height) {
                     case (...0, -30...30):
-                    print("left swipe")
-                    currentView += 1
+                    if currentView <= totalViews {
+                        currentView += 1
+                    }
                     case (0..., -30...30):
-                    print("right swipe")
-                    currentView -= 1
+                    if currentView <= totalViews && currentView != 1 {
+                        currentView -= 1
+                    }
                     default:  print("no clue")
                 }
             }
