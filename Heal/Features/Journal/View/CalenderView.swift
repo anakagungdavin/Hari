@@ -14,36 +14,23 @@ struct CalenderView: View {
     //Month update on arrow button click
     @State var currentMonth: Int = 0
     
-    //list of content view
     var body: some View {
-        //vertical content
         VStack (spacing: 50){
-            //write tittle
-            Text("Journal")
-                .font(.largeTitle.bold()) //font
-                .frame(maxWidth: .infinity, alignment: .leading) //align left
+            //Mark : Title
+            Text("Jurnalmu")
+                .font(.largeTitle.bold())
+                .frame(maxWidth: .infinity, alignment: .leading)
                 .position(x:210, y:45)
+                .foregroundColor(Color("ColorText"))
             VStack {
-                //month, year and symbol inline
-                Text("")
                 HStack (spacing: 20){
-                    //Month
+                    //Mark : Month & Year
                     Text(extraDate()[0])
-                    //Modification
                         .font(.title2.bold())
-                        .position(x:90, y:12)
-                    
-                    //year
-                    /*
-                     Text("")
-                     //Modification year
-                     .fontWeight(.semibold)
-                     .font(.system(size: 22))
-                     */
-                    //allign left all text (month&year)
-                    //Spacer(minLength: 0)
-                    
-                    //button left
+                        .position(x:100, y:12)
+                        .foregroundColor(Color("ColorText"))
+                    //Mark : Button Next/Previous
+                    //Button Left
                     Button {
                         withAnimation{
                             currentMonth -= 1
@@ -51,10 +38,10 @@ struct CalenderView: View {
                     } label: {
                         Image(systemName: "chevron.left")
                             .font(.title3)
-                            .foregroundColor(.black)
+                            .foregroundColor(Color("ColorText"))
                     }
                     
-                    //button right
+                    //Button Right
                     Button {
                         withAnimation{
                             currentMonth += 1
@@ -62,13 +49,12 @@ struct CalenderView: View {
                     } label: {
                         Image(systemName: "chevron.right")
                             .font(.title3)
-                            .foregroundColor(.black)
+                            .foregroundColor(Color("ColorText"))
                     }
-                    //get space tittle and calender
                     .padding(.horizontal,30)
                 }
                 
-                //days
+                //Mark: Calender Aja
                 //list days
                 let days: [String] = ["Min","Sen","Sel","Rab","Kam","Jum","Sab"]
                 //show days inline
@@ -78,6 +64,7 @@ struct CalenderView: View {
                         //.font(.callout)
                         //.fontWeight(.semibold)
                             .frame(maxWidth: .infinity)
+                            .foregroundColor(Color("ColorText"))
                     }
                     .padding(15)
                 }
@@ -89,15 +76,17 @@ struct CalenderView: View {
                 //masukkan tanggal ke tiap kolom hari(day)
                 let columns = Array(repeating: GridItem(.flexible()), count: 7)
                 LazyVGrid(columns: columns,spacing: 15) {
+                    //Mark: UI if Clicked Date
                     ForEach(extractDate()){value in
                         CardView(value: value)
                             .background(
                                 Capsule()
-                                    .fill(.green)
+                                    .fill(Color("bgCard"))
                                     .padding(.horizontal,8)
                                     .opacity(isSameDay(date1: value.date, date2: currentDate) ? 1 : 0)
                                 
                             )
+            
                             .onTapGesture {
                                 currentDate = value.date
                             }
@@ -108,66 +97,66 @@ struct CalenderView: View {
                 .padding(12)
             }
             .background(Rectangle()
-                .fill(Color("bgCalender"))
-                .frame(width:360, height:500))
-            .cornerRadius(50)
+                .fill(.white)
+                .frame(width:360, height:280))
+            //.cornerRadius(10)
             
-            Text("Your Journal")
+            //Mark: Second Title
+            Text("Jurnal Hari Ini")
                 .font(.title2.bold()) //font
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding(20)
-                .padding(.top,-40)
-                .padding(.bottom,-120)
+                .padding(.top,-30)
+                .padding(.bottom,-100)
+                .foregroundColor(Color("ColorText"))
             
             HStack {
                 VStack {
+                    //Mark : Card Journal
                     if let card = cards.first(where: { card in
                         return isSameDay(date1: card.cardDate, date2: currentDate)
                     }){
                         ForEach(card.cardList){ card in
                             HStack {
                                 VStack {
-                                    Image(systemName: "waveform.path.ecg")
-                                        .resizable()
-                                        .frame(width: 24, height: 8)
+                                    //Mark: BPM Value
                                     Text(card.BPM)
-                                        .font(.custom("SFProRounded-Bold", size: 20))
+                                        .font(.custom("SFProRounded-Bold", size: 20).bold())
+                                        .foregroundColor(Color("ColorText"))
                                     Text("BPM")
-                                        .font(.custom("SFProRounded-Bold", size: 10))
+                                        .font(.custom("SFProRounded-Bold", size: 10).bold())
+                                        .foregroundColor(Color("ColorText"))
                                 }
-                                .frame(width: 91, height: 70)
-                                .background(Color(UIColor(red: 1, green: 0.929, blue: 0.968, alpha: 1))).cornerRadius(5)
-                                .padding(.leading, 9)
+                                .frame(width: 70, height: 54)
+                                .background(.white).cornerRadius(10)
+                                .padding(.leading, 15)
                                 
                                 VStack{
                                     HStack {
-                                        Text("08 : 34 AM")
-                                            .font(.custom("SFProRounded-Regular", size: 10))
-                                            .background(Color(UIColor(red: 1, green: 0.929, blue: 0.968, alpha: 1))).cornerRadius(5)
-                                            .frame(maxWidth: .infinity, alignment: .leading)
-                                            .padding(.top, 5)
-                                            .padding(.leading, 10)
-                                            .padding(.bottom, 2)
-                                        Text("belum lengkap")
-                                            .padding(.leading,-35)
-                                        //edit
-                                        NavigationLink("edit", destination: SecondPage())
+                                        //Date Card Journal
+                                        Text("16 Oktober 2022")
+                                            .foregroundColor(Color("ColorText"))
+                                        Text("08 : 34")
+                                            .foregroundColor(Color("ColorText"))
+                                
+                                        //Mark : Go To Detail View
+                                        NavigationLink("edit", destination: DetailJournal())
                                     }
-                                    Text("complete your data")
-                                        .font(.custom("SFProRounded-Regular", size: 10))
-                                        .frame(width: 209, height: 48)
-                                        .background(Color(UIColor(red: 1, green: 0.929, blue: 0.968, alpha: 1))).cornerRadius(5)
-                                        .padding(.bottom, 5)
-                                        .padding(.leading, 10)
-                                        .padding(.trailing, 9)
+                                    HStack {
+                                        Image("Img_BPM")
+                                        Image("Img_ECG")
+                                        Image("Img_Act")
+                                    }
                                 }
                             }
                         }
                         .frame(width: 328, height: 80)
-                        .background(Color(UIColor(red: 846, green: 0.677, blue: 0.769, alpha: 1))).cornerRadius(10)
+                        .background(Color("bgCard")).cornerRadius(10)
+                        //.background(Color(UIColor(red: 846, green: 0.677, blue: 0.769, alpha: 1))).cornerRadius(10)
                     }
+                    //If EKG Empty
                     else {
-                        Text("No EKG Found")
+                        Text("Tidak Ada Data Tercatat")
                     }
                     
                 }
@@ -290,40 +279,5 @@ extension Date{
     }
 }
 
-//kode masher
-/*
-                        VStack{
-                            Image(systemName: "waveform.path.ecg")
-                                .resizable()
-                                .frame(width: 24, height: 8)
-                            
-                            Text("88")
-                                .font(.custom("SFProRounded-Bold", size: 20))
-                            Text("BPM")
-                                .font(.custom("SFProRounded-Bold", size: 10))
-                            
-                        }
-                        .frame(width: 91, height: 70)
-                        .background(Color(UIColor(red: 1, green: 0.929, blue: 0.968, alpha: 1))).cornerRadius(5)
-                        .padding(.leading, 9)
-                        
-                        VStack{
-                            Text("08 : 34 AM")
-                                .font(.custom("SFProRounded-Regular", size: 10))
-                                .background(Color(UIColor(red: 1, green: 0.929, blue: 0.968, alpha: 1))).cornerRadius(5)
-                                .frame(maxWidth: .infinity, alignment: .leading)
-                                .padding(.top, 5)
-                                .padding(.leading, 10)
-                                .padding(.bottom, 2)
-                            Text("complete your data")
-                                .font(.custom("SFProRounded-Regular", size: 10))
-                                .frame(width: 209, height: 48)
-                                .background(Color(UIColor(red: 1, green: 0.929, blue: 0.968, alpha: 1))).cornerRadius(5)
-                                .padding(.bottom, 5)
-                                .padding(.leading, 10)
-                                .padding(.trailing, 9)
-                        }
-                    }
-                    .frame(width: 328, height: 80)
-                    .background(Color(UIColor(red: 846, green: 0.677, blue: 0.769, alpha: 1))).cornerRadius(10)
-*/
+//List To DO:
+//Change color text date

@@ -27,14 +27,12 @@
 		30F91E3C28E2B5AC008F2C99 /* HealUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30F91E3B28E2B5AC008F2C99 /* HealUITestsLaunchTests.swift */; };
 		30FE0F4A290A4B3400AD1AAE /* HealthSymptoms.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30FE0F49290A4B3400AD1AAE /* HealthSymptoms.swift */; };
 		30FE0F4E290F830C00AD1AAE /* ProfilePageNew.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30FE0F4D290F830C00AD1AAE /* ProfilePageNew.swift */; };
-		446582692911984300877839 /* JournalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446582682911984300877839 /* JournalView.swift */; };
-		4465826F291198F300877839 /* DateValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4465826D291198F300877839 /* DateValue.swift */; };
-		44658270291198F300877839 /* EKGCardTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4465826E291198F300877839 /* EKGCardTest.swift */; };
-		446582722911991400877839 /* CalenderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446582712911991400877839 /* CalenderView.swift */; };
-		446582742911993800877839 /* SecondPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446582732911993800877839 /* SecondPage.swift */; };
-		446582762911995C00877839 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446582752911995C00877839 /* ViewController.swift */; };
-		446582782911996500877839 /* ConvertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446582772911996500877839 /* ConvertViewController.swift */; };
-		4465827B2911997900877839 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4465827A2911997900877839 /* Main.storyboard */; };
+		44CAC9352918E95F00FE0D8C /* DetailJournal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44CAC9322918E95F00FE0D8C /* DetailJournal.swift */; };
+		44CAC9362918E95F00FE0D8C /* JournalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44CAC9332918E95F00FE0D8C /* JournalView.swift */; };
+		44CAC9372918E95F00FE0D8C /* CalenderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44CAC9342918E95F00FE0D8C /* CalenderView.swift */; };
+		44CAC9392918E97400FE0D8C /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44CAC9382918E97400FE0D8C /* Extension.swift */; };
+		44CAC93C2918E97F00FE0D8C /* EKGCardTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44CAC93A2918E97F00FE0D8C /* EKGCardTest.swift */; };
+		44CAC93D2918E97F00FE0D8C /* DateValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44CAC93B2918E97F00FE0D8C /* DateValue.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -80,14 +78,12 @@
 		30F91E3B28E2B5AC008F2C99 /* HealUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		30FE0F49290A4B3400AD1AAE /* HealthSymptoms.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthSymptoms.swift; sourceTree = "<group>"; };
 		30FE0F4D290F830C00AD1AAE /* ProfilePageNew.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePageNew.swift; sourceTree = "<group>"; };
-		446582682911984300877839 /* JournalView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JournalView.swift; sourceTree = "<group>"; };
-		4465826D291198F300877839 /* DateValue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateValue.swift; sourceTree = "<group>"; };
-		4465826E291198F300877839 /* EKGCardTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EKGCardTest.swift; sourceTree = "<group>"; };
-		446582712911991400877839 /* CalenderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalenderView.swift; sourceTree = "<group>"; };
-		446582732911993800877839 /* SecondPage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SecondPage.swift; sourceTree = "<group>"; };
-		446582752911995C00877839 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		446582772911996500877839 /* ConvertViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConvertViewController.swift; sourceTree = "<group>"; };
-		4465827A2911997900877839 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		44CAC9322918E95F00FE0D8C /* DetailJournal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailJournal.swift; sourceTree = "<group>"; };
+		44CAC9332918E95F00FE0D8C /* JournalView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JournalView.swift; sourceTree = "<group>"; };
+		44CAC9342918E95F00FE0D8C /* CalenderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalenderView.swift; sourceTree = "<group>"; };
+		44CAC9382918E97400FE0D8C /* Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
+		44CAC93A2918E97F00FE0D8C /* EKGCardTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EKGCardTest.swift; sourceTree = "<group>"; };
+		44CAC93B2918E97F00FE0D8C /* DateValue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateValue.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -310,7 +306,6 @@
 		4465826A2911987900877839 /* Journal */ = {
 			isa = PBXGroup;
 			children = (
-				446582792911996F00877839 /* Storyboard */,
 				4465826B291198B400877839 /* View */,
 				4465826C291198CF00877839 /* ViewModel */,
 			);
@@ -320,9 +315,9 @@
 		4465826B291198B400877839 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				446582682911984300877839 /* JournalView.swift */,
-				446582712911991400877839 /* CalenderView.swift */,
-				446582732911993800877839 /* SecondPage.swift */,
+				44CAC9342918E95F00FE0D8C /* CalenderView.swift */,
+				44CAC9322918E95F00FE0D8C /* DetailJournal.swift */,
+				44CAC9332918E95F00FE0D8C /* JournalView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -330,20 +325,11 @@
 		4465826C291198CF00877839 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				4465826D291198F300877839 /* DateValue.swift */,
-				4465826E291198F300877839 /* EKGCardTest.swift */,
-				446582752911995C00877839 /* ViewController.swift */,
-				446582772911996500877839 /* ConvertViewController.swift */,
+				44CAC93B2918E97F00FE0D8C /* DateValue.swift */,
+				44CAC93A2918E97F00FE0D8C /* EKGCardTest.swift */,
+				44CAC9382918E97400FE0D8C /* Extension.swift */,
 			);
 			path = ViewModel;
-			sourceTree = "<group>";
-		};
-		446582792911996F00877839 /* Storyboard */ = {
-			isa = PBXGroup;
-			children = (
-				4465827A2911997900877839 /* Main.storyboard */,
-			);
-			path = Storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -451,7 +437,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4465827B2911997900877839 /* Main.storyboard in Resources */,
 				30F91E2128E2B5AB008F2C99 /* Preview Assets.xcassets in Resources */,
 				30F91E1E28E2B5AB008F2C99 /* Assets.xcassets in Resources */,
 			);
@@ -500,24 +485,23 @@
 			files = (
 				30E9630328FFBF3800A29E29 /* CoreDataHelper.swift in Sources */,
 				30F91E2328E2B5AB008F2C99 /* Persistence.swift in Sources */,
-				446582692911984300877839 /* JournalView.swift in Sources */,
+				44CAC9372918E95F00FE0D8C /* CalenderView.swift in Sources */,
 				30FE0F4E290F830C00AD1AAE /* ProfilePageNew.swift in Sources */,
 				30E962F328F4678600A29E29 /* HealthEcgs.swift in Sources */,
 				30E963092902549600A29E29 /* CustomUI.swift in Sources */,
 				30E962FC28FAA64C00A29E29 /* CustomTabBar.swift in Sources */,
 				30F91E1C28E2B5A7008F2C99 /* ContentView.swift in Sources */,
 				30E9630D290256F000A29E29 /* ProfilePage.swift in Sources */,
+				44CAC93C2918E97F00FE0D8C /* EKGCardTest.swift in Sources */,
 				30E962FF28FE61A400A29E29 /* HealthAuthorizer.swift in Sources */,
-				446582722911991400877839 /* CalenderView.swift in Sources */,
+				44CAC9362918E95F00FE0D8C /* JournalView.swift in Sources */,
+				44CAC93D2918E97F00FE0D8C /* DateValue.swift in Sources */,
 				30E9630128FE65AA00A29E29 /* HealthProfile.swift in Sources */,
 				30E962F828F5577E00A29E29 /* PreAlertPage.swift in Sources */,
+				44CAC9392918E97400FE0D8C /* Extension.swift in Sources */,
 				30F91E1A28E2B5A7008F2C99 /* HealApp.swift in Sources */,
+				44CAC9352918E95F00FE0D8C /* DetailJournal.swift in Sources */,
 				30F91E2628E2B5AB008F2C99 /* Heal.xcdatamodeld in Sources */,
-				4465826F291198F300877839 /* DateValue.swift in Sources */,
-				446582782911996500877839 /* ConvertViewController.swift in Sources */,
-				446582742911993800877839 /* SecondPage.swift in Sources */,
-				44658270291198F300877839 /* EKGCardTest.swift in Sources */,
-				446582762911995C00877839 /* ViewController.swift in Sources */,
 				30E9630F2902A8EF00A29E29 /* HexColorExtension.swift in Sources */,
 				30FE0F4A290A4B3400AD1AAE /* HealthSymptoms.swift in Sources */,
 			);
