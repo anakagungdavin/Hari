@@ -15,6 +15,8 @@ class HKProfile: ObservableObject {
     var weight = Int32()
     var sexs = String()
     var dob = Date()
+    var anchor = HKQueryAnchor.init(fromValue: 0)
+    var userDefault = UserDefaults.standard
 
     // most likely interchangable data
     func readData(completion: @escaping(Bool, Error?) -> Void) {
@@ -72,16 +74,77 @@ class HKProfile: ObservableObject {
         let weightType = HKSampleType.quantityType(forIdentifier: HKQuantityTypeIdentifier.bodyMass)!
         let heightType = HKSampleType.quantityType(forIdentifier: HKQuantityTypeIdentifier.height)!
 
-        let queryWeight = HKSampleQuery(sampleType: weightType,
-                                        predicate: nil,
-                                        limit: HKObjectQueryNoLimit,
-                                        sortDescriptors: nil) { (query, results, error) in
+        var anchor = getAnchor()
 
-            if let result = results?.last as? HKQuantitySample {
-                print("weight => \(result.quantity)")
-                self.weight = Int32(Int(result.quantity.doubleValue(for: HKUnit.gramUnit(with: .kilo))))
+        let queryWeigthnew = HKAnchoredObjectQuery(type: weightType, predicate: nil, anchor: anchor, limit: HKObjectQueryNoLimit) { (query, samplesOrNil, deletedObjectsOrNil, newAnchor, errorOrNil) in
+
+            guard let samples = samplesOrNil,
+                  let deletedObjects = deletedObjectsOrNil else {
+                fatalError("*** An error occurred during the initial query: \(errorOrNil!.localizedDescription) ***")
+            }
+
+            if let bodyMassSample = samples.last as? HKQuantitySample {
+                self.weight = Int32(Int(bodyMassSample.quantity.doubleValue(for: HKUnit.gramUnit(with: .kilo))))
+            }
+
+            guard let anchor = newAnchor else {
+                return
+            }
+
+            self.setAnchor(queryAnchor: newAnchor)
+
+            for bodyMassSample in samples {
+                print("Samples: \(bodyMassSample)")
+            }
+
+            if let bodyMassSample = samples.last as? HKQuantitySample {
+                self.weight = Int32(Int(bodyMassSample.quantity.doubleValue(for: HKUnit.gramUnit(with: .kilo))))
+            }
+
+            for deletedBodyMassSample in deletedObjects {
+                print("Deleted: \(deletedBodyMassSample)")
+            }
+
+            print("Anchor: \(anchor)")
+        }
+
+        queryWeigthnew.updateHandler = { (query, samplesOrNil, deletedObjectsOrNil, newAnchor, errorOrNil) in
+            guard let samples = samplesOrNil, let deletedObjects = deletedObjectsOrNil else {
+                // Handle the error here.
+                fatalError("*** An error occurred during an update: \(errorOrNil!.localizedDescription) ***")
+            }
+            
+            if let bodyMassSample = samples.last as? HKQuantitySample {
+                self.weight = Int32(Int(bodyMassSample.quantity.doubleValue(for: HKUnit.gramUnit(with: .kilo))))
+            }
+
+            anchor = newAnchor!
+            self.setAnchor(queryAnchor: newAnchor)
+
+            for bodyMassSample in samples {
+                print("samples: \(bodyMassSample)")
+
+            }
+
+            if let bodyMassSample = samples.last as? HKQuantitySample {
+                self.weight = Int32(Int(bodyMassSample.quantity.doubleValue(for: HKUnit.gramUnit(with: .kilo))))
+            }
+
+            for deletedBodyMassSample in deletedObjects {
+                print("deleted: \(deletedBodyMassSample)")
             }
         }
+
+//        let queryWeight = HKSampleQuery(sampleType: weightType,
+//                                        predicate: nil,
+//                                        limit: HKObjectQueryNoLimit,
+//                                        sortDescriptors: nil) { (query, results, error) in
+//
+//            if let result = results?.last as? HKQuantitySample {
+//                print("weight => \(result.quantity)")
+//                self.weight = Int32(Int(result.quantity.doubleValue(for: HKUnit.gramUnit(with: .kilo))))
+//            }
+//        }
 
         let queryHeight = HKSampleQuery(sampleType: heightType,
                                         predicate: nil,
@@ -106,7 +169,22 @@ class HKProfile: ObservableObject {
 
         self.healthStore.execute(queryIrregular)
         self.healthStore.execute(queryHeight)
-        self.healthStore.execute(queryWeight)
+        self.healthStore.execute(queryWeigthnew)
 
+    }
+
+    func getAnchor() -> HKQueryAnchor? {
+        if let anchorData = userDefault.object(forKey: "Anchor") as? Data {
+            return try? NSKeyedUnarchiver.unarchivedObject(ofClass: HKQueryAnchor.self, from: anchorData)
+        }
+
+        return nil
+    }
+
+    func setAnchor(queryAnchor: HKQueryAnchor?) {
+        if let queryAnchor = queryAnchor,
+           let data = try? NSKeyedArchiver.archivedData(withRootObject: queryAnchor, requiringSecureCoding: true) {
+            userDefault.set(data, forKey: "Anchor")
+        }
     }
 }

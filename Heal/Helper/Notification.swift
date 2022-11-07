@@ -12,7 +12,7 @@ class NotificationHelper: ObservableObject {
 
     @Published var isOn: Bool = true
 
-    init(){
+    init() {
         $isOn.sink { state in
             self.notifSchedule(isOn: state)
         }
@@ -41,9 +41,9 @@ class NotificationHelper: ObservableObject {
             var dateComponents = DateComponents()
             dateComponents.calendar = Calendar.current
 
-            dateComponents.weekday = 4 // hari ke berapa (1 brarti minggu)
-            dateComponents.hour = 16 // jam keberapa
-            dateComponents.minute = 08 // menit keberapa
+            dateComponents.weekday = 2 // hari ke berapa (1 brarti minggu)
+            dateComponents.hour = 14 // jam keberapa
+            dateComponents.minute = 53 // menit keberapa
 
             // trigger repeating event (biar muncul terus sekali seminggu)
             let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
@@ -66,7 +66,7 @@ class NotificationHelper: ObservableObject {
             print("********* CANCELLEDD NOTIFNYA **********%%%%%%")
         }
     }
-    
+
     func cancelNotification() {
         UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
         UNUserNotificationCenter.current().removeAllDeliveredNotifications()
