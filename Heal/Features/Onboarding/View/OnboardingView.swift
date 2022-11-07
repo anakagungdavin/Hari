@@ -57,7 +57,7 @@ struct OnboardingView_Previews: PreviewProvider {
 
 struct Home: View {
     var body: some View {
-        Text("Welcome to Swift UI 4.0!!")
+        Text("Welcome to Dashboard!!")
             .font(.title)
             .padding()
     }
@@ -71,6 +71,7 @@ struct WalkthroughScreen: View {
     var description: String
     var bgColor: String
     var img: String
+    @State var isVisible = true
     
     var body: some View {
         ZStack{
@@ -95,39 +96,40 @@ struct WalkthroughScreen: View {
                 .padding()
                 .overlay(
                     HStack{
-                        withAnimation(.spring(response: 1, dampingFraction: 10, blendDuration: 0)) {
-                            RoundedRectangle(cornerSize: CGSize(width: 10, height: 10))
-                                .foregroundColor(currentView == 1 ? .white : .white.opacity(0.5))
-                                .frame(width: currentView == 1 ? 25 : 12, height: 5)
+                        withAnimation(.spring(response: 1, dampingFraction: 3, blendDuration: 0)) {
+                            RoundedCorner()
+                                .foregroundColor(currentView == 1 ? Color(hex: "F27D87") : .white)
+                                .frame(width: currentView == 1 ? 55 : 19, height: 19)
                                 .onTapGesture {
                                     withAnimation(.easeOut) {
                                         if currentView != 1 {
                                             currentView = 1
                                         }
                                     }
+                                    isVisible = true
                                 }
                         }
                         
-                        RoundedCorner().frame(width: 50, height: 50)
-                        
-                        withAnimation(.spring(response: 1, dampingFraction: 10, blendDuration: 0)) {
-                            ContainerRelativeShape()
-                                .foregroundColor(currentView == 2 ? .white : .white.opacity(0.5))
-                                .frame(width: currentView == 2 ? 25 : 12, height: 5)
+                        withAnimation(.spring(response: 1, dampingFraction: 3, blendDuration: 0)) {
+                            RoundedCorner()
+                                .foregroundColor(currentView == 2 ? Color(hex: "F27D87") : .white)
+                                .frame(width: currentView == 2 ? 55 : 19, height: 19)
                                 .onTapGesture {
                                     withAnimation(.easeOut) {
                                         if currentView != 2 {
                                             currentView = 2
                                         }
                                     }
+                                    isVisible = true
                                 }
                         }
                         
-                        withAnimation(.spring(response: 1, dampingFraction: 10, blendDuration: 0)) {
-                            ContainerRelativeShape()
-                                .foregroundColor(currentView == 3 ? .white : .white.opacity(0.5))
-                                .frame(width: currentView == 3 ? 25 : 12, height: 5)
+                        withAnimation(.spring(response: 1, dampingFraction: 3, blendDuration: 0)) {
+                            RoundedCorner()
+                                .foregroundColor(currentView == 3 ? Color(hex: "F27D87") : .white)
+                                .frame(width: currentView == 3 ? 55 : 19, height: 19)
                                 .onTapGesture {
+                                    isVisible.toggle()
                                     withAnimation(.easeOut) {
                                         if currentView != 3 {
                                             currentView = 3
@@ -142,8 +144,6 @@ struct WalkthroughScreen: View {
                                 withAnimation(.easeOut) {
                                     if currentView <= totalViews || currentView == 2 {
                                         currentView += 1
-                                    } else if currentView == 3 {
-                                        currentView = 1
                                     }
                                 }
                             },
@@ -165,6 +165,7 @@ struct WalkthroughScreen: View {
                                     )
                             }
                         )
+                        .disabled(currentView == 3 ? false : true)
                     }
                         .padding()
                     ,alignment: .bottomTrailing
@@ -172,10 +173,10 @@ struct WalkthroughScreen: View {
             }
         }
         .background(
-                       LinearGradient(colors: [
-                           Color(hex: "FFFFFF"),Color(hex: "FFCED2")]
-                                      ,startPoint: .top, endPoint: .bottom)
-                   )
+           LinearGradient(colors: [
+               Color(hex: "FFFFFF"),Color(hex: "FFCED2")]
+                          ,startPoint: .top, endPoint: .bottom)
+       )
         .gesture(DragGesture(minimumDistance: 3.0, coordinateSpace: .local)
             .onEnded { value in
                 print(value.translation)
