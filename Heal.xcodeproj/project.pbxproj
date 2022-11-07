@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		305F29B529125E2800C4C76A /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 305F29B429125E2800C4C76A /* Notification.swift */; };
 		30E962F328F4678600A29E29 /* HealthEcgs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30E962F228F4678600A29E29 /* HealthEcgs.swift */; };
 		30E962F828F5577E00A29E29 /* PreAlertPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30E962F728F5577E00A29E29 /* PreAlertPage.swift */; };
 		30E962FC28FAA64C00A29E29 /* CustomTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30E962FB28FAA64C00A29E29 /* CustomTabBar.swift */; };
@@ -14,7 +15,6 @@
 		30E9630128FE65AA00A29E29 /* HealthProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30E9630028FE65AA00A29E29 /* HealthProfile.swift */; };
 		30E9630328FFBF3800A29E29 /* CoreDataHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30E9630228FFBF3800A29E29 /* CoreDataHelper.swift */; };
 		30E963092902549600A29E29 /* CustomUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30E96306290252B200A29E29 /* CustomUI.swift */; };
-		30E9630D290256F000A29E29 /* ProfilePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30E9630C290256F000A29E29 /* ProfilePage.swift */; };
 		30E9630F2902A8EF00A29E29 /* HexColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30E9630E2902A8EF00A29E29 /* HexColorExtension.swift */; };
 		30F91E1A28E2B5A7008F2C99 /* HealApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30F91E1928E2B5A7008F2C99 /* HealApp.swift */; };
 		30F91E1C28E2B5A7008F2C99 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30F91E1B28E2B5A7008F2C99 /* ContentView.swift */; };
@@ -54,6 +54,7 @@
 
 /* Begin PBXFileReference section */
 		3017647128EAB4C500E14A7D /* Heal.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Heal.entitlements; sourceTree = "<group>"; };
+		305F29B429125E2800C4C76A /* Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
 		30E962F228F4678600A29E29 /* HealthEcgs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthEcgs.swift; sourceTree = "<group>"; };
 		30E962F428F4691300A29E29 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		30E962F728F5577E00A29E29 /* PreAlertPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreAlertPage.swift; sourceTree = "<group>"; };
@@ -62,7 +63,6 @@
 		30E9630028FE65AA00A29E29 /* HealthProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthProfile.swift; sourceTree = "<group>"; };
 		30E9630228FFBF3800A29E29 /* CoreDataHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataHelper.swift; sourceTree = "<group>"; };
 		30E96306290252B200A29E29 /* CustomUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomUI.swift; sourceTree = "<group>"; };
-		30E9630C290256F000A29E29 /* ProfilePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePage.swift; sourceTree = "<group>"; };
 		30E9630E2902A8EF00A29E29 /* HexColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HexColorExtension.swift; sourceTree = "<group>"; };
 		30F91E1628E2B5A7008F2C99 /* Heal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Heal.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		30F91E1928E2B5A7008F2C99 /* HealApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealApp.swift; sourceTree = "<group>"; };
@@ -125,6 +125,7 @@
 			children = (
 				30E9630228FFBF3800A29E29 /* CoreDataHelper.swift */,
 				30F91E2228E2B5AB008F2C99 /* Persistence.swift */,
+				305F29B429125E2800C4C76A /* Notification.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -236,7 +237,6 @@
 		30E9630B290256DC00A29E29 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				30E9630C290256F000A29E29 /* ProfilePage.swift */,
 				30FE0F4D290F830C00AD1AAE /* ProfilePageNew.swift */,
 			);
 			path = View;
@@ -491,7 +491,6 @@
 				30E963092902549600A29E29 /* CustomUI.swift in Sources */,
 				30E962FC28FAA64C00A29E29 /* CustomTabBar.swift in Sources */,
 				30F91E1C28E2B5A7008F2C99 /* ContentView.swift in Sources */,
-				30E9630D290256F000A29E29 /* ProfilePage.swift in Sources */,
 				44CAC93C2918E97F00FE0D8C /* EKGCardTest.swift in Sources */,
 				30E962FF28FE61A400A29E29 /* HealthAuthorizer.swift in Sources */,
 				44CAC9362918E95F00FE0D8C /* JournalView.swift in Sources */,
@@ -501,6 +500,7 @@
 				44CAC9392918E97400FE0D8C /* Extension.swift in Sources */,
 				30F91E1A28E2B5A7008F2C99 /* HealApp.swift in Sources */,
 				44CAC9352918E95F00FE0D8C /* DetailJournal.swift in Sources */,
+				305F29B529125E2800C4C76A /* Notification.swift in Sources */, 
 				30F91E2628E2B5AB008F2C99 /* Heal.xcdatamodeld in Sources */,
 				30E9630F2902A8EF00A29E29 /* HexColorExtension.swift in Sources */,
 				30FE0F4A290A4B3400AD1AAE /* HealthSymptoms.swift in Sources */,
