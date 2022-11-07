@@ -6,9 +6,19 @@
 //
 
 import SwiftUI
+import CoreData
 
 struct ProfilePageNew: View {
 
+    @Environment(\.managedObjectContext) private var viewContext
+
+    @FetchRequest(
+        sortDescriptors: [NSSortDescriptor(keyPath: \Profile.name, ascending: true)],
+        animation: .default)
+    private var itemsProfile: FetchedResults<Profile>
+
+    @EnvironmentObject var authProc: HKAuthorize
+    @ObservedObject var notification: NotificationHelper
     @State private var name = ""
     @State private var doBirth = Date()
     @State private var gender = ""
@@ -47,21 +57,33 @@ struct ProfilePageNew: View {
                     Field(title: "Tinggi", text: $height)
                     Field(title: "Berat", text: $weight)
                     Field(title: "Penyakit Bawaan", text: $commorbit)
-                    
-                    Button("Sinkronisasi dengan Apple Health") {
-                        // calling function autofill after tapped
-                        // brt masukin dulu healthkit profile ke coredata yg profile, ntar tarik dari situ masukin ke state aja
+
+                    Toggle("Notification", isOn: self.$notification.isOn).onChange(of: self.notification.isOn) { newValue in
+                        notification.notifSchedule(isOn: newValue)
                     }
 
+                    Button("Sinkronisasi dengan Apple Health") {
+                        gender = authProc.getProfile.sexs
+                        height = String(authProc.getProfile.height)
+                        weight = String(authProc.getProfile.weight)
+                        doBirth = authProc.getProfile.dob
+                        // calling function autofill after tapped
+                        // brt masukin dulu healthkit profile
+                        // ke coredata yg profile, ntar tarik dari situ masukin ke state aja
+                    }
                 }.padding()
             }.navigationTitle("Profile")
+                .navigationBarBackButtonHidden(true)
+                .navigationBarHidden(true)
         }
+        //        .onAppear(){
+        //            self.profile = HKProfile()
     }
 }
 
 struct ProfilePageNew_Previews: PreviewProvider {
     static var previews: some View {
-        ProfilePageNew()
+        ProfilePageNew(notification: NotificationHelper())
     }
 }
 

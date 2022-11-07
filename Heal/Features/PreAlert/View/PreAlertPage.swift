@@ -10,53 +10,64 @@ import SwiftUI
 import CoreData
 
 struct PreAlertView: View {
-
+    @EnvironmentObject var authProc: HKAuthorize
     @State var selectedTab = "house"
+    @ObservedObject var notification: NotificationHelper
 
     var body: some View {
-
-        ZStack(content: {
-            Color(uiColor: .systemPink)
-                .ignoresSafeArea()
-
-            VStack {
-                HStack {
-                    ZStack {
-                        Rectangle(
-                        )
-                        .frame(width: 100, height: 100)
-//                        .cornerRadius(10)
-                        .custCornerRadius(10, corners: .allCorners)
-                        .foregroundColor(.white)
-
-                        Image("HeartAsset")
-                            .resizable()
-                            .frame(width: 70, height: 70)
+        NavigationView {
+            ZStack(content: {
+                Color(uiColor: .systemPink)
+                    .ignoresSafeArea()
+                VStack {
+                    HStack {
+                        ZStack {
+                            Rectangle(
+                            )
+                            .frame(width: 100, height: 100)
+    //                        .cornerRadius(10)
+                            .custCornerRadius(10, corners: .allCorners)
                             .foregroundColor(.white)
 
-                    }
+                            Image("HeartAsset")
+                                .resizable()
+                                .frame(width: 70, height: 70)
+                                .foregroundColor(.white)
+
+                        }
+                        Spacer()
+                    }.offset(CGSize(width: 25, height: 10))
+
+                    CardBig().environmentObject(authProc)
+                    NavigationLink {
+                        ProfilePageNew(notification: self.notification).environmentObject(authProc)
+                    } label: {
+                        Text("Next Screen")
+                            .navigationTitle("")
+                            .navigationBarHidden(true)
+                    }.navigationBarBackButtonHidden(true)
+                }
+
+                VStack {
                     Spacer()
-                }.offset(CGSize(width: 25, height: 10))
-
-                CardBig()
-            }
-
-            VStack {
-                Spacer()
-//                CustomTabBar(selectedTab: $selectedTab)
-            }
-        })
+    //                CustomTabBar(selectedTab: $selectedTab)
+                }
+            })
+        }
+        .onAppear() {
+            NotificationHelper().notifPermission()
+        }
     }
 }
 // }
 
 struct CardBig: View {
-    private var authProc: HKAuthorize?
+    @EnvironmentObject var authProc: HKAuthorize
     @Environment(\.managedObjectContext) var viewContext
 
-    init() {
-        authProc = HKAuthorize()
-    }
+    //    init() {
+    //        authProc = HKAuthorize()
+    //    }
 
     var body: some View {
         VStack(alignment: .leading, spacing: 15) {
@@ -83,8 +94,10 @@ struct CardBig: View {
 
             }
             Button(action: {
-                authProc?.authorizeHealthKit(viewContext: viewContext, completion: { success, error in
-                    print("done get data")
+                authProc.authorizeHealthKit(viewContext: viewContext, completion: { success, error in
+                    if !success {
+                        print("The error \(String(describing: error))")
+                    }
                 })
             }, label: {
                 Text("Connect to Apple Health")
@@ -93,8 +106,8 @@ struct CardBig: View {
                     .foregroundColor(Color(red: 34/255, green: 34/255, blue: 86/255))
                     .background(Color(red: 255/255, green: 240/255, blue: 217/255))
                     .custCornerRadius(10, corners: .allCorners)
-                    .padding()
-            }).padding()
+                //                    .padding()
+            })
 
             Spacer()
         }
@@ -102,12 +115,12 @@ struct CardBig: View {
         .background()
         .mask(RoundedRectangle(cornerRadius: 10, style: .continuous))
         .padding(20)
-        Spacer(minLength: 80)
+        //        Spacer(minLength: 80)
     }
 }
 
 struct PreAlertView_Previews: PreviewProvider {
     static var previews: some View {
-        PreAlertView()
+        PreAlertView(notification: NotificationHelper())
     }
 }
