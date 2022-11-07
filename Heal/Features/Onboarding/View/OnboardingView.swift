@@ -7,42 +7,44 @@
 
 import SwiftUI
 
-var totalViews = 3
+var totalViews = 4
 
 struct OnboardingView: View {
     //    @AppStorage("currentView") var currentView = 1
-        @State var currentView = 1
-        
+        @State var currentView = 2
+
         var body: some View {
             
             if currentView == 1 {
-                WalkthroughScreen(
+                FirstScene(
                     currentView: $currentView,
-                    title: "20% Off For New Customers",
-                    description: "On Shopping Cart Cup Holders At Zooblie.",
-                    bgColor: "PastelColor",
-                    img: "intro_1"
+                    imgMascot: "Group 33",
+                    imgRect: "Rectangle 17",
+                    contentText: "Text2",
+                    button: "Group 61"
                 )
                     .transition(.opacity)
             } else if currentView == 2 {
                 WalkthroughScreen(
                     currentView: $currentView,
-                    title: "Save on No Cost EMI",
-                    description: "Avail No Cost EMI offers at Zooblie.in",
-                    bgColor: "VilvetColor",
-                    img: "intro_2"
+                    imgMascot: "Group 96",
+                    img: "Tutorial 1"
                 )
             } else if currentView == 3 {
                 WalkthroughScreen(
                     currentView: $currentView,
-                    title: "Shopping Offers",
-                    description: "Online Shopping Offers on Zooblie, Grab upto 40 to 90% off",
-                    bgColor: "OrangeColor",
-                    img: "intro_3"
+                    imgMascot: "Group 97",
+                    img: "Tutorial 1"
+                )
+            } else if currentView == 4 {
+                WalkthroughScreen(
+                    currentView: $currentView,
+                    imgMascot: "Group 41",
+                    img: "Tutorial 4"
                 )
             }
             
-            if currentView == 4 {
+            if currentView == 5 {
                 Home()
             }
             
@@ -67,110 +69,164 @@ struct WalkthroughScreen: View {
 //    @AppStorage("currentView") var currentView = 1
     @Binding var currentView : Int
     
-    var title: String
-    var description: String
-    var bgColor: String
+    var imgMascot: String
     var img: String
-    @State var isVisible = true
+    @State var isVisible = false
     
     var body: some View {
         ZStack{
-            VStack{
-                VStack(alignment: .leading){
-                    Image(img)
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .padding()
-                    Text(title)
-                        .fontWeight(.semibold)
-                        .foregroundColor(Color.white)
-                        .font(.title)
-                        .padding(.top)
-                    
-                    
-                    Text(description)
-                        .padding(.top, 5.0)
-                        .foregroundColor(Color.white)
-                    Spacer(minLength: 0)
-                }
-                .padding()
-                .overlay(
-                    HStack{
-                        withAnimation(.spring(response: 1, dampingFraction: 3, blendDuration: 0)) {
-                            RoundedCorner()
-                                .foregroundColor(currentView == 1 ? Color(hex: "F27D87") : .white)
-                                .frame(width: currentView == 1 ? 55 : 19, height: 19)
-                                .onTapGesture {
-                                    withAnimation(.easeOut) {
-                                        if currentView != 1 {
-                                            currentView = 1
-                                        }
-                                    }
-                                    isVisible = true
-                                }
-                        }
-                        
-                        withAnimation(.spring(response: 1, dampingFraction: 3, blendDuration: 0)) {
-                            RoundedCorner()
-                                .foregroundColor(currentView == 2 ? Color(hex: "F27D87") : .white)
-                                .frame(width: currentView == 2 ? 55 : 19, height: 19)
-                                .onTapGesture {
-                                    withAnimation(.easeOut) {
-                                        if currentView != 2 {
-                                            currentView = 2
-                                        }
-                                    }
-                                    isVisible = true
-                                }
-                        }
-                        
-                        withAnimation(.spring(response: 1, dampingFraction: 3, blendDuration: 0)) {
-                            RoundedCorner()
-                                .foregroundColor(currentView == 3 ? Color(hex: "F27D87") : .white)
-                                .frame(width: currentView == 3 ? 55 : 19, height: 19)
-                                .onTapGesture {
-                                    isVisible.toggle()
-                                    withAnimation(.easeOut) {
-                                        if currentView != 3 {
-                                            currentView = 3
-                                        }
-                                    }
-                                }
-                        }
-                        
-                        Spacer()
-                        Button(
-                            action:{
+            Image(img)
+                .padding(EdgeInsets(top: 126, leading: 53, bottom: 218, trailing: 37))
+            Image(imgMascot)
+                .padding(EdgeInsets(top: 204, leading: 83, bottom: 480, trailing: 75))
+            
+            VStack {
+                HStack{
+                    withAnimation(.spring(response: 1, dampingFraction: 3, blendDuration: 0)) {
+                        RoundedCorner()
+                            .foregroundColor(currentView == 2 ? Color(hex: "F27D87") : .white)
+                            .frame(width: currentView == 2 ? 55 : 19, height: 19)
+                            .onTapGesture {
                                 withAnimation(.easeOut) {
-                                    if currentView <= totalViews || currentView == 2 {
-                                        currentView += 1
+                                    if currentView != 2 {
+                                        currentView = 2
                                     }
                                 }
-                            },
-                            label: {
-                                Image(systemName: "chevron.right")
-                                    .foregroundColor(Color.white)
-                                    .font(.system(size: 35.0, weight: .semibold))
-                                    .frame(width: 55, height: 55)
-                                    .background(Color("BgNextBtn"))
-                                    .clipShape(Circle())
-                                    .padding(17)
-                                    .overlay(
-                                        ZStack{
-                                            Circle()
-                                                .stroke(Color.white.opacity(0.4), lineWidth: 2)
-                                                .padding()
-                                                .foregroundColor(Color.white)
-                                        }
-                                    )
+                                isVisible = false
                             }
-                        )
-                        .disabled(currentView == 3 ? false : true)
                     }
-                        .padding()
-                    ,alignment: .bottomTrailing
-                )
+
+                    withAnimation(.spring(response: 1, dampingFraction: 3, blendDuration: 0)) {
+                        RoundedCorner()
+                            .foregroundColor(currentView == 3 ? Color(hex: "F27D87") : .white)
+                            .frame(width: currentView == 3 ? 55 : 19, height: 19)
+                            .onTapGesture {
+                                withAnimation(.easeOut) {
+                                    if currentView != 3 {
+                                        currentView = 3
+                                    }
+                                }
+                                isVisible = false
+                            }
+                    }
+
+                    withAnimation(.spring(response: 1, dampingFraction: 3, blendDuration: 0)) {
+                        RoundedCorner()
+                            .foregroundColor(currentView == 4 ? Color(hex: "F27D87") : .white)
+                            .frame(width: currentView == 4 ? 55 : 19, height: 19)
+                            .onTapGesture {
+                                isVisible.toggle()
+                                withAnimation(.easeOut) {
+                                    if currentView != 4 {
+                                        currentView = 4
+                                        isVisible.toggle()
+                                    }
+                                }
+                            }
+                    }
+                }
+                .padding(EdgeInsets(top: 34, leading: 0, bottom: 33, trailing: 0))
+                
+                if isVisible {
+                    ZStack{
+                        Image("Rectangle 16")
+                        Image("Selanjutnya")
+                    }
+                    .onTapGesture {
+                        print("************** SDF SDFSD ")
+                    }
+                }
             }
+            .frame(maxHeight: .infinity)
+            .padding(EdgeInsets(top: 662, leading: 0, bottom: 163, trailing: 0))
+            
+            
+//            VStack{
+//                VStack(alignment: .leading){
+//                    Image(img)
+//                        .resizable()
+//                        .aspectRatio(contentMode: .fit)
+//                        .padding()
+//                    Spacer(minLength: 0)
+//                }
+//                .padding()
+//                .overlay(
+//                    HStack{
+//                        withAnimation(.spring(response: 1, dampingFraction: 3, blendDuration: 0)) {
+//                            RoundedCorner()
+//                                .foregroundColor(currentView == 2 ? Color(hex: "F27D87") : .white)
+//                                .frame(width: currentView == 2 ? 55 : 19, height: 19)
+//                                .onTapGesture {
+//                                    withAnimation(.easeOut) {
+//                                        if currentView != 2 {
+//                                            currentView = 2
+//                                        }
+//                                    }
+//                                    isVisible = true
+//                                }
+//                        }
+//
+//                        withAnimation(.spring(response: 1, dampingFraction: 3, blendDuration: 0)) {
+//                            RoundedCorner()
+//                                .foregroundColor(currentView == 3 ? Color(hex: "F27D87") : .white)
+//                                .frame(width: currentView == 3 ? 55 : 19, height: 19)
+//                                .onTapGesture {
+//                                    withAnimation(.easeOut) {
+//                                        if currentView != 3 {
+//                                            currentView = 3
+//                                        }
+//                                    }
+//                                    isVisible = true
+//                                }
+//                        }
+//
+//                        withAnimation(.spring(response: 1, dampingFraction: 3, blendDuration: 0)) {
+//                            RoundedCorner()
+//                                .foregroundColor(currentView == 4 ? Color(hex: "F27D87") : .white)
+//                                .frame(width: currentView == 4 ? 55 : 19, height: 19)
+//                                .onTapGesture {
+//                                    isVisible.toggle()
+//                                    withAnimation(.easeOut) {
+//                                        if currentView != 4 {
+//                                            currentView = 4
+//                                        }
+//                                    }
+//                                }
+//                        }
+//
+//                        Spacer()
+//                        Button(
+//                            action:{
+//                                withAnimation(.easeOut) {
+//                                    if currentView <= totalViews || currentView == 2 {
+//                                        currentView += 1
+//                                    }
+//                                }
+//                            },
+//                            label: {
+//                                Image(systemName: "chevron.right")
+//                                    .foregroundColor(Color.white)
+//                                    .font(.system(size: 35.0, weight: .semibold))
+//                                    .frame(width: 55, height: 55)
+//                                    .background(Color("BgNextBtn"))
+//                                    .clipShape(Circle())
+//                                    .padding(17)
+//                                    .overlay(
+//                                        ZStack{
+//                                            Circle()
+//                                                .stroke(Color.white.opacity(0.4), lineWidth: 2)
+//                                                .padding()
+//                                                .foregroundColor(Color.white)
+//                                        }
+//                                    )
+//                            }
+//                        )
+//                        .disabled(currentView == 3 ? false : true)
+//                    }
+//                        .padding()
+//                    ,alignment: .bottomTrailing
+//                )
+//            }
         }
         .background(
            LinearGradient(colors: [
@@ -193,5 +249,34 @@ struct WalkthroughScreen: View {
                 }
             }
         )
+    }
+}
+
+struct FirstScene: View {
+    @Binding var currentView : Int
+    var imgMascot: String
+    var imgRect: String
+    var contentText: String
+    var button: String
+    
+    var body: some View {
+        ZStack{
+            Image(imgMascot)
+                .padding(.trailing, 231)
+            Image(imgRect)
+                .padding(EdgeInsets(top: 187, leading: 126, bottom: 475, trailing: 18))
+            Image(contentText)
+                .padding(EdgeInsets(top: 215, leading: 159, bottom: 493, trailing: 28))
+            Image(button)
+                .padding(EdgeInsets(top: 699, leading: 78, bottom: 95, trailing: 72))
+                .onTapGesture {
+                    currentView += 1
+                }
+        }
+        .background(
+           LinearGradient(colors: [
+               Color(hex: "FFFFFF"),Color(hex: "FFCED2")]
+                          ,startPoint: .top, endPoint: .bottom)
+       )
     }
 }
