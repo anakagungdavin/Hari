@@ -8,9 +8,13 @@
 import Foundation
 import HealthKit
 
-class HKProfile {
+class HKProfile: ObservableObject {
 
     var healthStore = HKHealthStore()
+    var height = Int32()
+    var weight = Int32()
+    var sexs = String()
+    var dob = Date()
 
     // most likely interchangable data
     func readData(completion: @escaping(Bool, Error?) -> Void) {
@@ -23,6 +27,9 @@ class HKProfile {
                 let calendar = Calendar.current
                 let currentYear = calendar.component(.year, from: Date() )
                 age = currentYear - birthDay.year!
+                guard let dob = birthDay.date else {
+                    return
+                }
             } catch {}
 
             do {
@@ -30,6 +37,7 @@ class HKProfile {
                 sex = getSex.biologicalSex
                 if let data = sex {
                     sexData = self.getReadableBiologicalSex(biologicalSex: data)
+                    sexs = sexData
                 }
             } catch {}
 
@@ -59,7 +67,7 @@ class HKProfile {
     }
 
     // data that always updated
-    func readRecentData() {
+    func readRecentData(completion: @escaping(Bool, Error?) -> Void) {
         let irregularType = HKCategoryType(HKCategoryTypeIdentifier.irregularHeartRhythmEvent)
         let weightType = HKSampleType.quantityType(forIdentifier: HKQuantityTypeIdentifier.bodyMass)!
         let heightType = HKSampleType.quantityType(forIdentifier: HKQuantityTypeIdentifier.height)!
@@ -71,6 +79,7 @@ class HKProfile {
 
             if let result = results?.last as? HKQuantitySample {
                 print("weight => \(result.quantity)")
+                self.weight = Int32(Int(result.quantity.doubleValue(for: HKUnit.gramUnit(with: .kilo))))
             }
         }
 
@@ -81,6 +90,7 @@ class HKProfile {
 
             if let result = results?.last as? HKQuantitySample {
                 print("height => \(result.quantity)")
+                self.height = Int32(Int(result.quantity.doubleValue(for: HKUnit.meterUnit(with: .centi))))
             }
         }
 

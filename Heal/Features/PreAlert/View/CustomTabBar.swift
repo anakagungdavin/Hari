@@ -31,7 +31,7 @@ struct CustomTabBar: View {
 
 struct CustomTabBar_Previews: PreviewProvider {
     static var previews: some View {
-        PreAlertView()
+        PreAlertView(notification: NotificationHelper())
     }
 }
 

@@ -8,8 +8,9 @@
 import Foundation
 import HealthKit
 import CoreData
+//dsd
 
-class HKAuthorize {
+class HKAuthorize: ObservableObject {
 
     var healthStore: HKHealthStore?
     var getProfile = HKProfile()
@@ -41,10 +42,16 @@ class HKAuthorize {
                 print("We had an error here: \n\(String(describing: error))")
             } else {
                 self.getProfile.readData { success, error in
-                    print("Succesfully read data")
+                    if !success {
+                        print("error")
+                    }
                 }
                 self.getECG.readECGs(viewContext)
-                self.getProfile.readRecentData()
+                self.getProfile.readRecentData { success, error in
+                    if !success {
+                        print("error")
+                    }
+                }
             }
         })
     }
