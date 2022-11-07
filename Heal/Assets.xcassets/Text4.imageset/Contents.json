@@ -1,0 +1,23 @@
+{
+  "images" : [
+    {
+      "filename" : "Selamat kamu sudah selesai melakukan tahap onboarding! Yuk, menuju ke tampilan utama dari HARI.png",
+      "idiom" : "universal",
+      "scale" : "1x"
+    },
+    {
+      "filename" : "Selamat kamu sudah selesai melakukan tahap onboarding! Yuk, menuju ke tampilan utama dari HARI@2x.png",
+      "idiom" : "universal",
+      "scale" : "2x"
+    },
+    {
+      "filename" : "Selamat kamu sudah selesai melakukan tahap onboarding! Yuk, menuju ke tampilan utama dari HARI@3x.png",
+      "idiom" : "universal",
+      "scale" : "3x"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}
