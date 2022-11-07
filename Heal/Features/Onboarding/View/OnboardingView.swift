@@ -11,7 +11,8 @@ var totalViews = 4
 
 struct OnboardingView: View {
     //    @AppStorage("currentView") var currentView = 1
-        @State var currentView = 2
+    @State var currentView = 2
+    @State var isVisible = false
 
         var body: some View {
             
@@ -28,19 +29,23 @@ struct OnboardingView: View {
                 WalkthroughScreen(
                     currentView: $currentView,
                     imgMascot: "Group 96",
-                    img: "Tutorial 1"
+                    img: "Tutorial 1",
+                    isVisible : $isVisible
+                    
                 )
             } else if currentView == 3 {
                 WalkthroughScreen(
                     currentView: $currentView,
                     imgMascot: "Group 97",
-                    img: "Tutorial 1"
+                    img: "Tutorial 1",
+                    isVisible : $isVisible
                 )
             } else if currentView == 4 {
                 WalkthroughScreen(
                     currentView: $currentView,
                     imgMascot: "Group 41",
-                    img: "Tutorial 4"
+                    img: "Tutorial 4",
+                    isVisible: $isVisible
                 )
             }
             
@@ -71,75 +76,71 @@ struct WalkthroughScreen: View {
     
     var imgMascot: String
     var img: String
-    @State var isVisible = false
+    @Binding var isVisible: Bool
     
     var body: some View {
         ZStack{
-            Image(img)
-                .padding(EdgeInsets(top: 126, leading: 53, bottom: 218, trailing: 37))
-            Image(imgMascot)
-                .padding(EdgeInsets(top: 204, leading: 83, bottom: 480, trailing: 75))
+            Group{
+                Image(img)
+                Image(imgMascot)
+                    .padding(EdgeInsets(top: 61, leading: 0, bottom: 260, trailing: 0))
+            }.padding(EdgeInsets(top: 79, leading: 45, bottom: 184, trailing: 45))
             
-            VStack {
-                HStack{
-                    withAnimation(.spring(response: 1, dampingFraction: 3, blendDuration: 0)) {
-                        RoundedCorner()
-                            .foregroundColor(currentView == 2 ? Color(hex: "F27D87") : .white)
-                            .frame(width: currentView == 2 ? 55 : 19, height: 19)
-                            .onTapGesture {
-                                withAnimation(.easeOut) {
-                                    if currentView != 2 {
-                                        currentView = 2
-                                    }
-                                }
-                                isVisible = false
-                            }
-                    }
-
-                    withAnimation(.spring(response: 1, dampingFraction: 3, blendDuration: 0)) {
-                        RoundedCorner()
-                            .foregroundColor(currentView == 3 ? Color(hex: "F27D87") : .white)
-                            .frame(width: currentView == 3 ? 55 : 19, height: 19)
-                            .onTapGesture {
-                                withAnimation(.easeOut) {
-                                    if currentView != 3 {
-                                        currentView = 3
-                                    }
-                                }
-                                isVisible = false
-                            }
-                    }
-
-                    withAnimation(.spring(response: 1, dampingFraction: 3, blendDuration: 0)) {
-                        RoundedCorner()
-                            .foregroundColor(currentView == 4 ? Color(hex: "F27D87") : .white)
-                            .frame(width: currentView == 4 ? 55 : 19, height: 19)
-                            .onTapGesture {
-                                isVisible.toggle()
-                                withAnimation(.easeOut) {
-                                    if currentView != 4 {
-                                        currentView = 4
-                                        isVisible.toggle()
-                                    }
+            HStack{
+                withAnimation(.spring(response: 1, dampingFraction: 3, blendDuration: 0)) {
+                    RoundedCorner()
+                        .foregroundColor(currentView == 2 ? Color(hex: "F27D87") : .white)
+                        .frame(width: currentView == 2 ? 55 : 19, height: 19)
+                        .onTapGesture {
+                            withAnimation(.easeOut) {
+                                if currentView != 2 {
+                                    currentView = 2
+                                    isVisible = false
                                 }
                             }
-                    }
+                        }
                 }
-                .padding(EdgeInsets(top: 34, leading: 0, bottom: 33, trailing: 0))
                 
-                if isVisible {
-                    ZStack{
-                        Image("Rectangle 16")
-                        Image("Selanjutnya")
-                    }
-                    .onTapGesture {
-                        print("************** SDF SDFSD ")
-                    }
+                withAnimation(.spring(response: 1, dampingFraction: 3, blendDuration: 0)) {
+                    RoundedCorner()
+                        .foregroundColor(currentView == 3 ? Color(hex: "F27D87") : .white)
+                        .frame(width: currentView == 3 ? 55 : 19, height: 19)
+                        .onTapGesture {
+                            withAnimation(.easeOut) {
+                                if currentView != 3 {
+                                    currentView = 3
+                                    isVisible = false
+                                }
+                            }
+                        }
+                }
+                
+                withAnimation(.spring(response: 1, dampingFraction: 3, blendDuration: 0)) {
+                    RoundedCorner()
+                        .foregroundColor(currentView == 4 ? Color(hex: "F27D87") : .white)
+                        .frame(width: currentView == 4 ? 55 : 19, height: 19)
+                        .onTapGesture {
+                            withAnimation(.easeOut) {
+                                if currentView != 4 {
+                                    currentView = 4
+                                    isVisible = true
+                                }
+                            }
+                        }
                 }
             }
-            .frame(maxHeight: .infinity)
-            .padding(EdgeInsets(top: 662, leading: 0, bottom: 163, trailing: 0))
-            
+                .padding(EdgeInsets(top: 613, leading: 0, bottom: 131, trailing: 0))
+        
+            if isVisible {
+                ZStack{
+                    Image("Rectangle 16")
+                    Image("Selanjutnya")
+                }
+                .padding(EdgeInsets(top: 665, leading: 0, bottom: 54, trailing: 0))
+                .onTapGesture {
+                    currentView += 1
+                }
+            }
             
 //            VStack{
 //                VStack(alignment: .leading){
@@ -241,9 +242,13 @@ struct WalkthroughScreen: View {
                     if currentView <= totalViews {
                         currentView += 1
                     }
+                    if currentView == 4 {
+                        isVisible = true
+                    }
                     case (0..., -30...30):
-                    if currentView <= totalViews && currentView != 1 {
+                    if currentView <= totalViews && currentView != 1{
                         currentView -= 1
+                        isVisible = false
                     }
                     default:  print("no clue")
                 }
