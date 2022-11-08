@@ -10,15 +10,16 @@ import SwiftUI
 var totalViews = 4
 
 struct OnboardingView: View {
-    //    @AppStorage("currentView") var currentView = 1
-    @State var currentView = 2
+    @AppStorage("currentView") var currentView = 1
+    let authorizer = HKAuthorize()
+    let notification = NotificationHelper()
+//    @State var currentView = 2
     @State var isVisible = false
 
         var body: some View {
-            
             if currentView == 1 {
                 FirstScene(
-                    currentView: $currentView,
+                    currentView: currentView,
                     imgMascot: "Group 33",
                     imgRect: "Rectangle 17",
                     contentText: "Text2",
@@ -27,7 +28,7 @@ struct OnboardingView: View {
                     .transition(.opacity)
             } else if currentView == 2 {
                 WalkthroughScreen(
-                    currentView: $currentView,
+                    currentView: currentView,
                     imgMascot: "Group 96",
                     img: "Tutorial 1",
                     isVisible : $isVisible
@@ -35,14 +36,14 @@ struct OnboardingView: View {
                 )
             } else if currentView == 3 {
                 WalkthroughScreen(
-                    currentView: $currentView,
+                    currentView: currentView,
                     imgMascot: "Group 97",
                     img: "Tutorial 1",
                     isVisible : $isVisible
                 )
             } else if currentView == 4 {
                 WalkthroughScreen(
-                    currentView: $currentView,
+                    currentView: currentView,
                     imgMascot: "Group 41",
                     img: "Tutorial 4",
                     isVisible: $isVisible
@@ -50,9 +51,10 @@ struct OnboardingView: View {
             }
             
             if currentView == 5 {
-                Home()
+//                Home()
+                PreAlertView(notification: notification)
+                    .environmentObject(authorizer)
             }
-            
         }
 }
 
@@ -71,8 +73,8 @@ struct Home: View {
 }
 
 struct WalkthroughScreen: View {
-//    @AppStorage("currentView") var currentView = 1
-    @Binding var currentView : Int
+    @AppStorage("currentView") var currentView = 1
+//    @Binding var currentView : Int
     
     var imgMascot: String
     var img: String
@@ -129,7 +131,7 @@ struct WalkthroughScreen: View {
                         }
                 }
             }
-                .padding(EdgeInsets(top: 613, leading: 0, bottom: 131, trailing: 0))
+            .padding(EdgeInsets(top: 613, leading: 0, bottom: 131, trailing: 0))
         
             if isVisible {
                 ZStack{
@@ -141,93 +143,6 @@ struct WalkthroughScreen: View {
                     currentView += 1
                 }
             }
-            
-//            VStack{
-//                VStack(alignment: .leading){
-//                    Image(img)
-//                        .resizable()
-//                        .aspectRatio(contentMode: .fit)
-//                        .padding()
-//                    Spacer(minLength: 0)
-//                }
-//                .padding()
-//                .overlay(
-//                    HStack{
-//                        withAnimation(.spring(response: 1, dampingFraction: 3, blendDuration: 0)) {
-//                            RoundedCorner()
-//                                .foregroundColor(currentView == 2 ? Color(hex: "F27D87") : .white)
-//                                .frame(width: currentView == 2 ? 55 : 19, height: 19)
-//                                .onTapGesture {
-//                                    withAnimation(.easeOut) {
-//                                        if currentView != 2 {
-//                                            currentView = 2
-//                                        }
-//                                    }
-//                                    isVisible = true
-//                                }
-//                        }
-//
-//                        withAnimation(.spring(response: 1, dampingFraction: 3, blendDuration: 0)) {
-//                            RoundedCorner()
-//                                .foregroundColor(currentView == 3 ? Color(hex: "F27D87") : .white)
-//                                .frame(width: currentView == 3 ? 55 : 19, height: 19)
-//                                .onTapGesture {
-//                                    withAnimation(.easeOut) {
-//                                        if currentView != 3 {
-//                                            currentView = 3
-//                                        }
-//                                    }
-//                                    isVisible = true
-//                                }
-//                        }
-//
-//                        withAnimation(.spring(response: 1, dampingFraction: 3, blendDuration: 0)) {
-//                            RoundedCorner()
-//                                .foregroundColor(currentView == 4 ? Color(hex: "F27D87") : .white)
-//                                .frame(width: currentView == 4 ? 55 : 19, height: 19)
-//                                .onTapGesture {
-//                                    isVisible.toggle()
-//                                    withAnimation(.easeOut) {
-//                                        if currentView != 4 {
-//                                            currentView = 4
-//                                        }
-//                                    }
-//                                }
-//                        }
-//
-//                        Spacer()
-//                        Button(
-//                            action:{
-//                                withAnimation(.easeOut) {
-//                                    if currentView <= totalViews || currentView == 2 {
-//                                        currentView += 1
-//                                    }
-//                                }
-//                            },
-//                            label: {
-//                                Image(systemName: "chevron.right")
-//                                    .foregroundColor(Color.white)
-//                                    .font(.system(size: 35.0, weight: .semibold))
-//                                    .frame(width: 55, height: 55)
-//                                    .background(Color("BgNextBtn"))
-//                                    .clipShape(Circle())
-//                                    .padding(17)
-//                                    .overlay(
-//                                        ZStack{
-//                                            Circle()
-//                                                .stroke(Color.white.opacity(0.4), lineWidth: 2)
-//                                                .padding()
-//                                                .foregroundColor(Color.white)
-//                                        }
-//                                    )
-//                            }
-//                        )
-//                        .disabled(currentView == 3 ? false : true)
-//                    }
-//                        .padding()
-//                    ,alignment: .bottomTrailing
-//                )
-//            }
         }
         .background(
            LinearGradient(colors: [
@@ -258,7 +173,8 @@ struct WalkthroughScreen: View {
 }
 
 struct FirstScene: View {
-    @Binding var currentView : Int
+    @AppStorage("currentView") var currentView = 1
+//    @Binding var currentView : Int
     var imgMascot: String
     var imgRect: String
     var contentText: String
