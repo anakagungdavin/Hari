@@ -9,7 +9,7 @@ import SwiftUI
 
 struct DetailJournal: View {
     @State var PDFurl: URL?
-    @State var ShowShareSheet: Bool = false
+    @State var showShareSheet: Bool = false
     var body: some View {
         VStack {
             Group {
@@ -100,7 +100,7 @@ struct DetailJournal: View {
                 } completion: { status, url in
                     if let url = url,status{
                         self.PDFurl = url
-                        self.ShowShareSheet.toggle()
+                        self.showShareSheet.toggle()
                     }
                     else{
                         print("failer to produce PDF")
@@ -113,7 +113,7 @@ struct DetailJournal: View {
 
         }//Batas Vstack
         
-        .sheet(isPresented: $ShowShareSheet){
+        .sheet(isPresented: $showShareSheet){
             PDFurl = nil
         } content: {
             if let PDFurl = PDFurl {
@@ -148,7 +148,7 @@ struct ShareSheet: UIViewControllerRepresentable{
 }
  
 
-struct DetailJournal_Preview: PreviewProvider {
+struct DetailJournalPreview: PreviewProvider {
     static var previews: some View {
        DetailJournal()
     }

@@ -106,10 +106,10 @@ struct ProfilePageNew: View {
                         Spacer()
 
                         Button("Sinkronisasi dengan Apple Health") {
-                            gender = authProc.getProfile.sexs
-                            height = String(authProc.getProfile.height)
-                            weight = String(authProc.getProfile.weight)
-                            doBirth = authProc.getProfile.dob
+//                            gender = authProc.getProfile.sexs
+//                            height = String(authProc.getProfile.height)
+//                            weight = String(authProc.getProfile.weight)
+//                            doBirth = authProc.getProfile.dob
                             // calling function autofill after tapped
                             // brt masukin dulu healthkit profile
                             // ke coredata yg profile, ntar tarik dari situ masukin ke state aja
@@ -120,8 +120,13 @@ struct ProfilePageNew: View {
                 .navigationBarBackButtonHidden(true)
                 .navigationBarHidden(true)
         }
-        //        .onAppear(){
-        //            self.profile = HKProfile()
+        .onAppear() {
+            ProfilePageModel().setHealthProfile(viewContext: viewContext, authProc: authProc)
+            gender = authProc.getProfile.sexs
+            height = String(authProc.getProfile.height)
+            weight = String(authProc.getProfile.weight)
+            doBirth = authProc.getProfile.dob
+        }
     }
 }
 

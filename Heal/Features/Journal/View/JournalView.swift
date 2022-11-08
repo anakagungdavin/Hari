@@ -26,7 +26,7 @@ struct JournalView: View {
     }
 }
 
-struct JournalView_preview: PreviewProvider {
+struct JournalViewPreview: PreviewProvider {
     static var previews: some View {
         JournalView()
     }

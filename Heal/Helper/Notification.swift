@@ -42,8 +42,8 @@ class NotificationHelper: ObservableObject {
             dateComponents.calendar = Calendar.current
 
             dateComponents.weekday = 2 // hari ke berapa (1 brarti minggu)
-            dateComponents.hour = 14 // jam keberapa
-            dateComponents.minute = 53 // menit keberapa
+            dateComponents.hour = 17 // jam keberapa
+            dateComponents.minute = 2 // menit keberapa
 
             // trigger repeating event (biar muncul terus sekali seminggu)
             let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)

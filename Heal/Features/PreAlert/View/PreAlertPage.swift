@@ -116,7 +116,7 @@ struct CardBig: View {
         .background()
         .mask(RoundedRectangle(cornerRadius: 10, style: .continuous))
         .padding(20)
-        
+
         //        Spacer(minLength: 80)
     }
 }

@@ -10,7 +10,7 @@ import HealthKit
 
 class HKProfile: ObservableObject {
 
-    var healthStore = HKHealthStore()
+//    var healthStore = HKHealthStore()
     var height = Int32()
     var weight = Int32()
     var sexs = String()
@@ -25,18 +25,18 @@ class HKProfile: ObservableObject {
             var sexData: String = "Not Retrived"
 
             do {
-                let birthDay = try healthStore.dateOfBirthComponents()
+                let birthDay = try HKAuthorize().healthStore?.dateOfBirthComponents()
                 let calendar = Calendar.current
                 let currentYear = calendar.component(.year, from: Date() )
-                age = currentYear - birthDay.year!
-                guard let dob = birthDay.date else {
+                age = currentYear - (birthDay?.year! ?? 0)
+                guard let dob = birthDay?.date else {
                     return
                 }
             } catch {}
 
             do {
-                let getSex = try healthStore.biologicalSex()
-                sex = getSex.biologicalSex
+                let getSex = try HKAuthorize().healthStore?.biologicalSex()
+                sex = getSex?.biologicalSex
                 if let data = sex {
                     sexData = self.getReadableBiologicalSex(biologicalSex: data)
                     sexs = sexData
@@ -74,17 +74,16 @@ class HKProfile: ObservableObject {
         let weightType = HKSampleType.quantityType(forIdentifier: HKQuantityTypeIdentifier.bodyMass)!
         let heightType = HKSampleType.quantityType(forIdentifier: HKQuantityTypeIdentifier.height)!
 
-        var anchor = getAnchor()
+//        var anchor = getAnchor()
 
-        let queryWeigthnew = HKAnchoredObjectQuery(type: weightType, predicate: nil, anchor: anchor, limit: HKObjectQueryNoLimit) { (query, samplesOrNil, deletedObjectsOrNil, newAnchor, errorOrNil) in
+        let queryWeigthnew = HKAnchoredObjectQuery(type: weightType,
+                                                   predicate: nil,
+                                                   anchor: anchor,
+                                                   limit: HKObjectQueryNoLimit) { (query, samplesOrNil, deletedObjectsOrNil, newAnchor, errorOrNil) in
 
             guard let samples = samplesOrNil,
                   let deletedObjects = deletedObjectsOrNil else {
                 fatalError("*** An error occurred during the initial query: \(errorOrNil!.localizedDescription) ***")
-            }
-
-            if let bodyMassSample = samples.last as? HKQuantitySample {
-                self.weight = Int32(Int(bodyMassSample.quantity.doubleValue(for: HKUnit.gramUnit(with: .kilo))))
             }
 
             guard let anchor = newAnchor else {
@@ -105,7 +104,7 @@ class HKProfile: ObservableObject {
                 print("Deleted: \(deletedBodyMassSample)")
             }
 
-            print("Anchor: \(anchor)")
+            print("Anchor: \(self.anchor)")
         }
 
         queryWeigthnew.updateHandler = { (query, samplesOrNil, deletedObjectsOrNil, newAnchor, errorOrNil) in
@@ -113,12 +112,12 @@ class HKProfile: ObservableObject {
                 // Handle the error here.
                 fatalError("*** An error occurred during an update: \(errorOrNil!.localizedDescription) ***")
             }
-            
+
             if let bodyMassSample = samples.last as? HKQuantitySample {
                 self.weight = Int32(Int(bodyMassSample.quantity.doubleValue(for: HKUnit.gramUnit(with: .kilo))))
             }
 
-            anchor = newAnchor!
+            self.anchor = newAnchor!
             self.setAnchor(queryAnchor: newAnchor)
 
             for bodyMassSample in samples {
@@ -126,9 +125,9 @@ class HKProfile: ObservableObject {
 
             }
 
-            if let bodyMassSample = samples.last as? HKQuantitySample {
-                self.weight = Int32(Int(bodyMassSample.quantity.doubleValue(for: HKUnit.gramUnit(with: .kilo))))
-            }
+//            if let bodyMassSample = samples.last as? HKQuantitySample {
+//                self.weight = Int32(Int(bodyMassSample.quantity.doubleValue(for: HKUnit.gramUnit(with: .kilo))))
+//            }
 
             for deletedBodyMassSample in deletedObjects {
                 print("deleted: \(deletedBodyMassSample)")
@@ -167,9 +166,9 @@ class HKProfile: ObservableObject {
             }
         }
 
-        self.healthStore.execute(queryIrregular)
-        self.healthStore.execute(queryHeight)
-        self.healthStore.execute(queryWeigthnew)
+        HKAuthorize().healthStore?.execute(queryIrregular)
+        HKAuthorize().healthStore?.execute(queryHeight)
+        HKAuthorize().healthStore?.execute(queryWeigthnew)
 
     }
 

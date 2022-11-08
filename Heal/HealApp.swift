@@ -16,11 +16,7 @@ struct HealApp: App {
 
     var body: some Scene {
         WindowGroup {
- 
-      
-
             PreAlertView(notification: notification)
-
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
                 .environmentObject(authorizer)
         }
