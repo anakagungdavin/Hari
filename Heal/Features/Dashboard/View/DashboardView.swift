@@ -36,43 +36,77 @@ struct DashboardView: View {
         GeometryReader{ geometry in
             Image("kotak dashboard atas")
                 .ignoresSafeArea()
-            
-            ScrollView{
-                ZStack {
-                    Image("Group 34")
+            ZStack {
+                Image("Group 34")
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding(EdgeInsets(top: 32, leading: -39, bottom: 0, trailing: 0))
+                
+                VStack(alignment: .leading){
+                    Text("Halo!")
+                        .font(.custom("SFProRounded-Semibold", size: 38))
+                        .foregroundColor(Color(hex: "B2444E"))
+                    Text("Selamat datang Oktober")
+                        .font(.custom("SFProRounded-Light", size: 22))
+                        .foregroundColor(Color(hex: "B2444E"))
                         .frame(maxWidth: .infinity, alignment: .leading)
-                        .padding(EdgeInsets(top: 32, leading: -39, bottom: 0, trailing: 0))
-                    
-                    VStack(alignment: .leading){
-                        Text("Halo!")
-                            .font(.custom("SFProRounded-Semibold", size: 38))
-                            .foregroundColor(Color(hex: "B2444E"))
-                        Text("Selamat datang Oktober")
-                            .font(.custom("SFProRounded-Light", size: 22))
-                            .foregroundColor(Color(hex: "B2444E"))
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                    } //vstack
-                    .padding(EdgeInsets(top: -90, leading: 170, bottom: 0, trailing: 0))
-                    
-                    HStack{
-                        ForEach(0..<3, id: \.self){ i in
-                            ZStack{
-                                Image("card tanggal")
-                                    .opacity(i == 0 ? 1 : 0)
-                                
-                                VStack{
-                                    Text(DateFormatter.displayMonth.string(from: Calendar.current.date(byAdding: .day, value: i, to: Date())!))
-                                        .font(.custom("SFProRounded-Light", size: 20))
-                                        .foregroundColor(Color(hex: "B2444E"))
-                                    Text(DateFormatter.displayDate.string(from: Calendar.current.date(byAdding: .day, value: i, to: Date())!))
-                                        .foregroundColor(Color(hex: "B2444E"))
-                                        .font(.custom("SFProRounded-Semibold", size: 20))
-                                }
+                } //vstack
+                .padding(EdgeInsets(top: -90, leading: 170, bottom: 0, trailing: 0))
+                
+                HStack{
+                    ForEach(0..<3, id: \.self){ i in
+                        ZStack{
+                            Image("card tanggal")
+                                .opacity(i == 0 ? 1 : 0)
+                            
+                            VStack{
+                                Text(DateFormatter.displayMonth.string(from: Calendar.current.date(byAdding: .day, value: i, to: Date())!))
+                                    .font(.custom("SFProRounded-Light", size: 20))
+                                    .foregroundColor(Color(hex: "B2444E"))
+                                Text(DateFormatter.displayDate.string(from: Calendar.current.date(byAdding: .day, value: i, to: Date())!))
+                                    .foregroundColor(Color(hex: "B2444E"))
+                                    .font(.custom("SFProRounded-Semibold", size: 20))
                             }
                         }
                     }
-                    .padding(EdgeInsets(top: 130, leading: 130, bottom: 0, trailing: 0))
-                } //zstack
+                }
+                .padding(EdgeInsets(top: 130, leading: 130, bottom: 0, trailing: 0))
+            } //zstack
+            ScrollView{
+//                ZStack {
+//                    Image("Group 34")
+//                        .frame(maxWidth: .infinity, alignment: .leading)
+//                        .padding(EdgeInsets(top: 32, leading: -39, bottom: 0, trailing: 0))
+//
+//                    VStack(alignment: .leading){
+//                        Text("Halo!")
+//                            .font(.custom("SFProRounded-Semibold", size: 38))
+//                            .foregroundColor(Color(hex: "B2444E"))
+//                        Text("Selamat datang Oktober")
+//                            .font(.custom("SFProRounded-Light", size: 22))
+//                            .foregroundColor(Color(hex: "B2444E"))
+//                            .frame(maxWidth: .infinity, alignment: .leading)
+//                    } //vstack
+//                    .padding(EdgeInsets(top: -90, leading: 170, bottom: 0, trailing: 0))
+//
+//                    HStack{
+//                        ForEach(0..<3, id: \.self){ i in
+//                            ZStack{
+//                                Image("card tanggal")
+//                                    .opacity(i == 0 ? 1 : 0)
+//
+//                                VStack{
+//                                    Text(DateFormatter.displayMonth.string(from: Calendar.current.date(byAdding: .day, value: i, to: Date())!))
+//                                        .font(.custom("SFProRounded-Light", size: 20))
+//                                        .foregroundColor(Color(hex: "B2444E"))
+//                                    Text(DateFormatter.displayDate.string(from: Calendar.current.date(byAdding: .day, value: i, to: Date())!))
+//                                        .foregroundColor(Color(hex: "B2444E"))
+//                                        .font(.custom("SFProRounded-Semibold", size: 20))
+//                                }
+//                            }
+//                        }
+//                    }
+//                    .padding(EdgeInsets(top: 130, leading: 130, bottom: 0, trailing: 0))
+//                } //zstack
                 
                 VStack{
                     Group{
@@ -175,8 +209,70 @@ struct DashboardView: View {
                         }
                     }
                     .padding(EdgeInsets(top: 17, leading: 28, bottom: 0, trailing: 0))
+                    
+                    Group{
+                        VStack{
+                            Text("Informasi Untukmu")
+                                .foregroundColor(Color(hex: "B2444E"))
+                                .font(.custom("SFProRounded-Regular", size: 22))
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                            
+                            HStack {
+                                VStack(alignment: .center){
+                                    Text("\(Int(10)) / \(Int(14))")
+                                        .font(.custom("SFProRounded-Semibold", size: 20))
+                                        .foregroundColor(Color(hex: "B2444E"))
+                                        .frame(maxWidth: .infinity, alignment: .center)
+                                    Text("Jurnal")
+                                        .font(.custom("SFProRounded-Light", size: 12))
+                                        .foregroundColor(Color(hex: "B2444E"))
+                                        .frame(maxWidth: .infinity, alignment: .center)
+                                    Text("Lengkap")
+                                        .font(.custom("SFProRounded-Light", size: 12))
+                                        .foregroundColor(Color(hex: "B2444E"))
+                                        .frame(maxWidth: .infinity, alignment: .center)
+                                    ProgressView(value: 10, total: 14)
+                                        .tint(Color(hex: "F27D87"))
+                                        .background(Color(hex: "FFCED2"))
+                                        .padding(EdgeInsets(top: 0, leading: 9, bottom: 0, trailing: 9))
+                                        .scaleEffect(x: 1, y: 1.5, anchor: .center)
+                                }.frame(width: 90, height: 76)
+                                    .overlay{
+                                        RoundedRectangle(cornerRadius: 5)
+                                            .stroke(Color(hex: "FFCED2"))
+                                    }
+                                    .padding(.trailing, 32)
+                                
+                                VStack(alignment: .center){
+                                    Text("8")
+                                        .font(.custom("SFProRounded-Semibold", size: 20))
+                                        .foregroundColor(Color(hex: "B2444E"))
+                                        .frame(maxWidth: .infinity, alignment: .center)
+                                    Text("Gejala")
+                                        .font(.custom("SFProRounded-Light", size: 12))
+                                        .foregroundColor(Color(hex: "B2444E"))
+                                        .frame(maxWidth: .infinity, alignment: .center)
+                                    Text("terdeteksi")
+                                        .font(.custom("SFProRounded-Light", size: 12))
+                                        .foregroundColor(Color(hex: "B2444E"))
+                                        .frame(maxWidth: .infinity, alignment: .center)
+                                    Text("bulan ini")
+                                        .font(.custom("SFProRounded-Light", size: 12))
+                                        .foregroundColor(Color(hex: "B2444E"))
+                                        .frame(maxWidth: .infinity, alignment: .center)
+                                }.frame(width: 90, height: 76)
+                                    .overlay{
+                                        RoundedRectangle(cornerRadius: 5)
+                                            .stroke(Color(hex: "FFCED2"))
+                                    }
+                                    .padding(.trailing, 32)
+                            }
+                        }
+                    }
+                    .padding(EdgeInsets(top: 17, leading: 28, bottom: 0, trailing: 0))
                 }
             }//ScrollView
+            .padding(.top, 235)
         }
         .background(Color(hex: "FFFFFF"))
         .navigationTitle("Dashboard")
