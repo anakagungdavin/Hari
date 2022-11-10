@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		305F29B529125E2800C4C76A /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 305F29B429125E2800C4C76A /* Notification.swift */; };
+		308DECB1291A4A2F00623F96 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 308DECB0291A4A2F00623F96 /* OnboardingView.swift */; };
 		30E962F328F4678600A29E29 /* HealthEcgs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30E962F228F4678600A29E29 /* HealthEcgs.swift */; };
 		30E962F828F5577E00A29E29 /* PreAlertPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30E962F728F5577E00A29E29 /* PreAlertPage.swift */; };
 		30E962FC28FAA64C00A29E29 /* CustomTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30E962FB28FAA64C00A29E29 /* CustomTabBar.swift */; };
@@ -55,6 +56,7 @@
 /* Begin PBXFileReference section */
 		3017647128EAB4C500E14A7D /* Heal.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Heal.entitlements; sourceTree = "<group>"; };
 		305F29B429125E2800C4C76A /* Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
+		308DECB0291A4A2F00623F96 /* OnboardingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		30E962F228F4678600A29E29 /* HealthEcgs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthEcgs.swift; sourceTree = "<group>"; };
 		30E962F428F4691300A29E29 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		30E962F728F5577E00A29E29 /* PreAlertPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreAlertPage.swift; sourceTree = "<group>"; };
@@ -162,7 +164,6 @@
 			isa = PBXGroup;
 			children = (
 				3017647B28EC3C0400E14A7D /* View */,
-				3017647C28EC3C0E00E14A7D /* ViewModel */,
 			);
 			path = Onboarding;
 			sourceTree = "<group>";
@@ -170,15 +171,9 @@
 		3017647B28EC3C0400E14A7D /* View */ = {
 			isa = PBXGroup;
 			children = (
+				308DECB0291A4A2F00623F96 /* OnboardingView.swift */,
 			);
 			path = View;
-			sourceTree = "<group>";
-		};
-		3017647C28EC3C0E00E14A7D /* ViewModel */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		30E962F028F4672D00A29E29 /* HealthKitProvider */ = {
@@ -500,10 +495,11 @@
 				44CAC9392918E97400FE0D8C /* Extension.swift in Sources */,
 				30F91E1A28E2B5A7008F2C99 /* HealApp.swift in Sources */,
 				44CAC9352918E95F00FE0D8C /* DetailJournal.swift in Sources */,
-				305F29B529125E2800C4C76A /* Notification.swift in Sources */, 
+				305F29B529125E2800C4C76A /* Notification.swift in Sources */,
 				30F91E2628E2B5AB008F2C99 /* Heal.xcdatamodeld in Sources */,
 				30E9630F2902A8EF00A29E29 /* HexColorExtension.swift in Sources */,
 				30FE0F4A290A4B3400AD1AAE /* HealthSymptoms.swift in Sources */,
+				308DECB1291A4A2F00623F96 /* OnboardingView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
