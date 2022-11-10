@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		305704EB291AC5DE00D5EF44 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 305704EA291AC5DE00D5EF44 /* OnboardingView.swift */; };
+		305704EF291B4B8000D5EF44 /* MainContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 305704EE291B4B8000D5EF44 /* MainContainer.swift */; };
 		305F29B529125E2800C4C76A /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 305F29B429125E2800C4C76A /* Notification.swift */; };
 		308DECAE2919577400623F96 /* ProfilePageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 308DECAD2919577400623F96 /* ProfilePageModel.swift */; };
 		30E962F328F4678600A29E29 /* HealthEcgs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30E962F228F4678600A29E29 /* HealthEcgs.swift */; };
@@ -55,6 +57,8 @@
 
 /* Begin PBXFileReference section */
 		3017647128EAB4C500E14A7D /* Heal.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Heal.entitlements; sourceTree = "<group>"; };
+		305704EA291AC5DE00D5EF44 /* OnboardingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = OnboardingView.swift; path = Heal/Features/Onboarding/View/OnboardingView.swift; sourceTree = SOURCE_ROOT; };
+		305704EE291B4B8000D5EF44 /* MainContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainContainer.swift; sourceTree = "<group>"; };
 		305F29B429125E2800C4C76A /* Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
 		308DECAD2919577400623F96 /* ProfilePageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePageModel.swift; sourceTree = "<group>"; };
 		30E962F228F4678600A29E29 /* HealthEcgs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthEcgs.swift; sourceTree = "<group>"; };
@@ -151,6 +155,7 @@
 		3017647928EC319300E14A7D /* Features */ = {
 			isa = PBXGroup;
 			children = (
+				305704EC291B4B5000D5EF44 /* MainContainer */,
 				3017647A28EC3BDE00E14A7D /* Onboarding */,
 				30E962F528F5536200A29E29 /* PreAlert */,
 				30E962F028F4672D00A29E29 /* HealthKitProvider */,
@@ -179,8 +184,26 @@
 		3017647C28EC3C0E00E14A7D /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				305704EA291AC5DE00D5EF44 /* OnboardingView.swift */,
 			);
 			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		305704EC291B4B5000D5EF44 /* MainContainer */ = {
+			isa = PBXGroup;
+			children = (
+				305704ED291B4B6A00D5EF44 /* View */,
+			);
+			path = MainContainer;
+			sourceTree = "<group>";
+		};
+		305704ED291B4B6A00D5EF44 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				30E962FB28FAA64C00A29E29 /* CustomTabBar.swift */,
+				305704EE291B4B8000D5EF44 /* MainContainer.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		308DECAF2919577B00623F96 /* ViewModel */ = {
@@ -223,7 +246,6 @@
 			isa = PBXGroup;
 			children = (
 				30E962F728F5577E00A29E29 /* PreAlertPage.swift */,
-				30E962FB28FAA64C00A29E29 /* CustomTabBar.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -515,6 +537,8 @@
 				305F29B529125E2800C4C76A /* Notification.swift in Sources */,
 				30F91E2628E2B5AB008F2C99 /* Heal.xcdatamodeld in Sources */,
 				30E9630F2902A8EF00A29E29 /* HexColorExtension.swift in Sources */,
+				305704EB291AC5DE00D5EF44 /* OnboardingView.swift in Sources */,
+				305704EF291B4B8000D5EF44 /* MainContainer.swift in Sources */,
 				30FE0F4A290A4B3400AD1AAE /* HealthSymptoms.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -61,7 +61,7 @@ class CoreHelper {
     }
 
     // Diaturin buat ngehandle klo nilai parameternya kosong gimana (entah di sini atau di sana)
-    func addItemProfile(_ viewContext: NSManagedObjectContext,
+    func addIaddtemProfile(_ viewContext: NSManagedObjectContext,
                         _ name: String,
                         _ age: Int32,
                         _ doBirth: Date,
@@ -109,6 +109,18 @@ class CoreHelper {
 
             try? viewContext.save()
         }
+    }
+    
+    func updateECG(_ viewContext: NSManagedObjectContext,
+                   _ resultDate: Date,
+                   _ counter: Int,
+                   _ bpmRate: Double,
+                   _ symptoms: String,
+                   _ notes: String = "",
+                   _ activities: String,
+                   _ xAxis: [Double],
+                   _ yAxis: [Double]) {
+        
     }
 
 }

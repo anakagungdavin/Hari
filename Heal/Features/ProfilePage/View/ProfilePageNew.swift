@@ -19,6 +19,7 @@ struct ProfilePageNew: View {
 
     @EnvironmentObject var authProc: HKAuthorize
     @ObservedObject var notification: NotificationHelper
+    @State var selectedTab = "house"
     @State private var name = ""
     @State private var doBirth = Date()
     @State private var gender = ""
@@ -116,6 +117,10 @@ struct ProfilePageNew: View {
                         }
                     }
                 }.padding()
+//                VStack {
+//                    Spacer()
+//                    CustomTabBar(selectedTab: $selectedTab)
+//                }
             }.navigationTitle("Profile")
                 .navigationBarBackButtonHidden(true)
                 .navigationBarHidden(true)

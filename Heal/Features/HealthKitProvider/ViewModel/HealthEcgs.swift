@@ -118,6 +118,7 @@ class HKEcgs: ObservableObject {
                                                     " ",
                                                     self.xAxis,
                                                     self.yAxis)
+                            self.avgBpms.append(ecgBPM)
                             counter += 1
                             print("************ \(ecgBPM)")
                             print("************ \(ecgDate)")
