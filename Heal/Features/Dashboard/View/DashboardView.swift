@@ -40,11 +40,14 @@ struct DashboardView: View {
                             
                             VStack(alignment: .leading){
                                 Text("Halo!")
-                                    .font(.custom("SF Pro Rounded", size: 38))
+                                    .font(.custom("SFProRounded-Semibold", size: 38))
                                     .foregroundColor(Color(hex: "B2444E"))
                                 Text("Selamat datang Oktober")
+                                    .font(.custom("SFProRounded-Light", size: 22))
+                                    .foregroundColor(Color(hex: "B2444E"))
+                                    .frame(maxWidth: .infinity, alignment: .leading)
                             } //vstack
-                            .padding(EdgeInsets(top: 45, leading: 10, bottom: 0, trailing: 0))
+                            .padding(EdgeInsets(top: 45, leading: 0, bottom: 0, trailing: 0))
                         } //hstack
                         .frame(maxWidth: .infinity)
                     }
