@@ -32,6 +32,12 @@ struct DashboardView: View {
         animation: .default)
     private var fullItems: FetchedResults<Ecg>
     
+    @FetchRequest(
+        sortDescriptors: [NSSortDescriptor(keyPath: \Ecg.timeStampECG, ascending: true)],
+        predicate: NSPredicate(format: "activities == %@ AND timeStampECG == %@", "", Date() as CVarArg),
+        animation: .default)
+    private var ecgToday: FetchedResults<Ecg>
+    
     var body: some View {
         GeometryReader{ geometry in
             ScrollView{
@@ -123,7 +129,7 @@ struct DashboardView: View {
                             } //VStack
                             .frame(width: 330, height: 130)
                         } //Zstack
-                    }.padding(EdgeInsets(top: 33, leading: 27, bottom: 0, trailing: 30))
+                    }.padding(EdgeInsets(top: 33, leading: 0, bottom: 0, trailing: 026))
                     
                     Group{
                         VStack{
@@ -197,7 +203,7 @@ struct DashboardView: View {
                             }
                         }
                     }
-                    .padding(EdgeInsets(top: 17, leading: 28, bottom: 0, trailing: 0))
+                    .padding(EdgeInsets(top: 17, leading: 28, bottom: 0, trailing: 26))
                     
                     Group{
                         VStack{
@@ -222,6 +228,7 @@ struct DashboardView: View {
                                         RoundedRectangle(cornerRadius: 5)
                                             .stroke(Color(hex: "FFCED2"))
                                     }
+                                    .padding(.trailing, 18)
                                 
                                 VStack(alignment: .center){
                                     Image("apa itu aritmia ilus")
@@ -238,6 +245,7 @@ struct DashboardView: View {
                                         RoundedRectangle(cornerRadius: 5)
                                             .stroke(Color(hex: "FFCED2"))
                                     }
+                                    .padding(.trailing, 18)
                                 
                                 VStack(alignment: .center){
                                     Image("apa itu EKG ilus")
@@ -254,11 +262,12 @@ struct DashboardView: View {
                                         RoundedRectangle(cornerRadius: 5)
                                             .stroke(Color(hex: "FFCED2"))
                                     }
+                                
+                                Spacer()
                             } //HStack
-                            .padding(.trailing, 26)
                         }
                     }
-                    .padding(EdgeInsets(top: 17, leading: 28, bottom: 0, trailing: 0))
+                    .padding(EdgeInsets(top: 17, leading: 26, bottom: 0, trailing: 26))
                 }
             }//ScrollView
         } //geometry
