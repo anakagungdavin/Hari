@@ -25,6 +25,7 @@ class HKAuthorize: ObservableObject {
 
         print("Trying to access HealthKit")
         let healthKitTypes: Set = [HKObjectType.electrocardiogramType(),
+                                   HKQuantityType(HKQuantityTypeIdentifier.heartRate),
                                    HKCategoryType(HKCategoryTypeIdentifier.irregularHeartRhythmEvent),
                                    HKCharacteristicType(HKCharacteristicTypeIdentifier.dateOfBirth),
                                    HKCharacteristicType(HKCharacteristicTypeIdentifier.biologicalSex),

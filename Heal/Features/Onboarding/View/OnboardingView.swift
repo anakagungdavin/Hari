@@ -12,9 +12,9 @@ var totalViews = 3
 struct OnboardingView: View {
     //    @AppStorage("currentView") var currentView = 1
         @State var currentView = 1
-        
+
         var body: some View {
-            
+
             if currentView == 1 {
                 WalkthroughScreen(
                     currentView: $currentView,

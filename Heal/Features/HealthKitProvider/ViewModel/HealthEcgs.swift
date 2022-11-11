@@ -68,6 +68,7 @@ class HKEcgs: ObservableObject {
             self.healthStore.execute(query)
         }
 
+
         self.healthStore.execute(ecgQuery)
         // print("everything working here")
         print(ecgSamples.count)
@@ -91,7 +92,7 @@ class HKEcgs: ObservableObject {
         self.healthStore.execute(ecgQuery)
     }
 
-    func readECGs(_ viewContext: NSManagedObjectContext) {
+    func readECGs(_ viewContext: NSManagedObjectContext){
         var counter = 0
 
         self.getECGsCount { (ecgsCount) in

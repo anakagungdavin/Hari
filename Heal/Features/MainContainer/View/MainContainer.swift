@@ -11,33 +11,41 @@ struct MainContainer: View {
 
     @State var selectedTab = "house"
     @State var currentDate: Date = Date()
+    @ObservedObject var heartRate: HKHeartRate
 
     var body: some View {
         ZStack {
 //            VStack {
 //                Spacer()
-                Text("******** BABIK")
             switch selectedTab {
             case "house":
                 PreAlertView(notification: NotificationHelper())
             case "doc.text.below.ecg":
                 CalenderView(currentDate: $currentDate)
             case "books.vertical":
-                ProfilePageNew(notification: NotificationHelper())
+                ProfilePageNew(notification: NotificationHelper(), ecgsViewModel: HKEcgs())
             default:
                 PreAlertView(notification: NotificationHelper())
             }
             VStack {
                 Spacer()
+                Button("Test") {
+                    for BPM in heartRate.heartData{
+                        print(BPM.heartRate)
+                    }
+                    print("********** BABIK \(heartRate.heartData[0].heartRate)")
+                }
                 CustomTabBar(selectedTab: $selectedTab)
             }
 //            }
+        }.onAppear(){
+            heartRate.observeHeartRate()
         }
     }
 }
 
 struct MainContainer_Previews: PreviewProvider {
     static var previews: some View {
-        MainContainer()
+        MainContainer(heartRate: HKHeartRate())
     }
 }

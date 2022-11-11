@@ -16,9 +16,12 @@ struct ProfilePageNew: View {
         sortDescriptors: [NSSortDescriptor(keyPath: \Profile.name, ascending: true)],
         animation: .default)
     private var itemsProfile: FetchedResults<Profile>
+    @FetchRequest(entity: Ecg.entity(), sortDescriptors: [NSSortDescriptor(keyPath: \Ecg.avgBPM, ascending: true)])
+    var profileData: FetchedResults<Ecg>
 
     @EnvironmentObject var authProc: HKAuthorize
     @ObservedObject var notification: NotificationHelper
+    @StateObject var ecgsViewModel: HKEcgs
     @State var selectedTab = "house"
     @State private var name = ""
     @State private var doBirth = Date()
@@ -131,13 +134,14 @@ struct ProfilePageNew: View {
             height = String(authProc.getProfile.height)
             weight = String(authProc.getProfile.weight)
             doBirth = authProc.getProfile.dob
+            print("************* ANJAYYYYY \(profileData.last?.avgBPM)")
         }
     }
 }
 
 struct ProfilePageNew_Previews: PreviewProvider {
     static var previews: some View {
-        ProfilePageNew(notification: NotificationHelper())
+        ProfilePageNew(notification: NotificationHelper(), ecgsViewModel: HKEcgs())
     }
 }
 

@@ -17,7 +17,7 @@ struct ContentView: View {
         sortDescriptors: [NSSortDescriptor(keyPath: \Ecg.timeStampECG, ascending: true)],
         animation: .default)
     private var items: FetchedResults<Ecg>
-    private var healthEcg: HKEcgs?
+//    private var healthEcg: HKEcgs?
     private var authProc: HKAuthorize?
     let dateFormatter = DateFormatter()
 
