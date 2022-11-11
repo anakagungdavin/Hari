@@ -38,6 +38,8 @@ struct DashboardView: View {
         animation: .default)
     private var ecgToday: FetchedResults<Ecg>
     
+    let todayMonth = DateFormatter.displayMonth.string(from: Calendar.current.date(byAdding: .day, value: 0, to: Date())!)
+    
     var body: some View {
         GeometryReader{ geometry in
             ScrollView{
@@ -56,12 +58,14 @@ struct DashboardView: View {
                         Text("Halo!")
                             .font(.custom("SFProRounded-Semibold", size: 38))
                             .foregroundColor(Color(hex: "B2444E"))
-                        Text("Selamat datang Oktober")
-                            .font(.custom("SFProRounded-Light", size: 22))
+                        Text("Selamat datang \(todayMonth)")
+                            .frame(width: 250)
+                            .font(.custom("SFProRounded-Light", size: 222))
                             .foregroundColor(Color(hex: "B2444E"))
-                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .minimumScaleFactor(0.01)
+                            .lineLimit(1)
                     } //vstack
-                    .padding(EdgeInsets(top: 20, leading: 138, bottom: 0, trailing: 0))
+                    .padding(EdgeInsets(top: 20, leading: 125, bottom: 0, trailing: 40))
                     
                     HStack{
                         ForEach(0..<4, id: \.self){ i in
@@ -80,7 +84,7 @@ struct DashboardView: View {
                             }
                         }
                     }
-                    .padding(EdgeInsets(top: 190, leading: 120, bottom: 0, trailing: 10))
+                    .padding(EdgeInsets(top: 190, leading: 110, bottom: 0, trailing: 20))
                 } //ZStack
                 .edgesIgnoringSafeArea(.all)
                 
@@ -271,7 +275,7 @@ struct DashboardView: View {
                 }
             }//ScrollView
         } //geometry
-        .ignoresSafeArea()
+        .edgesIgnoringSafeArea(.top)
         .background(Color(hex: "FFFFFF"))
         .navigationTitle("Dashboard")
     }
@@ -309,6 +313,12 @@ extension DateFormatter {
     static let displayDay: DateFormatter = {
          let formatter = DateFormatter()
          formatter.dateFormat = "E"
+         return formatter
+    }()
+    
+    static let displayMonth: DateFormatter = {
+         let formatter = DateFormatter()
+         formatter.dateFormat = "MMMM"
          return formatter
     }()
 }
