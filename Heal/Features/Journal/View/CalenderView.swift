@@ -6,8 +6,22 @@
 //
 
 import SwiftUI
+import CoreData
 //show UI Calender
 struct CalenderView: View {
+    @FetchRequest(entity: Ecg.entity(), sortDescriptors: [NSSortDescriptor(keyPath: \Ecg.avgBPM, ascending: true)])
+    var BPMValues: FetchedResults<Ecg>
+    @State var dictionaryDate: [Date: [Double]] = [:]
+    func change() {
+        for i in 0..<BPMValues.count {
+            var bpms = dictionaryDate[BPMValues[i].timeStampECG ?? Date()] ?? []
+            bpms.append(BPMValues[i].avgBPM)
+            dictionaryDate[BPMValues[i].timeStampECG ?? Date()] = bpms
+        }
+        
+        print(dictionaryDate)
+    }
+
     //initialisation variabel "currentDate" from "JournalView.swift"
     @Binding var currentDate: Date
     
@@ -147,6 +161,13 @@ struct CalenderView: View {
                                         Image("Img_ECG")
                                         Image("Img_Act")
                                     }
+                                    Button {
+                                        print(BPMValues.count)
+                                        print(BPMValues[0].avgBPM)
+                                        print(dictionaryDate)
+                                    }label: {
+                                        Text("Testing")
+                                    }
                                 }
                             }
                         }
@@ -168,6 +189,9 @@ struct CalenderView: View {
             //update month
             currentDate = getCurrentMonth()
             
+        }
+        .onAppear() {
+            change()
         }
  
     }
@@ -256,7 +280,7 @@ struct CalenderView: View {
 
 struct CalenderView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        JournalView()
     }
 }
 
