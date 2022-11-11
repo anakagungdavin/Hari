@@ -13,10 +13,17 @@ struct CalenderView: View {
     var BPMValues: FetchedResults<Ecg>
     @State var dictionaryDate: [Date: [Double]] = [:]
     func change() {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "YYY-MM-dd"
+        dateFormatter.locale = Locale(identifier: "en_US_POSIX")
+        dateFormatter.timeZone = TimeZone(identifier: "UTC")!
         for i in 0..<BPMValues.count {
-            var bpms = dictionaryDate[BPMValues[i].timeStampECG ?? Date()] ?? []
+            let dates = dateFormatter.string(from: BPMValues[i].timeStampECG ?? Date())
+            let dated = dateFormatter.date(from: dates)
+            var bpms = dictionaryDate[dated ?? Date()] ?? []
             bpms.append(BPMValues[i].avgBPM)
-            dictionaryDate[BPMValues[i].timeStampECG ?? Date()] = bpms
+            dictionaryDate[dated ?? Date()] = bpms
+            
         }
         
         print(dictionaryDate)
@@ -127,14 +134,14 @@ struct CalenderView: View {
             HStack {
                 VStack {
                     //Mark : Card Journal
-                    if let card = cards.first(where: { card in
-                        return isSameDay(date1: card.cardDate, date2: currentDate)
+                    if let card = dictionaryDate.first(where: { card in
+                        return isSameDay(date1: card.key, date2: currentDate)
                     }){
-                        ForEach(card.cardList){ card in
+                        ForEach (0..<1) { i in
                             HStack {
                                 VStack {
                                     //Mark: BPM Value
-                                    Text(card.BPM)
+                                    Text(String(card.value[i]))
                                         .font(.custom("SFProRounded-Bold", size: 20).bold())
                                         .foregroundColor(Color("ColorText"))
                                     Text("BPM")
@@ -148,7 +155,7 @@ struct CalenderView: View {
                                 VStack{
                                     HStack {
                                         //Date Card Journal
-                                        Text("16 Oktober 2022")
+                                        Text(currentDate.toString(dateFormat: "dd MMM YYYY"))
                                             .foregroundColor(Color("ColorText"))
                                         Text("08 : 34")
                                             .foregroundColor(Color("ColorText"))
@@ -192,6 +199,7 @@ struct CalenderView: View {
         }
         .onAppear() {
             change()
+            //changeArrayDate()
         }
  
     }
@@ -200,16 +208,16 @@ struct CalenderView: View {
         VStack {
             if value.day != -1{
                 //mark kalau ada card
-                if let card = cards.first(where: { card in
-                    return isSameDay(date1: card.cardDate, date2: value.date)
+                if let card = dictionaryDate.first(where: { card in
+                    return isSameDay(date1: card.key, date2: value.date)
                 }){
                     Text("\(value.day)")
-                        .foregroundColor(isSameDay(date1: card.cardDate, date2: currentDate) ? .white: .primary)
+                        .foregroundColor(isSameDay(date1: card.key, date2: currentDate) ? .white: .primary)
                         .frame(maxWidth: .infinity)
                     
                     
                     Circle()
-                        .fill(isSameDay(date1: card.cardDate, date2: currentDate) ? .white: .blue)
+                        .fill(isSameDay(date1: card.key, date2: currentDate) ? .white: .blue)
                         .frame(width: 5, height: 5)
                 }
                 else {
@@ -300,6 +308,12 @@ extension Date{
             
             return calendar.date(byAdding: .day, value: day - 1, to:startDate)!
         }
+    }
+    
+    func toString( dateFormat format  : String ) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = format
+        return dateFormatter.string(from: self)
     }
 }
 
