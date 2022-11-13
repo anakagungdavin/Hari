@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		302B9119291E281A00D1D6D3 /* HealthHearthRate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 302B9118291E281A00D1D6D3 /* HealthHearthRate.swift */; };
+		302B911C292129EE00D1D6D3 /* PreAlertTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 302B911B292129EE00D1D6D3 /* PreAlertTest.swift */; };
 		305704EB291AC5DE00D5EF44 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 305704EA291AC5DE00D5EF44 /* OnboardingView.swift */; };
 		305704EF291B4B8000D5EF44 /* MainContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 305704EE291B4B8000D5EF44 /* MainContainer.swift */; };
 		305F29B529125E2800C4C76A /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 305F29B429125E2800C4C76A /* Notification.swift */; };
@@ -59,6 +60,7 @@
 /* Begin PBXFileReference section */
 		3017647128EAB4C500E14A7D /* Heal.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Heal.entitlements; sourceTree = "<group>"; };
 		302B9118291E281A00D1D6D3 /* HealthHearthRate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthHearthRate.swift; sourceTree = "<group>"; };
+		302B911B292129EE00D1D6D3 /* PreAlertTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreAlertTest.swift; sourceTree = "<group>"; };
 		305704EA291AC5DE00D5EF44 /* OnboardingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = OnboardingView.swift; path = Heal/Features/Onboarding/View/OnboardingView.swift; sourceTree = SOURCE_ROOT; };
 		305704EE291B4B8000D5EF44 /* MainContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainContainer.swift; sourceTree = "<group>"; };
 		305F29B429125E2800C4C76A /* Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
@@ -249,6 +251,7 @@
 			isa = PBXGroup;
 			children = (
 				30E962F728F5577E00A29E29 /* PreAlertPage.swift */,
+				302B911B292129EE00D1D6D3 /* PreAlertTest.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -523,6 +526,7 @@
 				30F91E2328E2B5AB008F2C99 /* Persistence.swift in Sources */,
 				308DECAE2919577400623F96 /* ProfilePageModel.swift in Sources */,
 				302B9119291E281A00D1D6D3 /* HealthHearthRate.swift in Sources */,
+				302B911C292129EE00D1D6D3 /* PreAlertTest.swift in Sources */,
 				44CAC9372918E95F00FE0D8C /* CalenderView.swift in Sources */,
 				30FE0F4E290F830C00AD1AAE /* ProfilePageNew.swift in Sources */,
 				30E962F328F4678600A29E29 /* HealthEcgs.swift in Sources */,
@@ -707,6 +711,8 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Heal/Info.plist;
+				INFOPLIST_KEY_NSHealthShareUsageDescription = "We use HealthKit to Store your Journal and ECG datas.";
+				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "We use HealthKit to Store your Journal and ECG datas.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -739,6 +745,8 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Heal/Info.plist;
+				INFOPLIST_KEY_NSHealthShareUsageDescription = "We use HealthKit to Store your Journal and ECG datas.";
+				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "We use HealthKit to Store your Journal and ECG datas.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

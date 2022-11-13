@@ -30,7 +30,7 @@ struct PreAlertView: View {
                             .custCornerRadius(10, corners: .allCorners)
                             .foregroundColor(.white)
 
-                            Image("HeartAsset")
+                            Image("Group 35")
                                 .resizable()
                                 .frame(width: 70, height: 70)
                                 .foregroundColor(.white)
@@ -123,6 +123,6 @@ struct CardBig: View {
 
 struct PreAlertView_Previews: PreviewProvider {
     static var previews: some View {
-        PreAlertView(notification: NotificationHelper())
+        PreAlertView(notification: NotificationHelper()).environmentObject(HKAuthorize())
     }
 }

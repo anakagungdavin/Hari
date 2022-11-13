@@ -141,7 +141,7 @@ struct ProfilePageNew: View {
 
 struct ProfilePageNew_Previews: PreviewProvider {
     static var previews: some View {
-        ProfilePageNew(notification: NotificationHelper(), ecgsViewModel: HKEcgs())
+        ProfilePageNew(notification: NotificationHelper(), ecgsViewModel: HKEcgs()).environmentObject(HKAuthorize())
     }
 }
 

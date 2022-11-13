@@ -8,6 +8,7 @@
 import Foundation
 import HealthKit
 import CoreData
+import UserNotifications
 
 struct HeartRateEntry: Hashable, Identifiable {
     var heartRate: Double
@@ -25,6 +26,7 @@ class HKHeartRate: ObservableObject {
     func observeHeartRate() {
 
         startHeartRateQuery()
+        readIrregular()
     }
 
     private func startHeartRateQuery() {
@@ -36,17 +38,13 @@ class HKHeartRate: ObservableObject {
                                                    predicate: nil,
                                                    anchor: queryAnchor,
                                                    limit: HKObjectQueryNoLimit,
-                                                   resultsHandler: self.updateHandler)
+                                                   resultsHandler: self.updateHandlerHR)
 
-        queryHeartRate.updateHandler = self.updateHandler(query:newSamples:deleteSamples:newAnchor:error:)
+        queryHeartRate.updateHandler = self.updateHandlerHR(query:newSamples:deleteSamples:newAnchor:error:)
         HKAuthorize().healthStore?.execute(queryHeartRate)
     }
 
-    func updateHandler(query: HKAnchoredObjectQuery,
-                       newSamples: [HKSample]?,
-                       deleteSamples: [HKDeletedObject]?,
-                       newAnchor: HKQueryAnchor?,
-                       error: Error?) {
+    func updateHandlerHR(query: HKAnchoredObjectQuery, newSamples: [HKSample]?, deleteSamples: [HKDeletedObject]?, newAnchor: HKQueryAnchor?, error: Error?) {
 
         if let error = error {
             print("Health query error \(error)")
@@ -70,11 +68,36 @@ class HKHeartRate: ObservableObject {
         }
     }
 
-//    private func process(_ samples: [HKQuantitySample], type: HKQuantityTypeIdentifier) {
-//        for sample in samples {
-//            if type == .heartRate {
-//                lastHeartRate = sample.quantity.doubleValue(for: heartRateQuantity)
-//            }
-//        }
-//    }
+    func readIrregular() {
+
+        let irregularType = HKCategoryType(HKCategoryTypeIdentifier.irregularHeartRhythmEvent)
+        let queryIrreg: HKObserverQuery = HKObserverQuery(sampleType: irregularType, predicate: nil, updateHandler: self.irregularHandler)
+
+        HKAuthorize().healthStore?.execute(queryIrreg)
+        HKAuthorize().healthStore?.enableBackgroundDelivery(for: irregularType, frequency: .immediate, withCompletion: { success, error in
+            if !success {
+                print(String(describing: error))
+            }
+        })
+
+    }
+
+    // Still buggy need to fix
+    func irregularHandler(query: HKObserverQuery!, completionHandler: HKObserverQueryCompletionHandler!, error: Error!) {
+
+        print("New Data")
+
+        let content = UNMutableNotificationContent()
+        content.title = "Irregular rhythm"
+        content.body = "Notification triggered"
+        content.subtitle = "Please do your ECG"
+        content.sound = UNNotificationSound.default
+
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 1, repeats: false)
+        let request = UNNotificationRequest(identifier: "notification.id.01", content: content, trigger: trigger)
+
+        UNUserNotificationCenter.current().add(request)
+
+        completionHandler()
+    }
 }

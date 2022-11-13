@@ -70,7 +70,6 @@ class HKProfile: ObservableObject {
 
     // data that always updated
     func readRecentData(completion: @escaping(Bool, Error?) -> Void) {
-        let irregularType = HKCategoryType(HKCategoryTypeIdentifier.irregularHeartRhythmEvent)
         let weightType = HKSampleType.quantityType(forIdentifier: HKQuantityTypeIdentifier.bodyMass)!
         let heightType = HKSampleType.quantityType(forIdentifier: HKQuantityTypeIdentifier.height)!
 
@@ -125,25 +124,10 @@ class HKProfile: ObservableObject {
 
             }
 
-//            if let bodyMassSample = samples.last as? HKQuantitySample {
-//                self.weight = Int32(Int(bodyMassSample.quantity.doubleValue(for: HKUnit.gramUnit(with: .kilo))))
-//            }
-
             for deletedBodyMassSample in deletedObjects {
                 print("deleted: \(deletedBodyMassSample)")
             }
         }
-
-//        let queryWeight = HKSampleQuery(sampleType: weightType,
-//                                        predicate: nil,
-//                                        limit: HKObjectQueryNoLimit,
-//                                        sortDescriptors: nil) { (query, results, error) in
-//
-//            if let result = results?.last as? HKQuantitySample {
-//                print("weight => \(result.quantity)")
-//                self.weight = Int32(Int(result.quantity.doubleValue(for: HKUnit.gramUnit(with: .kilo))))
-//            }
-//        }
 
         let queryHeight = HKSampleQuery(sampleType: heightType,
                                         predicate: nil,
@@ -156,17 +140,17 @@ class HKProfile: ObservableObject {
             }
         }
 
-        let queryIrregular = HKSampleQuery(sampleType: irregularType,
-                                           predicate: nil,
-                                           limit: HKObjectQueryNoLimit,
-                                           sortDescriptors: nil) { (query, results, error) in
+//        let queryIrregular = HKSampleQuery(sampleType: irregularType,
+//                                           predicate: nil,
+//                                           limit: HKObjectQueryNoLimit,
+//                                           sortDescriptors: nil) { (query, results, error) in
+//
+//            if let result = results?.last as? HKCategorySample {
+//                print("Hasil IRREGULAR ** \(result.description)")
+//            }
+//        }
 
-            if let result = results?.last as? HKCategorySample {
-                print("Hasil IRREGULAR ** \(result.description)")
-            }
-        }
-
-        HKAuthorize().healthStore?.execute(queryIrregular)
+//        HKAuthorize().healthStore?.execute(queryIrregular)
         HKAuthorize().healthStore?.execute(queryHeight)
         HKAuthorize().healthStore?.execute(queryWeigthnew)
 

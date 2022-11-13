@@ -30,10 +30,9 @@ struct MainContainer: View {
             VStack {
                 Spacer()
                 Button("Test") {
-                    for BPM in heartRate.heartData{
+                    for BPM in heartRate.heartData {
                         print(BPM.heartRate)
                     }
-                    print("********** BABIK \(heartRate.heartData[0].heartRate)")
                 }
                 CustomTabBar(selectedTab: $selectedTab)
             }

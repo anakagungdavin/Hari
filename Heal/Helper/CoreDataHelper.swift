@@ -110,7 +110,7 @@ class CoreHelper {
             try? viewContext.save()
         }
     }
-    
+
     func updateECG(_ viewContext: NSManagedObjectContext,
                    _ resultDate: Date,
                    _ counter: Int,
@@ -120,7 +120,7 @@ class CoreHelper {
                    _ activities: String,
                    _ xAxis: [Double],
                    _ yAxis: [Double]) {
-        
+
     }
 
 }
