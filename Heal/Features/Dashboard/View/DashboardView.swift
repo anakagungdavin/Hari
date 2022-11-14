@@ -159,7 +159,7 @@ struct DashboardView: View {
                                         }.padding(.leading, 52)
                                         
                                         VStack {
-                                            Image(i.activities == "" ? "aktivitas kosong" : "aktivitas aman")
+                                            Image(i.activities == " " ? "aktivitas kosong" : "aktivitas aman")
                                             Text("88 BPM")
                                                 .foregroundColor(.white)
                                                 .font(.custom("SFProRounded-Semibold", size: 12))
