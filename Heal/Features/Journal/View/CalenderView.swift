@@ -139,13 +139,9 @@ struct CalenderView: View {
                 VStack {
                     //Mark : Card Journal
                     if let card = dictionaryDate.first(where: { card in
-                        //print(dictionaryDate.values.count)
                         return isSameDay(date1: card.key, date2: currentDate)
-                        //print(card.value.count)
                     }){
                         ForEach(card.value, id: \.self){ cardd in
-                        //ForEach (0..<1) { i in
-                            //ForEach (0..<dictionaryDate.values[i].count) { j in
                                 HStack {
                                     VStack {
                                         //Mark: BPM Value
@@ -163,10 +159,10 @@ struct CalenderView: View {
                                     VStack{
                                         HStack {
                                             //Date Card Journal
-                                            Text(currentDate.toString(dateFormat: "dd MMM YYYY"))
+                                            Text(currentDate.toString(dateFormat: "dd MMMM YYYY"))
                                                 .foregroundColor(Color("ColorText"))
-                                            Text("08 : 34")
-                                                .foregroundColor(Color("ColorText"))
+                                            //Text("08 : 34")
+                                             //   .foregroundColor(Color("ColorText"))
                                             
                                             //Mark : Go To Detail View
                                             NavigationLink("edit", destination: DetailJournal())
@@ -176,6 +172,7 @@ struct CalenderView: View {
                                             Image("Img_ECG")
                                             Image("Img_Act")
                                         }
+                                        /*
                                         Button {
                                             print(BPMValues.count)
                                             print(BPMValues[0].avgBPM)
@@ -183,6 +180,7 @@ struct CalenderView: View {
                                         }label: {
                                             Text("Testing")
                                         }
+                                        */
                                     }
                                 }
                             //}
@@ -207,8 +205,10 @@ struct CalenderView: View {
             
         }
         .onAppear() {
-            change()
-            //changeArrayDate()
+            if dictionaryDate == [:] {
+                change()
+                //changeArrayDate()
+            }
         }
  
     }
