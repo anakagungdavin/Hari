@@ -74,7 +74,7 @@ struct DashboardView: View {
                             .foregroundColor(Color(hex: "B2444E"))
                         Text("Selamat datang \(todayMonth)")
                             .frame(width: 250)
-                            .font(.custom("SFProRounded-Light", size: 222))
+                            .font(.custom("SFProRounded-Light", size: 22))
                             .foregroundColor(Color(hex: "B2444E"))
                             .minimumScaleFactor(0.01)
                             .lineLimit(1)
@@ -142,10 +142,12 @@ struct DashboardView: View {
                                                 .foregroundColor(.white)
                                                 .font(.custom("SFProRounded-Semibold", size: 12))
                                                 .frame(width: 50)
-                                            Text("Direkam : 00:00")
-                                                .foregroundColor(.white)
-                                                .font(.custom("SFProRounded-Semibold", size: 10))
+                                            Text("Direkam : \(i.timeStampECG!, style: .time)")
                                                 .frame(width: 80)
+                                                .foregroundColor(.white)
+                                                .font(.custom("SFProRounded-Semibold", size: 20))
+                                                .minimumScaleFactor(0.01)
+                                                .lineLimit(1)
                                             Spacer()
                                         }.padding(.leading, 100)
                                         
@@ -160,7 +162,7 @@ struct DashboardView: View {
                                         
                                         VStack {
                                             Image(i.activities == " " ? "aktivitas kosong" : "aktivitas aman")
-                                            Text("88 BPM")
+                                            Text(i.activities == " " ? "N/A" : "Aktivitas tercatat")
                                                 .foregroundColor(.white)
                                                 .font(.custom("SFProRounded-Semibold", size: 12))
                                                 .frame(width: 50)
