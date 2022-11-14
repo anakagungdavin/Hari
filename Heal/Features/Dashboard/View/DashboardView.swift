@@ -32,11 +32,24 @@ struct DashboardView: View {
         animation: .default)
     private var fullItems: FetchedResults<Ecg>
     
-    @FetchRequest(
-        sortDescriptors: [NSSortDescriptor(keyPath: \Ecg.timeStampECG, ascending: true)],
-        predicate: NSPredicate(format: "activities == %@ AND timeStampECG == %@", "", Date() as CVarArg),
-        animation: .default)
-    private var ecgToday: FetchedResults<Ecg>
+//    @FetchRequest(
+//        sortDescriptors: [NSSortDescriptor(keyPath: \Ecg.timeStampECG, ascending: false)],
+//        predicate: NSPredicate(format: "activities == %@", ""))
+//    private var ecgToday: FetchedResults<Ecg>
+//
+    @FetchRequest private var ecgToday: FetchedResults<Ecg>
+    
+    init() {
+        let request: NSFetchRequest<Ecg> = Ecg.fetchRequest()
+        request.predicate = NSPredicate(format: "activities == %@", "")
+
+        request.sortDescriptors = [
+            NSSortDescriptor(keyPath: \Ecg.timeStampECG, ascending: false)
+        ]
+
+        request.fetchLimit = 1
+        _ecgToday = FetchRequest(fetchRequest: request)
+    }
     
     let todayMonth = DateFormatter.displayMonth.string(from: Calendar.current.date(byAdding: .day, value: 0, to: Date())!)
     
@@ -46,9 +59,10 @@ struct DashboardView: View {
                 ZStack {
                     VStack{
                         Image("kotak dashboard atas")
+                            .resizable()
+                            .frame(width: 390, height: 174)
                         Spacer()
-//                        Rectangle().frame(height: 100).opacity(0)
-                    } //VStack
+                    }
                     
                     Image("maskot dashboard")
                         .frame(maxWidth: .infinity, alignment: Alignment(horizontal: .leading, vertical: .bottom))
@@ -65,7 +79,7 @@ struct DashboardView: View {
                             .minimumScaleFactor(0.01)
                             .lineLimit(1)
                     } //vstack
-                    .padding(EdgeInsets(top: 20, leading: 125, bottom: 0, trailing: 40))
+                    .padding(EdgeInsets(top: 20, leading: 125, bottom: 0, trailing: 30))
                     
                     HStack{
                         ForEach(0..<4, id: \.self){ i in
@@ -86,7 +100,7 @@ struct DashboardView: View {
                     }
                     .padding(EdgeInsets(top: 190, leading: 110, bottom: 0, trailing: 20))
                 } //ZStack
-                .edgesIgnoringSafeArea(.all)
+                .edgesIgnoringSafeArea([.top, .bottom])
                 
 //                HStack{
 //                    ForEach(0..<4, id: \.self){ i in
@@ -119,17 +133,42 @@ struct DashboardView: View {
                                     .frame(maxWidth: .infinity, alignment: .leading)
                                     .padding(.leading, 13)
                                     .padding(.top, 11)
-                                    .padding(.bottom, 19)
-                                HStack{
-                                    Image("bpm aman")
-                                        .padding(.leading, 65)
-                                    Image("ecg kosong")
-                                        .padding(.leading, 67)
-                                    Image("aktivitas kosong")
-                                        .padding(.leading, 67)
-                                        .padding(.trailing, 67)
-                                }
-                                .padding(.bottom, 46)
+                                
+                                HStack {
+                                    ForEach(ecgToday){ i in
+                                        VStack {
+                                            Image(i.activities == "" ? "bpm aman" : "bpm gak normal")
+                                            Text("88 BPM")
+                                                .foregroundColor(.white)
+                                                .font(.custom("SFProRounded-Semibold", size: 12))
+                                                .frame(width: 50)
+                                            Text("Direkam : 00:00")
+                                                .foregroundColor(.white)
+                                                .font(.custom("SFProRounded-Semibold", size: 10))
+                                                .frame(width: 80)
+                                            Spacer()
+                                        }.padding(.leading, 100)
+                                        
+                                        VStack {
+                                            Image( "ecg kosong")
+                                            Text("N/A")
+                                                .foregroundColor(.white)
+                                                .font(.custom("SFProRounded-Semibold", size: 12))
+                                                .frame(width: 50)
+                                            Spacer()
+                                        }.padding(.leading, 52)
+                                        
+                                        VStack {
+                                            Image(i.activities == "" ? "aktivitas kosong" : "aktivitas aman")
+                                            Text("88 BPM")
+                                                .foregroundColor(.white)
+                                                .font(.custom("SFProRounded-Semibold", size: 12))
+                                                .frame(width: 50)
+                                            Spacer()
+                                        }.padding(.leading, 52)
+                                            .padding(.trailing, 120)
+                                    } //ForEach
+                                } //HStack
                             } //VStack
                             .frame(width: 330, height: 130)
                         } //Zstack
@@ -275,7 +314,7 @@ struct DashboardView: View {
                 }
             }//ScrollView
         } //geometry
-        .edgesIgnoringSafeArea(.top)
+        .edgesIgnoringSafeArea([.top, .bottom])
         .background(Color(hex: "FFFFFF"))
         .navigationTitle("Dashboard")
     }
