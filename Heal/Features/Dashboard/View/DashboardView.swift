@@ -41,7 +41,7 @@ struct DashboardView: View {
     
     init() {
         let request: NSFetchRequest<Ecg> = Ecg.fetchRequest()
-        request.predicate = NSPredicate(format: "activities == %@", "")
+        request.predicate = NSPredicate(format: "activities == %@", " ")
 
         request.sortDescriptors = [
             NSSortDescriptor(keyPath: \Ecg.timeStampECG, ascending: false)
