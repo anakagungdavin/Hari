@@ -31,10 +31,41 @@ class HKEcgs: ObservableObject {
                                                     end: Date.distantFuture,
                                                     options: .strictEndDate)
         let sortDescriptor = NSSortDescriptor(key: HKSampleSortIdentifierStartDate, ascending: false)
-        
-//        let ecgQueryNew = HKAnchoredObjectQuery(type: HKObjectType.electrocardiogramType(), predicate: predicate, anchor: queryAnchor, limit: HKObjectQueryNoLimit) { (query, newSamples, deleteSamples, newAnchor, error) in
-//            <#code#>
-//        }
+
+        // New Query
+        let ecgQueryNew = HKAnchoredObjectQuery(type: HKObjectType.electrocardiogramType(), predicate: predicate, anchor: queryAnchor, limit: HKObjectQueryNoLimit) { (query, newSamples, deleteSamples, newAnchor, error) in
+            if let error = error {
+                print("Health Query Error \(error)")
+            } else {
+                
+            }
+//            print("******** Recent \(mostRecentSample)")
+//            
+//            let electroCardiogram = samples[counter] as! HKElectrocardiogram
+//            let query = HKElectrocardiogramQuery(electroCardiogram) { [self] (query, result) in
+//                
+//                switch result {
+//                case .error(let error):
+//                    print("error: ", error)
+//                    
+//                case .measurement(let value):
+//                    let sample = (value.quantity(for: .appleWatchSimilarToLeadI)!.doubleValue(for: HKUnit.volt()),
+//                                  value.timeSinceSampleStart)
+//                    ecgSamples.append(sample)
+//                    
+//                case .done:
+//                    let averageBPM = electroCardiogram.averageHeartRate?.doubleValue(for: HKUnit.count().unitDivided(by: .minute())) ?? 0
+//                    // print("done")
+//                    
+//                    DispatchQueue.main.async {
+//                        completion(averageBPM, ecgSamples, samples[counter].startDate)
+//                    }
+//                @unknown default:
+//                    return
+//                }
+//            }
+//            self.healthStore.execute(query)
+        }
 
         let ecgQuery = HKSampleQuery(sampleType: HKObjectType.electrocardiogramType(),
                                      predicate: predicate,
