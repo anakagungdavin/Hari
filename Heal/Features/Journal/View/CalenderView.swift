@@ -12,11 +12,14 @@ struct CalenderView: View {
     @FetchRequest(entity: Ecg.entity(), sortDescriptors: [NSSortDescriptor(keyPath: \Ecg.avgBPM, ascending: true)])
     var BPMValues: FetchedResults<Ecg>
     @State var dictionaryDate: [Date: [Double]] = [:]
+    @State var hour: [String] = []
     func change() {
+        //Date
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "YYY-MM-dd"
         dateFormatter.locale = Locale(identifier: "en_US_POSIX")
         dateFormatter.timeZone = TimeZone(identifier: "UTC")!
+        
         for i in 0..<BPMValues.count {
             let dates = dateFormatter.string(from: BPMValues[i].timeStampECG ?? Date())
             let dated = dateFormatter.date(from: dates)
@@ -27,6 +30,7 @@ struct CalenderView: View {
         }
         
         print(dictionaryDate)
+        print(BPMValues[0].timeStampECG)
     }
 
     //initialisation variabel "currentDate" from "JournalView.swift"
@@ -135,49 +139,54 @@ struct CalenderView: View {
                 VStack {
                     //Mark : Card Journal
                     if let card = dictionaryDate.first(where: { card in
+                        //print(dictionaryDate.values.count)
                         return isSameDay(date1: card.key, date2: currentDate)
+                        //print(card.value.count)
                     }){
-                        ForEach (0..<1) { i in
-                            HStack {
-                                VStack {
-                                    //Mark: BPM Value
-                                    Text(String(card.value[i]))
-                                        .font(.custom("SFProRounded-Bold", size: 20).bold())
-                                        .foregroundColor(Color("ColorText"))
-                                    Text("BPM")
-                                        .font(.custom("SFProRounded-Bold", size: 10).bold())
-                                        .foregroundColor(Color("ColorText"))
-                                }
-                                .frame(width: 70, height: 54)
-                                .background(.white).cornerRadius(10)
-                                .padding(.leading, 15)
-                                
-                                VStack{
-                                    HStack {
-                                        //Date Card Journal
-                                        Text(currentDate.toString(dateFormat: "dd MMM YYYY"))
+                        ForEach(card.value, id: \.self){ cardd in
+                        //ForEach (0..<1) { i in
+                            //ForEach (0..<dictionaryDate.values[i].count) { j in
+                                HStack {
+                                    VStack {
+                                        //Mark: BPM Value
+                                        Text(String(cardd))
+                                            .font(.custom("SFProRounded-Bold", size: 20).bold())
                                             .foregroundColor(Color("ColorText"))
-                                        Text("08 : 34")
+                                        Text("BPM")
+                                            .font(.custom("SFProRounded-Bold", size: 10).bold())
                                             .foregroundColor(Color("ColorText"))
-                                
-                                        //Mark : Go To Detail View
-                                        NavigationLink("edit", destination: DetailJournal())
                                     }
-                                    HStack {
-                                        Image("Img_BPM")
-                                        Image("Img_ECG")
-                                        Image("Img_Act")
-                                    }
-                                    Button {
-                                        print(BPMValues.count)
-                                        print(BPMValues[0].avgBPM)
-                                        print(dictionaryDate)
-                                    }label: {
-                                        Text("Testing")
+                                    .frame(width: 70, height: 54)
+                                    .background(.white).cornerRadius(10)
+                                    .padding(.leading, 15)
+                                    
+                                    VStack{
+                                        HStack {
+                                            //Date Card Journal
+                                            Text(currentDate.toString(dateFormat: "dd MMM YYYY"))
+                                                .foregroundColor(Color("ColorText"))
+                                            Text("08 : 34")
+                                                .foregroundColor(Color("ColorText"))
+                                            
+                                            //Mark : Go To Detail View
+                                            NavigationLink("edit", destination: DetailJournal())
+                                        }
+                                        HStack {
+                                            Image("Img_BPM")
+                                            Image("Img_ECG")
+                                            Image("Img_Act")
+                                        }
+                                        Button {
+                                            print(BPMValues.count)
+                                            print(BPMValues[0].avgBPM)
+                                            print(dictionaryDate)
+                                        }label: {
+                                            Text("Testing")
+                                        }
                                     }
                                 }
-                            }
-                        }
+                            //}
+                        }//batas foreach
                         .frame(width: 328, height: 80)
                         .background(Color("bgCard")).cornerRadius(10)
                         //.background(Color(UIColor(red: 846, green: 0.677, blue: 0.769, alpha: 1))).cornerRadius(10)
