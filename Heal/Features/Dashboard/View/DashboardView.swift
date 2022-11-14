@@ -137,8 +137,8 @@ struct DashboardView: View {
                                 HStack {
                                     ForEach(ecgToday){ i in
                                         VStack {
-                                            Image(i.activities == "" ? "bpm aman" : "bpm gak normal")
-                                            Text( "\(i.avgBPM) BPM")
+                                            Image(i.activities == " " ? "bpm aman" : "bpm gak normal")
+                                            Text( "\(Int(i.avgBPM)) BPM")
                                                 .foregroundColor(.white)
                                                 .font(.custom("SFProRounded-Semibold", size: 12))
                                                 .frame(width: 50)
