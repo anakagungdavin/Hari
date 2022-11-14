@@ -8,11 +8,13 @@
 import SwiftUI
 
 struct PreAlertTest: View {
+    @EnvironmentObject var authProc: HKAuthorize
+    
     var body: some View {
         ZStack {
             LinearGradient(colors: [.white, Color(hex: "E37777")], startPoint: .top, endPoint: .bottom)
                 .ignoresSafeArea()
-            CardBigNew()
+            CardBigNew().environmentObject(authProc)
             VStack {
                 HStack {
                     Image("Group 35")
@@ -80,6 +82,7 @@ struct CardBigNew: View {
             HStack {
                 Spacer(minLength: 50)
                 Button(action: {
+                    // nyari cara buat pindah ke page selanjutnya
                     authProc.authorizeHealthKit(viewContext: viewContext, completion: { success, error in
                         if !success {
                             print("The error \(String(describing: error))")

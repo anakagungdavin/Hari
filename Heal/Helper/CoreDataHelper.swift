@@ -62,12 +62,13 @@ class CoreHelper {
 
     // Diaturin buat ngehandle klo nilai parameternya kosong gimana (entah di sini atau di sana)
     func addIaddtemProfile(_ viewContext: NSManagedObjectContext,
-                        _ name: String,
-                        _ age: Int32,
-                        _ doBirth: Date,
-                        _ weight: Int32,
-                        _ height: Int32,
-                        _ sex: String) {
+                           _ name: String,
+                           _ age: Int32,
+                           _ doBirth: Date,
+                           _ weight: Int32,
+                           _ height: Int32,
+                           _ sex: String,
+                           _ commorbit: String) {
 
         let newItem = Profile(context: viewContext)
         newItem.name = name
@@ -76,6 +77,7 @@ class CoreHelper {
         newItem.weight = weight
         newItem.height = height
         newItem.sex = sex
+        newItem.commorbit = commorbit
 
         do {
             try viewContext.save()
@@ -98,6 +100,7 @@ class CoreHelper {
         let newWeight = profile.weight
         let newHeight = profile.height
         let newGender = profile.sex
+        let newCommorbit = profile.commorbit
 
         viewContext.performAndWait {
             profile.name = newName
@@ -106,6 +109,7 @@ class CoreHelper {
             profile.weight = newWeight
             profile.height = newHeight
             profile.sex = newGender
+            profile.commorbit = newCommorbit
 
             try? viewContext.save()
         }

@@ -23,7 +23,7 @@ struct MainContainer: View {
             case "doc.text.below.ecg":
                 CalenderView(currentDate: $currentDate)
             case "books.vertical":
-                ProfilePageNew(notification: NotificationHelper(), ecgsViewModel: HKEcgs())
+                ProfilePageNew(notification: NotificationHelper(), ecgsViewModel: HKEcgs(), profile: Profile())
             default:
                 PreAlertView(notification: NotificationHelper())
             }

@@ -41,7 +41,7 @@ struct PreAlertView: View {
 
                     CardBig().environmentObject(authProc)
                     NavigationLink {
-                        ProfilePageNew(notification: self.notification, ecgsViewModel: HKEcgs()).environmentObject(authProc)
+                        ProfilePageNew(notification: self.notification, ecgsViewModel: HKEcgs(), profile: Profile()).environmentObject(authProc)
                     } label: {
                         Text("Next Screen")
                             .navigationTitle("")

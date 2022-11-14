@@ -19,6 +19,7 @@ class HKEcgs: ObservableObject {
     @Published var avgBpms = [Double]()
 
     var healthStore = HKHealthStore()
+    var queryAnchor: HKQueryAnchor?
     var ecgSamples = [[(Double, Double)]]()
     var xAxis = [Double]()
     var yAxis = [Double]()
@@ -30,6 +31,10 @@ class HKEcgs: ObservableObject {
                                                     end: Date.distantFuture,
                                                     options: .strictEndDate)
         let sortDescriptor = NSSortDescriptor(key: HKSampleSortIdentifierStartDate, ascending: false)
+        
+//        let ecgQueryNew = HKAnchoredObjectQuery(type: HKObjectType.electrocardiogramType(), predicate: predicate, anchor: queryAnchor, limit: HKObjectQueryNoLimit) { (query, newSamples, deleteSamples, newAnchor, error) in
+//            <#code#>
+//        }
 
         let ecgQuery = HKSampleQuery(sampleType: HKObjectType.electrocardiogramType(),
                                      predicate: predicate,

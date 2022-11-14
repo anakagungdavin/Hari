@@ -21,6 +21,7 @@ struct ProfilePageNew: View {
 
     @EnvironmentObject var authProc: HKAuthorize
     @ObservedObject var notification: NotificationHelper
+
     @StateObject var ecgsViewModel: HKEcgs
     @State var selectedTab = "house"
     @State private var name = ""
@@ -31,6 +32,8 @@ struct ProfilePageNew: View {
     @State private var commorbit = ""
     @State private var custom = true
 
+    let profile: Profile
+
     var body: some View {
         NavigationView {
             ZStack(alignment: .topTrailing) {
@@ -39,17 +42,10 @@ struct ProfilePageNew: View {
 
                     Image("Mascot1").frame(alignment: .topLeading)
                         .ignoresSafeArea(.all, edges: .leading)
-//                        .border(.black)
 
                 VStack {
                     Spacer().frame(minHeight: 10, idealHeight: 75, maxHeight: 600)
                         .fixedSize()
-
-//                    Image(systemName: "person.crop.circle.fill")
-//                        .resizable()
-//                        .scaledToFit()
-//                        // ini buat ilustrasi
-//                        .frame(width: 100, height: 100)
 
                     HStack {
                         Text("Profile").fontWeight(.bold)
@@ -61,7 +57,6 @@ struct ProfilePageNew: View {
 
                     Rectangle().frame(width: .infinity, height: 2).foregroundColor(Color(hex: "E37777"))
 
-//                    Field(title: "Nama", text: $name)
                     FieldTitle(title: "Nama", text: $name)
                     DatePicker(selection: $doBirth, displayedComponents: .date) {
                         Text("Tanggal Lahir")
@@ -79,11 +74,6 @@ struct ProfilePageNew: View {
                         FieldTitle(title: "Tinggi", text: $height)
                         FieldTitle(title: "Berat", text: $weight)
                         FieldTitle(title: "Penyakit Bawaan", text: $commorbit)
-//                        Field(title: "Jenis Kelamin", text: $gender)
-//                        Field(title: "Tinggi", text: $height)
-//                        Field(title: "Berat", text: $weight)
-//                        Field(title: "Penyakit Bawaan", text: $commorbit)
-
                     }
 
                     HStack {
@@ -107,23 +97,19 @@ struct ProfilePageNew: View {
                             .font(.title3)
                             .frame(maxWidth: .infinity)
 
-                        Spacer()
-
                         Button("Sinkronisasi dengan Apple Health") {
-//                            gender = authProc.getProfile.sexs
-//                            height = String(authProc.getProfile.height)
-//                            weight = String(authProc.getProfile.weight)
-//                            doBirth = authProc.getProfile.dob
+
+                            ProfilePageModel().setHealthProfile(viewContext: viewContext, authProc: authProc)
+                            gender = authProc.getProfile.sexs
+                            height = String(authProc.getProfile.height)
+                            weight = String(authProc.getProfile.weight)
+                            doBirth = authProc.getProfile.dob
                             // calling function autofill after tapped
                             // brt masukin dulu healthkit profile
                             // ke coredata yg profile, ntar tarik dari situ masukin ke state aja
                         }
                     }
                 }.padding()
-//                VStack {
-//                    Spacer()
-//                    CustomTabBar(selectedTab: $selectedTab)
-//                }
             }.navigationTitle("Profile")
                 .navigationBarBackButtonHidden(true)
                 .navigationBarHidden(true)
@@ -134,6 +120,7 @@ struct ProfilePageNew: View {
             height = String(authProc.getProfile.height)
             weight = String(authProc.getProfile.weight)
             doBirth = authProc.getProfile.dob
+
             print("************* ANJAYYYYY \(profileData.last?.avgBPM)")
         }
     }
@@ -141,7 +128,7 @@ struct ProfilePageNew: View {
 
 struct ProfilePageNew_Previews: PreviewProvider {
     static var previews: some View {
-        ProfilePageNew(notification: NotificationHelper(), ecgsViewModel: HKEcgs()).environmentObject(HKAuthorize())
+        ProfilePageNew(notification: NotificationHelper(), ecgsViewModel: HKEcgs(), profile: Profile()).environmentObject(HKAuthorize())
     }
 }
 
@@ -154,16 +141,14 @@ struct FieldTitle: View {
 
             HStack {
                 Text(title)
-//                    .border(.black, width: 3)
                     .font(.title3)
                     TextField(title, text: text)
-//                        .background(RoundedRectangle(cornerRadius: 10).fill(Color.white))
                         .font(.title3)
                         .frame(maxWidth: .infinity, alignment: .trailing)
                         .multilineTextAlignment(.trailing)
-//                        .border(.red, width: 3)
 
-            }.padding()
+            }
+            .padding()
             .background(RoundedRectangle(cornerRadius: 10).fill(Color.white))
             .foregroundColor(Color(hex: "E37777"))
             .overlay(RoundedRectangle(cornerRadius: 10)
@@ -188,15 +173,4 @@ struct Field: View {
             .font(.title3)
             .frame(maxWidth: .infinity)
     }
-
-//    private func onExpandTapped() {
-//            isHidden.toggle()
-//            UIApplication.shared.endEditing()
-//        }
 }
-//
-// extension UIApplication {
-//    func endEditing() {
-//        sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
-//    }
-// }
