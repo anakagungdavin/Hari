@@ -372,7 +372,7 @@ struct DashboardView: View {
                 }
             }//ScrollView
         } //geometry
-        .edgesIgnoringSafeArea([.top, .bottom])
+        .edgesIgnoringSafeArea(.top)
         .background(Color(hex: "FFFFFF"))
         .navigationTitle("Dashboard")
         .navigationBarHidden(true)
