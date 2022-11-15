@@ -20,17 +20,20 @@ struct DashboardView: View {
     let weekdays = [0, 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17]
     let ecg = [66, 60, 70, 85, 90, 100, 130,140,150,160,170,180,190,200,210,220,230,240]
     
-    @FetchRequest(
-        sortDescriptors: [NSSortDescriptor(keyPath: \Ecg.timeStampECG, ascending: true)],
-        predicate: NSPredicate(format: "activities == %@", ""),
-        animation: .default)
-    private var items: FetchedResults<Ecg>
+//    let weekdays = [0, 1,2]
+//    let ecg = [66, 60, 70]
     
     @FetchRequest(
         sortDescriptors: [NSSortDescriptor(keyPath: \Ecg.timeStampECG, ascending: true)],
-        predicate: NSPredicate(format: "activities != ''"),
+        predicate: NSPredicate(format: "activities == %@", " "),
         animation: .default)
-    private var fullItems: FetchedResults<Ecg>
+    private var ecgNoActivities: FetchedResults<Ecg>
+    
+    @FetchRequest(
+        sortDescriptors: [NSSortDescriptor(keyPath: \Ecg.timeStampECG, ascending: true)],
+        predicate: NSPredicate(format: "activities != ' '"),
+        animation: .default)
+    private var ecgComplete: FetchedResults<Ecg>
     
 //    @FetchRequest(
 //        sortDescriptors: [NSSortDescriptor(keyPath: \Ecg.timeStampECG, ascending: false)],
@@ -100,7 +103,7 @@ struct DashboardView: View {
                     }
                     .padding(EdgeInsets(top: 190, leading: 110, bottom: 0, trailing: 20))
                 } //ZStack
-                .edgesIgnoringSafeArea([.top, .bottom])
+                .edgesIgnoringSafeArea([.top])
                 
 //                HStack{
 //                    ForEach(0..<4, id: \.self){ i in
@@ -143,13 +146,18 @@ struct DashboardView: View {
                                                 .font(.custom("SFProRounded-Semibold", size: 12))
                                                 .frame(width: 50)
                                             Text("Direkam : \(i.timeStampECG!, style: .time)")
-                                                .frame(width: 80)
+                                                .frame(width: 72)
                                                 .foregroundColor(.white)
                                                 .font(.custom("SFProRounded-Semibold", size: 20))
                                                 .minimumScaleFactor(0.01)
                                                 .lineLimit(1)
+                                                
                                             Spacer()
-                                        }.padding(.leading, 100)
+                                        }
+                                        .padding(.leading, 100)
+                                        .onTapGesture {
+                                            print("BPM CLICKED")
+                                        }
                                         
                                         VStack {
                                             Image( "ecg kosong")
@@ -158,7 +166,10 @@ struct DashboardView: View {
                                                 .font(.custom("SFProRounded-Semibold", size: 12))
                                                 .frame(width: 50)
                                             Spacer()
-                                        }.padding(.leading, 52)
+                                        }.padding(.leading, 40)
+                                        .onTapGesture {
+                                            print("ECG CLICKED")
+                                        }
                                         
                                         VStack {
                                             Image(i.activities == " " ? "aktivitas kosong" : "aktivitas aman")
@@ -167,14 +178,18 @@ struct DashboardView: View {
                                                 .font(.custom("SFProRounded-Semibold", size: 12))
                                                 .frame(width: 50)
                                             Spacer()
-                                        }.padding(.leading, 52)
-                                            .padding(.trailing, 120)
+                                        }
+                                        .padding(.leading, 50)
+                                        .padding(.trailing, 120)
+                                        .onTapGesture {
+                                            print("ACTIVITY CLICKED")
+                                        }
                                     } //ForEach
                                 } //HStack
                             } //VStack
                             .frame(width: 330, height: 130)
                         } //Zstack
-                    }.padding(EdgeInsets(top: 33, leading: 0, bottom: 0, trailing: 026))
+                    }.padding(EdgeInsets(top: 33, leading: 0, bottom: 0, trailing: 26))
                     
                     Group{
                         VStack{
@@ -187,17 +202,26 @@ struct DashboardView: View {
                                 ScrollView(.horizontal, showsIndicators: false){
                                     Chart{
                                         ForEach(weekdays, id: \.self){ index in
-                                            PointMark(x: .value("Day", weekdays[index]), y: .value("ECG", ecg[index]))
+                                            PointMark(x: .value("Day", weekdays[index]),
+                                                      y: .value("ECG", ecg[index]))
+                                                .foregroundStyle(Color(hex: "60D0B5"))
+//                                                .annotation{
+//                                                    Text("\(ecg[index])")
+//                                                        .font(.footnote)
+//                                                }
                                         }
                                     }
-                                    .frame(width: CGFloat(ecg.count) * 50)
-                                    .scaledToFit()
+                                    .frame(width: CGFloat(ecg.count) * 50 < 248 ? 248 : CGFloat(ecg.count) * 50,
+                                           height: 155)
+//                                    .scaledToFit()
+                                    .chartXScale(range: .plotDimension(padding: 5))
+                                    .chartYScale(range: .plotDimension(padding: 5))
                                 } //scrollview
-                                .frame(width: 248, height: 155)
+//                                .frame(width: 248, height: 155)
                                 
                                 VStack{
                                     VStack(alignment: .center){
-                                        Text("\(Int(10)) / \(Int(14))")
+                                        Text("\(ecgComplete.count) / \(ecgNoActivities.count)")
                                             .font(.custom("SFProRounded-Semibold", size: 20))
                                             .foregroundColor(Color(hex: "B2444E"))
                                             .frame(maxWidth: .infinity, alignment: .center)
@@ -245,7 +269,7 @@ struct DashboardView: View {
                                         }
                                         .padding(.trailing, 32)
                                 } //VStack
-                            }
+                            } //HStack
                         }
                     }
                     .padding(EdgeInsets(top: 17, leading: 28, bottom: 0, trailing: 26))
