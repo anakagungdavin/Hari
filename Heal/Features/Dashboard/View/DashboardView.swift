@@ -35,6 +35,11 @@ struct DashboardView: View {
         animation: .default)
     private var ecgComplete: FetchedResults<Ecg>
     
+    @FetchRequest(
+        sortDescriptors: [NSSortDescriptor(keyPath: \Ecg.timeStampECG, ascending: true)],
+        animation: .default)
+    private var allEcgData: FetchedResults<Ecg>
+    
 //    @FetchRequest(
 //        sortDescriptors: [NSSortDescriptor(keyPath: \Ecg.timeStampECG, ascending: false)],
 //        predicate: NSPredicate(format: "activities == %@", ""))
@@ -198,6 +203,11 @@ struct DashboardView: View {
                                 .font(.custom("SFProRounded-Regular", size: 22))
                                 .frame(maxWidth: .infinity, alignment: .leading)
                             
+                            Text(todayMonth)
+                                .foregroundColor(Color(hex: "B2444E"))
+                                .font(.custom("SFProRounded-Semibold", size: 12))
+                                .padding(.top, 12)
+                            
                             HStack {
                                 ScrollView(.horizontal, showsIndicators: false){
                                     Chart{
@@ -216,6 +226,22 @@ struct DashboardView: View {
 //                                    .scaledToFit()
                                     .chartXScale(range: .plotDimension(padding: 5))
                                     .chartYScale(range: .plotDimension(padding: 5))
+                                    
+//                                    Chart(allEcgData){
+//                                        PointMark(x: .value("Day", DateFormatter.),
+//                                                  y: .value("ECG", $0.avgBPM))
+//                                            .foregroundStyle(Color(hex: "60D0B5"))
+////                                                .annotation{
+////                                                    Text("\(ecg[index])")
+////                                                        .font(.footnote)
+////                                                }
+//                                    }
+//                                    .frame(width: CGFloat(ecg.count) * 50 < 248 ? 248 : CGFloat(ecg.count) * 50,
+//                                           height: 155)
+////                                    .scaledToFit()
+//                                    .chartXScale(range: .plotDimension(padding: 5))
+//                                    .chartYScale(range: .plotDimension(padding: 5))
+                                    
                                 } //scrollview
 //                                .frame(width: 248, height: 155)
                                 
@@ -233,7 +259,7 @@ struct DashboardView: View {
                                             .font(.custom("SFProRounded-Light", size: 12))
                                             .foregroundColor(Color(hex: "B2444E"))
                                             .frame(maxWidth: .infinity, alignment: .center)
-                                        ProgressView(value: 10, total: 14)
+                                        ProgressView(value: CGFloat(ecgComplete.count), total: CGFloat(ecgNoActivities.count))
                                             .tint(Color(hex: "F27D87"))
                                             .background(Color(hex: "FFCED2"))
                                             .padding(EdgeInsets(top: 0, leading: 9, bottom: 0, trailing: 9))
