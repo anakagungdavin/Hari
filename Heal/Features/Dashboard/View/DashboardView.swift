@@ -17,11 +17,11 @@ struct DashboardView: View {
 //    let weekdays = Calendar.current.shortWeekdaySymbols
 //    let ecg = [66, 60, 70, 85, 90, 100, 130]
     
-    let weekdays = [0, 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17]
-    let ecg = [66, 60, 70, 85, 90, 100, 130,140,150,160,170,180,190,200,210,220,230,240]
+//    let weekdays = [0, 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17]
+//    let ecg = [66, 60, 70, 85, 90, 100, 130,140,150,160,170,180,190,200,210,220,230,240]
     
-//    let weekdays = [0, 1,2]
-//    let ecg = [66, 60, 70]
+    let weekdays = [0, 1]
+    let ecg = [66, 60]
     
     @FetchRequest(
         sortDescriptors: [NSSortDescriptor(keyPath: \Ecg.timeStampECG, ascending: true)],
@@ -62,7 +62,7 @@ struct DashboardView: View {
     let todayMonth = DateFormatter.displayMonth.string(from: Calendar.current.date(byAdding: .day, value: 0, to: Date())!)
     
     var body: some View {
-        NavigationView{
+        NavigationStack{
             GeometryReader{ geometry in
                 ScrollView{
                     ZStack {
@@ -211,40 +211,43 @@ struct DashboardView: View {
                                 
                                 HStack {
                                     ScrollView(.horizontal, showsIndicators: false){
+//                                        Chart{
+//                                            ForEach(weekdays, id: \.self){ index in
+//                                                PointMark(x: .value("Day", weekdays[index]),
+//                                                          y: .value("ECG", ecg[index]))
+//                                                .foregroundStyle(Color(hex: "60D0B5"))
+//                                                //                                                .annotation{
+//                                                //                                                    Text("\(ecg[index])")
+//                                                //                                                        .font(.footnote)
+//                                                //                                                }
+//                                            }
+//                                        }
+//                                        .frame(width: CGFloat(ecg.count) * 50 < 248 ? 248 : CGFloat(ecg.count) * 50,
+//                                               height: 155)
+////                                        .scaledToFit()
+//                                        .chartXScale(range: .plotDimension(padding: 5))
+//                                        .chartYScale(range: .plotDimension(padding: 5))
+                                        
+                                        
                                         Chart{
-                                            ForEach(weekdays, id: \.self){ index in
-                                                PointMark(x: .value("Day", weekdays[index]),
-                                                          y: .value("ECG", ecg[index]))
+                                            ForEach(allEcgData){ index in
+                                                PointMark(x: .value("Day", DateFormatter.displayDate.string(from: Calendar.current.date(byAdding: .day, value: 0, to: index.timeStampECG!)!)),
+                                                          y: .value("ECG",index.avgBPM))
                                                 .foregroundStyle(Color(hex: "60D0B5"))
-                                                //                                                .annotation{
-                                                //                                                    Text("\(ecg[index])")
-                                                //                                                        .font(.footnote)
-                                                //                                                }
+//                                                .annotation{
+//                                                    Text("\(Int(index.avgBPM))")
+//                                                        .font(.footnote)
+//                                                }
                                             }
                                         }
                                         .frame(width: CGFloat(ecg.count) * 50 < 248 ? 248 : CGFloat(ecg.count) * 50,
                                                height: 155)
-                                        //                                    .scaledToFit()
+    //                                    .scaledToFit()
                                         .chartXScale(range: .plotDimension(padding: 5))
                                         .chartYScale(range: .plotDimension(padding: 5))
                                         
-                                        //                                    Chart(allEcgData){
-                                        //                                        PointMark(x: .value("Day", DateFormatter.),
-                                        //                                                  y: .value("ECG", $0.avgBPM))
-                                        //                                            .foregroundStyle(Color(hex: "60D0B5"))
-                                        ////                                                .annotation{
-                                        ////                                                    Text("\(ecg[index])")
-                                        ////                                                        .font(.footnote)
-                                        ////                                                }
-                                        //                                    }
-                                        //                                    .frame(width: CGFloat(ecg.count) * 50 < 248 ? 248 : CGFloat(ecg.count) * 50,
-                                        //                                           height: 155)
-                                        ////                                    .scaledToFit()
-                                        //                                    .chartXScale(range: .plotDimension(padding: 5))
-                                        //                                    .chartYScale(range: .plotDimension(padding: 5))
-                                        
                                     } //scrollview
-                                    //                                .frame(width: 248, height: 155)
+    //                                .frame(width: 248, height: 155)
                                     
                                     VStack{
                                         VStack(alignment: .center){
@@ -399,7 +402,7 @@ struct RoundedRectProgressViewStyle: ProgressViewStyle {
 
 struct Dashboard_Previews: PreviewProvider {
     static var previews: some View {
-        NavigationView{
+        NavigationStack{
             DashboardView()
         }
     }
