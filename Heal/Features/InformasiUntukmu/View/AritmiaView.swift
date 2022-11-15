@@ -8,6 +8,13 @@
 import SwiftUI
 
 struct AritmiaView: View {
+    
+    init() {
+        UINavigationBar.appearance().largeTitleTextAttributes = [.foregroundColor: UIColor(named: "B2444E") as Any]
+        
+        UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: UIColor(named: "B2444E") as Any]
+    }
+    
     var body: some View {
         
         ZStack{
@@ -73,13 +80,16 @@ struct AritmiaView: View {
                 
             }
         }
-        .navigationTitle("Apa itu Aritmia ?").font(.system(size: 38, weight: .semibold, design: .rounded)).foregroundColor(Color(hex: "B2444E"))
+        .navigationTitle("Apa itu Aritmia ?")
         
     }
 }
 
 struct AritmiaView_Previews: PreviewProvider {
     static var previews: some View {
-        AritmiaView()
+        NavigationView{
+            AritmiaView()
+        }
+        
     }
 }
