@@ -10,12 +10,18 @@ import SwiftUI
 struct DetailJournal: View {
     @State var PDFurl: URL?
     @State var ShowShareSheet: Bool = false
+    @State var isSesak: Bool = false
+    @State var isMuntah: Bool = false
+    @State var isPusing: Bool = false
+    @State var isNyeriDada: Bool = false
+    var ecg: Double
+    var date: String
     var body: some View {
         VStack {
             Group {
                 HStack {
                     Image("IconECG") //ECG Image Icon
-                    Text("16 Oktober 2022") //Date
+                    Text(date) //Date
                     Text("|")
                     Text("10:35") // Date ECG
                 }
@@ -25,7 +31,7 @@ struct DetailJournal: View {
                 VStack {
                     HStack {
                         Image("Heart")
-                        Text("88")//BPM Value
+                        Text(String(ecg))//BPM Value
                             .bold()
                             .foregroundColor(Color("ColorText"))
                         Text("DPM Rerata")
@@ -54,10 +60,26 @@ struct DetailJournal: View {
 
                 //Symptoms
                 HStack {
-                    Image("Sesak")
-                    Image("Muntah")
-                    Image("Pusing")
-                    Image("NyeriDada")
+                    Button(action: {
+                        self.isSesak.toggle()
+                    }){
+                        Image(self.isSesak == true ? "Sesak.fill":"Sesak")
+                    }
+                    Button(action: {
+                        self.isMuntah.toggle()
+                    }){
+                        Image(self.isMuntah == true ? "Muntah.fill":"Muntah")
+                    }
+                    Button(action: {
+                        self.isPusing.toggle()
+                    }){
+                        Image(self.isPusing == true ? "Pusing.fill":"Pusing")
+                    }
+                    Button(action: {
+                        self.isNyeriDada.toggle()
+                    }){
+                        Image(self.isNyeriDada == true ? "NyeriDada.fill":"NyeriDada")
+                    }
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .position(x:220, y:135)
@@ -147,13 +169,13 @@ struct ShareSheet: UIViewControllerRepresentable{
     }
 }
  
-
+/*
 struct DetailJournal_Preview: PreviewProvider {
     static var previews: some View {
-       DetailJournal()
+       //DetailJournal(ecg: Cale)
     }
 }
-
+*/
 //Kode Masher
 /*
  NavigationStack{

@@ -113,7 +113,7 @@ class HKEcgs: ObservableObject {
                                                     ecgDate,
                                                     counter,
                                                     ecgBPM,
-                                                    " ",
+                                                    [],
                                                     " ",
                                                     " ",
                                                     self.xAxis,

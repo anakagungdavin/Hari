@@ -23,7 +23,7 @@ class CoreHelper {
                     _ resultDate: Date,
                     _ counter: Int,
                     _ bpmRate: Double,
-                    _ symptoms: String = "",
+                    _ symptoms: [String] = [""],
                     _ notes: String = "",
                     _ activities: String = "",
                     _ xAxis: [Double],
@@ -108,6 +108,18 @@ class CoreHelper {
             profile.sex = newGender
             
             try? viewContext.save()
+        }
+    }
+    
+    func updateECG(ecg: Ecg) {
+        
+        let newSymptoms = ecg.symptoms
+        
+        viewContext.performAndWait {
+            ecg.symptoms = newSymptoms
+            try? viewContext.save()
+            
+            
         }
     }
     

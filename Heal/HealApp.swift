@@ -17,8 +17,8 @@ struct HealApp: App {
     var body: some Scene {
         WindowGroup {
  
-            ContentView()
-           //JournalView()
+            //ContentView()
+           JournalView()
            // PreAlertView(notification: notification)
 
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)

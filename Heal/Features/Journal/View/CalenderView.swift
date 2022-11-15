@@ -165,7 +165,12 @@ struct CalenderView: View {
                                              //   .foregroundColor(Color("ColorText"))
                                             
                                             //Mark : Go To Detail View
-                                            NavigationLink("edit", destination: DetailJournal())
+                                            //NavigationLink("edit", destination: DetailJournal())
+                                            NavigationLink {
+                                                DetailJournal(ecg: cardd, date: currentDate.toString(dateFormat: "dd MMMM YYYY"))
+                                            } label: {
+                                                Text("Edit")
+                                            }
                                         }
                                         HStack {
                                             Image("Img_BPM")
