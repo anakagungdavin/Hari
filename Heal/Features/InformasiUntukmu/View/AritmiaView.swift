@@ -17,71 +17,60 @@ struct AritmiaView: View {
                 
                 VStack(alignment: .leading){
                     
-                    HStack{
-                        Button(){
-                            //fungsi balik ke dashboard
-                        }label: {
-                            Image("chevron left")
-                        }.padding()
-                            .multilineTextAlignment(.leading)
-                        
-                        Text("Informasi Untukmu")
-                            .font(.system(size: 28, weight: .semibold, design: .rounded))
-                            .foregroundColor(Color(hex: "B2444E"))
-                            .multilineTextAlignment(.leading)
-                        Spacer()
+                    ScrollView{
+                        VStack{
+                            Text("Apa itu Aritmia ?")
+                                .multilineTextAlignment(.center)
+                                .font(.system(size: 38, weight: .semibold, design: .rounded))
+                                .foregroundColor(Color(hex: "B2444E"))
+                                .frame(width: 400)
+                            
+                            Group{
+                                Text("")
+                                Text("")
+                            }
+                            
+                            ZStack{
+                                Image("box apa itu aritmia")
+                                    .position(x:200,y:175)
+                                
+                                VStack{
+                                    Image("ilus aritmia")
+                                    
+                                    Text("Suatu kondisi dimana jantung berdetak dengan ritme yang tidak  teratur atau tidak normal")
+                                        .font(.system(size: 12, weight: .regular, design: .rounded))
+                                        .foregroundColor(Color(hex: "B2444E"))
+                                        .frame(width: 314, alignment: .leading)
+                                    
+                                    Text("")
+                                    Text("")
+                                    
+                                    Text("Gejalanya ?").font(.system(size: 16, weight: .semibold, design: .rounded))
+                                        .foregroundColor(Color(hex: "B2444E"))
+                                        .frame(width: 314, alignment: .leading)
+                                        
+                                    
+                                    Text("")
+                                    
+                                    Group{
+                                        Text("Penderita aritmia bisa saja tidak mengalami gejala apapun, atau dapat merasakan gejala :")
+                                        Text("• Pusing")
+                                        Text("• Pingsan")
+                                        Text("• Sakit di dada")
+                                        Text("• Dada berdebar debar")
+                                    }.font(.system(size: 12, weight: .regular, design: .rounded))
+                                        .foregroundColor(Color(hex: "B2444E"))
+                                        .frame(width: 314, alignment: .leading)
+                                    
+                                    Image("ilus aritmia 2")
+                                        .position(x:280,y:0)
+                                }
+                            }
+                            Spacer()
+                        }
                     }
                     
-                    VStack{
-                        Text("Apa itu Aritmia ?")
-                            .multilineTextAlignment(.center)
-                            .font(.system(size: 38, weight: .semibold, design: .rounded))
-                            .foregroundColor(Color(hex: "B2444E"))
-                            .frame(width: 400)
-                        
-                        Group{
-                            Text("")
-                            Text("")
-                        }
-                        
-                        ZStack{
-                            Image("box apa itu aritmia")
-                                .position(x:200,y:175)
-                            
-                            VStack{
-                                Image("ilus aritmia")
-                                
-                                Text("Suatu kondisi dimana jantung berdetak dengan ritme yang tidak  teratur atau tidak normal")
-                                    .font(.system(size: 12, weight: .regular, design: .rounded))
-                                    .foregroundColor(Color(hex: "B2444E"))
-                                    .frame(width: 314, alignment: .leading)
-                                
-                                Text("")
-                                Text("")
-                                
-                                Text("Gejalanya ?").font(.system(size: 16, weight: .semibold, design: .rounded))
-                                    .foregroundColor(Color(hex: "B2444E"))
-                                    .frame(width: 314, alignment: .leading)
-                                    
-                                
-                                Text("")
-                                
-                                Group{
-                                    Text("Penderita aritmia bisa saja tidak mengalami gejala apapun, atau dapat merasakan gejala :")
-                                    Text("• Pusing")
-                                    Text("• Pingsan")
-                                    Text("• Sakit di dada")
-                                    Text("• Dada berdebar debar")
-                                }.font(.system(size: 12, weight: .regular, design: .rounded))
-                                    .foregroundColor(Color(hex: "B2444E"))
-                                    .frame(width: 314, alignment: .leading)
-                                
-                                Image("ilus aritmia 2")
-                                    .position(x:280,y:0)
-                            }
-                        }
-                        Spacer()
-                    }
+                   
                 }
             }
         }
