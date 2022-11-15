@@ -128,7 +128,7 @@ struct DashboardView: View {
                     VStack{
                         Group{
                             ZStack {
-                                Image("box blom lengkap")
+                                Image(ecgToday[0].activities == " " ? "box blom lengkap" : "box lengkap")
                                 
                                 VStack{
                                     Text("Lengkapi Jurnalmu")
@@ -382,7 +382,7 @@ struct DashboardView: View {
             .background(Color(hex: "FFFFFF"))
             .navigationTitle("Dashboard")
             .navigationBarHidden(true)
-        }.accentColor(Color(hex: "B2444E"))
+        }.accentColor(Color("B2444E"))
     }
 }
 
