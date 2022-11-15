@@ -16,22 +16,7 @@ struct RitmeJantungView: View {
                     .ignoresSafeArea()
                 
                 VStack(alignment: .leading){
-                    
-                    HStack{
-                        Button(){
-                            //fungsi balik ke dashboard
-                        }label: {
-                            Image("chevron left")
-                        }.padding()
-                            .multilineTextAlignment(.leading)
-                        
-                        Text("Informasi Untukmu")
-                            .font(.system(size: 28, weight: .semibold, design: .rounded))
-                            .foregroundColor(Color(hex: "B2444E"))
-                            .multilineTextAlignment(.leading)
-                        Spacer()
-                    }
-                    
+                
                     ScrollView{
                         VStack{
                             Text("Jenis Ritme Jantung")
