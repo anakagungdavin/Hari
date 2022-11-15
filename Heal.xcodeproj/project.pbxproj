@@ -34,6 +34,9 @@
 		44CAC9392918E97400FE0D8C /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44CAC9382918E97400FE0D8C /* Extension.swift */; };
 		44CAC93C2918E97F00FE0D8C /* EKGCardTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44CAC93A2918E97F00FE0D8C /* EKGCardTest.swift */; };
 		44CAC93D2918E97F00FE0D8C /* DateValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44CAC93B2918E97F00FE0D8C /* DateValue.swift */; };
+		D8223A58291E5D5F00D9FF40 /* RitmeJantungView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8223A57291E5D5F00D9FF40 /* RitmeJantungView.swift */; };
+		D8223A5A291E5D7100D9FF40 /* ECGView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8223A59291E5D7100D9FF40 /* ECGView.swift */; };
+		D8223A5C291E5D7B00D9FF40 /* AritmiaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8223A5B291E5D7B00D9FF40 /* AritmiaView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -86,6 +89,9 @@
 		44CAC9382918E97400FE0D8C /* Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
 		44CAC93A2918E97F00FE0D8C /* EKGCardTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EKGCardTest.swift; sourceTree = "<group>"; };
 		44CAC93B2918E97F00FE0D8C /* DateValue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateValue.swift; sourceTree = "<group>"; };
+		D8223A57291E5D5F00D9FF40 /* RitmeJantungView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RitmeJantungView.swift; sourceTree = "<group>"; };
+		D8223A59291E5D7100D9FF40 /* ECGView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ECGView.swift; sourceTree = "<group>"; };
+		D8223A5B291E5D7B00D9FF40 /* AritmiaView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AritmiaView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -151,6 +157,7 @@
 		3017647928EC319300E14A7D /* Features */ = {
 			isa = PBXGroup;
 			children = (
+				D8223A55291E5D1A00D9FF40 /* InformasiUntukmu */,
 				3017647A28EC3BDE00E14A7D /* Onboarding */,
 				30E962F528F5536200A29E29 /* PreAlert */,
 				30E962F028F4672D00A29E29 /* HealthKitProvider */,
@@ -327,6 +334,24 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
+		D8223A55291E5D1A00D9FF40 /* InformasiUntukmu */ = {
+			isa = PBXGroup;
+			children = (
+				D8223A56291E5D2D00D9FF40 /* View */,
+			);
+			path = InformasiUntukmu;
+			sourceTree = "<group>";
+		};
+		D8223A56291E5D2D00D9FF40 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				D8223A57291E5D5F00D9FF40 /* RitmeJantungView.swift */,
+				D8223A59291E5D7100D9FF40 /* ECGView.swift */,
+				D8223A5B291E5D7B00D9FF40 /* AritmiaView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -484,8 +509,10 @@
 				30FE0F4E290F830C00AD1AAE /* ProfilePageNew.swift in Sources */,
 				30E962F328F4678600A29E29 /* HealthEcgs.swift in Sources */,
 				30E963092902549600A29E29 /* CustomUI.swift in Sources */,
+				D8223A58291E5D5F00D9FF40 /* RitmeJantungView.swift in Sources */,
 				30E962FC28FAA64C00A29E29 /* CustomTabBar.swift in Sources */,
 				30F91E1C28E2B5A7008F2C99 /* ContentView.swift in Sources */,
+				D8223A5C291E5D7B00D9FF40 /* AritmiaView.swift in Sources */,
 				44CAC93C2918E97F00FE0D8C /* EKGCardTest.swift in Sources */,
 				30E962FF28FE61A400A29E29 /* HealthAuthorizer.swift in Sources */,
 				44CAC9362918E95F00FE0D8C /* JournalView.swift in Sources */,
@@ -495,6 +522,7 @@
 				44CAC9392918E97400FE0D8C /* Extension.swift in Sources */,
 				30F91E1A28E2B5A7008F2C99 /* HealApp.swift in Sources */,
 				44CAC9352918E95F00FE0D8C /* DetailJournal.swift in Sources */,
+				D8223A5A291E5D7100D9FF40 /* ECGView.swift in Sources */,
 				305F29B529125E2800C4C76A /* Notification.swift in Sources */,
 				30F91E2628E2B5AB008F2C99 /* Heal.xcdatamodeld in Sources */,
 				30E9630F2902A8EF00A29E29 /* HexColorExtension.swift in Sources */,
