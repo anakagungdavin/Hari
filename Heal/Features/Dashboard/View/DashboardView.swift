@@ -282,55 +282,61 @@ struct DashboardView: View {
                                 .frame(maxWidth: .infinity, alignment: .leading)
                             
                             HStack(alignment: .center) {
-                                VStack(alignment: .center){
-                                    Image("jenis aritmia ilus")
-                                    Text("Jenis")
-                                        .font(.custom("SFProRounded-Semibold", size: 20))
-                                        .foregroundColor(Color(hex: "B2444E"))
-                                        .frame(maxWidth: .infinity, alignment: .center)
-                                    Text("Aritmia")
-                                        .font(.custom("SFProRounded-Semibold", size: 20))
-                                        .foregroundColor(Color(hex: "B2444E"))
-                                        .frame(maxWidth: .infinity, alignment: .center)
-                                }.frame(width: 100, height: 100)
-                                    .overlay{
-                                        RoundedRectangle(cornerRadius: 5)
-                                            .stroke(Color(hex: "FFCED2"))
-                                    }
-                                    .padding(.trailing, 18)
+                                NavigationLink(destination: RitmeJantungView()){
+                                    VStack(alignment: .center){
+                                        Image("jenis aritmia ilus")
+                                        Text("Jenis")
+                                            .font(.custom("SFProRounded-Semibold", size: 20))
+                                            .foregroundColor(Color(hex: "B2444E"))
+                                            .frame(maxWidth: .infinity, alignment: .center)
+                                        Text("Aritmia")
+                                            .font(.custom("SFProRounded-Semibold", size: 20))
+                                            .foregroundColor(Color(hex: "B2444E"))
+                                            .frame(maxWidth: .infinity, alignment: .center)
+                                    }.frame(width: 100, height: 100)
+                                        .overlay{
+                                            RoundedRectangle(cornerRadius: 5)
+                                                .stroke(Color(hex: "FFCED2"))
+                                        }
+                                        .padding(.trailing, 18)
+                                }
                                 
-                                VStack(alignment: .center){
-                                    Image("apa itu aritmia ilus")
-                                    Text("Apa itu")
-                                        .font(.custom("SFProRounded-Semibold", size: 20))
-                                        .foregroundColor(Color(hex: "B2444E"))
-                                        .frame(maxWidth: .infinity, alignment: .center)
-                                    Text("Aritmia?")
-                                        .font(.custom("SFProRounded-Semibold", size: 20))
-                                        .foregroundColor(Color(hex: "B2444E"))
-                                        .frame(maxWidth: .infinity, alignment: .center)
-                                }.frame(width: 100, height: 100)
-                                    .overlay{
-                                        RoundedRectangle(cornerRadius: 5)
-                                            .stroke(Color(hex: "FFCED2"))
-                                    }
-                                    .padding(.trailing, 18)
+                                NavigationLink(destination: AritmiaView()){
+                                    VStack(alignment: .center){
+                                        Image("apa itu aritmia ilus")
+                                        Text("Apa itu")
+                                            .font(.custom("SFProRounded-Semibold", size: 20))
+                                            .foregroundColor(Color(hex: "B2444E"))
+                                            .frame(maxWidth: .infinity, alignment: .center)
+                                        Text("Aritmia?")
+                                            .font(.custom("SFProRounded-Semibold", size: 20))
+                                            .foregroundColor(Color(hex: "B2444E"))
+                                            .frame(maxWidth: .infinity, alignment: .center)
+                                    }.frame(width: 100, height: 100)
+                                        .overlay{
+                                            RoundedRectangle(cornerRadius: 5)
+                                                .stroke(Color(hex: "FFCED2"))
+                                        }
+                                        .padding(.trailing, 18)
+                                }
                                 
-                                VStack(alignment: .center){
-                                    Image("apa itu EKG ilus")
-                                    Text("Apa itu")
-                                        .font(.custom("SFProRounded-Semibold", size: 20))
-                                        .foregroundColor(Color(hex: "B2444E"))
-                                        .frame(maxWidth: .infinity, alignment: .center)
-                                    Text("EKG ?")
-                                        .font(.custom("SFProRounded-Semibold", size: 20))
-                                        .foregroundColor(Color(hex: "B2444E"))
-                                        .frame(maxWidth: .infinity, alignment: .center)
-                                }.frame(width: 100, height: 100)
-                                    .overlay{
-                                        RoundedRectangle(cornerRadius: 5)
-                                            .stroke(Color(hex: "FFCED2"))
-                                    }
+                                NavigationLink(destination: ECGView()){
+                                    VStack(alignment: .center){
+                                        Image("apa itu EKG ilus")
+                                        Text("Apa itu")
+                                            .font(.custom("SFProRounded-Semibold", size: 20))
+                                            .foregroundColor(Color(hex: "B2444E"))
+                                            .frame(maxWidth: .infinity, alignment: .center)
+                                        Text("EKG ?")
+                                            .font(.custom("SFProRounded-Semibold", size: 20))
+                                            .foregroundColor(Color(hex: "B2444E"))
+                                            .frame(maxWidth: .infinity, alignment: .center)
+                                    }.frame(width: 100, height: 100)
+                                        .overlay{
+                                            RoundedRectangle(cornerRadius: 5)
+                                                .stroke(Color(hex: "FFCED2"))
+                                        }
+                                }
                                 
                                 Spacer()
                             } //HStack
@@ -343,6 +349,7 @@ struct DashboardView: View {
         .edgesIgnoringSafeArea([.top, .bottom])
         .background(Color(hex: "FFFFFF"))
         .navigationTitle("Dashboard")
+        .navigationBarHidden(true)
     }
 }
 
