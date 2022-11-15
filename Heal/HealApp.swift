@@ -19,7 +19,7 @@ struct HealApp: App {
  
             //ContentView()
            JournalView()
-           // PreAlertView(notification: notification)
+//            PreAlertView(notification: notification)
 
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
                 .environmentObject(authorizer)

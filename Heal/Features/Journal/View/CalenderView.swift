@@ -212,7 +212,6 @@ struct CalenderView: View {
         .onAppear() {
             if dictionaryDate == [:] {
                 change()
-                //changeArrayDate()
             }
         }
  
