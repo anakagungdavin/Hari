@@ -8,6 +8,13 @@
 import SwiftUI
 
 struct RitmeJantungView: View {
+    
+    init() {
+        UINavigationBar.appearance().largeTitleTextAttributes = [.foregroundColor: UIColor(named: "B2444E") as Any]
+        
+        UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: UIColor(named: "B2444E") as Any]    
+    }
+    
     var body: some View {
         
         ZStack{
@@ -156,7 +163,8 @@ struct RitmeJantungView: View {
                 }
             }
         }
-        .navigationTitle("Jenis Ritme Jantung").font(.system(size: 38, weight: .semibold, design: .rounded)).foregroundColor(Color(hex: "B2444E"))
+        .navigationTitle("Jenis Ritme Jantung")
+
         
         
     }
@@ -164,6 +172,9 @@ struct RitmeJantungView: View {
 
 struct RitmeJantungView_Previews: PreviewProvider {
     static var previews: some View {
-        RitmeJantungView()
+        NavigationView{
+            RitmeJantungView()
+        }
+        
     }
 }
