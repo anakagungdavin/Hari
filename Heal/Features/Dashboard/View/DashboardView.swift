@@ -40,11 +40,6 @@ struct DashboardView: View {
         animation: .default)
     private var allEcgData: FetchedResults<Ecg>
     
-//    @FetchRequest(
-//        sortDescriptors: [NSSortDescriptor(keyPath: \Ecg.timeStampECG, ascending: false)],
-//        predicate: NSPredicate(format: "activities == %@", ""))
-//    private var ecgToday: FetchedResults<Ecg>
-//
     @FetchRequest private var ecgToday: FetchedResults<Ecg>
     
     init() {
@@ -109,26 +104,26 @@ struct DashboardView: View {
                         }
                         .padding(EdgeInsets(top: 190, leading: 110, bottom: 0, trailing: 20))
                     } //ZStack
-                    .edgesIgnoringSafeArea([.top])
+                    .edgesIgnoringSafeArea(.top)
                     
-                    //                HStack{
-                    //                    ForEach(0..<4, id: \.self){ i in
-                    //                        ZStack{
-                    //                            Image("card tanggal")
-                    //                                .opacity(i == 0 ? 1 : 0)
-                    //
-                    //                            VStack{
-                    //                                Text(DateFormatter.displayDay.string(from: Calendar.current.date(byAdding: .day, value: i, to: Date())!))
-                    //                                    .font(.custom("SFProRounded-Light", size: 20))
-                    //                                    .foregroundColor(Color(hex: "B2444E"))
-                    //                                Text(DateFormatter.displayDate.string(from: Calendar.current.date(byAdding: .day, value: i, to: Date())!))
-                    //                                    .foregroundColor(Color(hex: "B2444E"))
-                    //                                    .font(.custom("SFProRounded-Semibold", size: 20))
-                    //                            }
-                    //                        }
-                    //                    }
-                    //                }
-                    //                .padding(EdgeInsets(top: -50, leading: 100, bottom: 0, trailing: 0))
+                //                HStack{
+                //                    ForEach(0..<4, id: \.self){ i in
+                //                        ZStack{
+                //                            Image("card tanggal")
+                //                                .opacity(i == 0 ? 1 : 0)
+                //
+                //                            VStack{
+                //                                Text(DateFormatter.displayDay.string(from: Calendar.current.date(byAdding: .day, value: i, to: Date())!))
+                //                                    .font(.custom("SFProRounded-Light", size: 20))
+                //                                    .foregroundColor(Color(hex: "B2444E"))
+                //                                Text(DateFormatter.displayDate.string(from: Calendar.current.date(byAdding: .day, value: i, to: Date())!))
+                //                                    .foregroundColor(Color(hex: "B2444E"))
+                //                                    .font(.custom("SFProRounded-Semibold", size: 20))
+                //                            }
+                //                        }
+                //                    }
+                //                }
+                //                .padding(EdgeInsets(top: -50, leading: 100, bottom: 0, trailing: 0))
                     
                     VStack{
                         Group{
@@ -234,15 +229,22 @@ struct DashboardView: View {
                                                 PointMark(x: .value("Day", DateFormatter.displayDate.string(from: Calendar.current.date(byAdding: .day, value: 0, to: index.timeStampECG!)!)),
                                                           y: .value("ECG",index.avgBPM))
                                                 .foregroundStyle(Color(hex: "60D0B5"))
-//                                                .annotation{
-//                                                    Text("\(Int(index.avgBPM))")
-//                                                        .font(.footnote)
-//                                                }
                                             }
                                         }
                                         .frame(width: CGFloat(ecg.count) * 50 < 248 ? 248 : CGFloat(ecg.count) * 50,
                                                height: 155)
-    //                                    .scaledToFit()
+                                        .chartYAxis {
+                                            AxisMarks(position: .leading, values: .automatic) { value in
+                                                AxisGridLine(centered: true, stroke: StrokeStyle(lineWidth: 1)).foregroundStyle(Color(hex: "F27D87"))
+                                                AxisValueLabel() {
+                                                    if let intValue = value.as(Int.self) {
+                                                        Text("\(intValue)")
+                                                        .font(.custom("SFProRounded-Bold",size: 10))
+                                                        .foregroundColor(Color(hex: "B2444E"))
+                                                    }
+                                                }
+                                            }
+                                        }
                                         .chartXScale(range: .plotDimension(padding: 5))
                                         .chartYScale(range: .plotDimension(padding: 5))
                                         
@@ -380,7 +382,7 @@ struct DashboardView: View {
             .background(Color(hex: "FFFFFF"))
             .navigationTitle("Dashboard")
             .navigationBarHidden(true)
-        }
+        }.accentColor(Color(hex: "B2444E"))
     }
 }
 
