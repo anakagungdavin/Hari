@@ -267,8 +267,8 @@
 		30E9630A290256B700A29E29 /* ProfilePage */ = {
 			isa = PBXGroup;
 			children = (
-				308DECAF2919577B00623F96 /* ViewModel */,
 				30E9630B290256DC00A29E29 /* View */,
+				308DECAF2919577B00623F96 /* ViewModel */,
 			);
 			path = ProfilePage;
 			sourceTree = "<group>";

@@ -10,7 +10,7 @@ import SwiftUI
 var totalViews = 3
 
 struct OnboardingView: View {
-    //    @AppStorage("currentView") var currentView = 1
+//        @AppStorage("currentView") var currentView = 1
         @State var currentView = 1
 
         var body: some View {

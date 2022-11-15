@@ -14,18 +14,18 @@ struct DetailJournal: View {
         VStack {
             Group {
                 HStack {
-                    Image("IconECG") //ECG Image Icon
-                    Text("16 Oktober 2022") //Date
+                    Image("IconECG") // ECG Image Icon
+                    Text("16 Oktober 2022") // Date
                     Text("|")
                     Text("10:35") // Date ECG
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .position(x:210, y:45)
-                //Mark : Card Add ECG
+                // Mark : Card Add ECG
                 VStack {
                     HStack {
                         Image("Heart")
-                        Text("88")//BPM Value
+                        Text("88") // BPM Value
                             .bold()
                             .foregroundColor(Color("ColorText"))
                         Text("DPM Rerata")
@@ -33,25 +33,25 @@ struct DetailJournal: View {
                     }
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .position(x:240, y:45)
-                                
+                    
                     Image("ECGraph")
                         .position(x:195, y:95)
-                    Text("Ritme Sinus")//Status ECG
+                    Text("Ritme Sinus") // Status ECG
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .position(x:240, y:125)
                         .bold()
                         .foregroundColor(Color("ColorText"))
                 }
-                            
+                
                 .background(Color("bgCard").cornerRadius(10).frame(width: 360, height: 200).position(x:195, y: 110))
-                             
-                            
+                
+                
                 Text("Gejala Yang Dirasakan")
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .position(x:220, y:160)
                     .foregroundColor(Color("ColorText"))
-                            
-
+                
+                
                 //Symptoms
                 HStack {
                     Image("Sesak")
@@ -61,12 +61,12 @@ struct DetailJournal: View {
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .position(x:220, y:135)
-
+                
                 Text("Activitas Yang Dilakukan")
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .position(x:220, y:120)
                     .foregroundColor(Color("ColorText"))
-
+                
                 HStack {
                     Image("Olahraga")
                     Image("Makan")
@@ -75,19 +75,19 @@ struct DetailJournal: View {
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .position(x:220, y:95)
-
+                
                 Text("Konsumsi Obat")
                     .frame(maxWidth: .infinity, alignment: .leading)
-                                .position(x:220, y:75)
-                                .foregroundColor(Color("ColorText"))
-
+                    .position(x:220, y:75)
+                    .foregroundColor(Color("ColorText"))
+                
                 HStack {
                     Image("Ya")
                     Image("Tidak")
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .position(x:220, y:45)
-
+                
             }//Group
             Text("Catatan")
                 .frame(maxWidth: .infinity, alignment: .leading)
@@ -108,9 +108,9 @@ struct DetailJournal: View {
                 }
             } label: {
                 Text("Export PDF")
-
+                
             }
-
+            
         }//Batas Vstack
         
         .sheet(isPresented: $showShareSheet){
@@ -121,12 +121,12 @@ struct DetailJournal: View {
             }
             
         }
-         
-
-                    
+        
+        
+        
         
     }//batas scroll view
-        
+    
     
 }
 
@@ -146,11 +146,11 @@ struct ShareSheet: UIViewControllerRepresentable{
         
     }
 }
- 
+
 
 struct DetailJournalPreview: PreviewProvider {
     static var previews: some View {
-       DetailJournal()
+        DetailJournal()
     }
 }
 

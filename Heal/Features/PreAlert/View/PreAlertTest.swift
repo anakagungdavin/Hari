@@ -111,6 +111,6 @@ struct CardBigNew: View {
 
 struct PreAlertTest_Previews: PreviewProvider {
     static var previews: some View {
-        PreAlertTest()
+        PreAlertTest().environmentObject(HKAuthorize())
     }
 }
