@@ -33,8 +33,8 @@ class NotificationHelper: ObservableObject {
         if isOn {
             // notification content
             let content = UNMutableNotificationContent()
-            content.title = "ini namanya judul notifikasi"
-            content.body = "ini namanya isi notifikasi"
+            content.title = "HARI Reminder"
+            content.body = "Sudah seminggu sejak terakhir kali kamu melakukan Jurnaling, perbarui sekarang!"
             content.sound = UNNotificationSound.default
 
             // schedule notification

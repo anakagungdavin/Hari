@@ -115,16 +115,15 @@ class CoreHelper {
         }
     }
 
-    func updateECG(_ viewContext: NSManagedObjectContext,
-                   _ resultDate: Date,
-                   _ counter: Int,
-                   _ bpmRate: Double,
-                   _ symptoms: String,
-                   _ notes: String = "",
-                   _ activities: String,
-                   _ xAxis: [Double],
-                   _ yAxis: [Double]) {
+    func updateECG(ecg: Ecg) {
+        
+        let newSymptoms = ecg.symptoms
+        
+        viewContext.performAndWait {
+            ecg.symptoms = newSymptoms
+            try? viewContext.save()
 
+
+        }
     }
-
 }

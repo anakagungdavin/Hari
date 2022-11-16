@@ -71,10 +71,14 @@ class HKHeartRate: ObservableObject {
     func readIrregular() {
 
         let irregularType = HKCategoryType(HKCategoryTypeIdentifier.irregularHeartRhythmEvent)
-        let queryIrreg: HKObserverQuery = HKObserverQuery(sampleType: irregularType, predicate: nil, updateHandler: self.irregularHandler)
+        let queryIrreg: HKObserverQuery = HKObserverQuery(sampleType: irregularType,
+                                                          predicate: nil,
+                                                          updateHandler: self.irregularHandler)
 
         HKAuthorize().healthStore?.execute(queryIrreg)
-        HKAuthorize().healthStore?.enableBackgroundDelivery(for: irregularType, frequency: .immediate, withCompletion: { success, error in
+        HKAuthorize().healthStore?.enableBackgroundDelivery(for: irregularType,
+                                                            frequency: .immediate,
+                                                            withCompletion: { success, error in
             if !success {
                 print(String(describing: error))
             }
@@ -87,16 +91,16 @@ class HKHeartRate: ObservableObject {
 
         print("New Data")
 
-        let content = UNMutableNotificationContent()
-        content.title = "Irregular rhythm"
-        content.body = "Notification triggered"
-        content.subtitle = "Please do your ECG"
-        content.sound = UNNotificationSound.default
-
-        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 1, repeats: false)
-        let request = UNNotificationRequest(identifier: "notification.id.01", content: content, trigger: trigger)
-
-        UNUserNotificationCenter.current().add(request)
+//        let content = UNMutableNotificationContent()
+//        content.title = "Irregular rhythm"
+//        content.body = "Notification triggered"
+//        content.subtitle = "Please do your ECG"
+//        content.sound = UNNotificationSound.default
+//
+//        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 1, repeats: false)
+//        let request = UNNotificationRequest(identifier: "notification.id.01", content: content, trigger: trigger)
+//
+//        UNUserNotificationCenter.current().add(request)
 
         completionHandler()
     }
