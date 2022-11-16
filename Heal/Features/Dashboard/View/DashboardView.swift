@@ -158,6 +158,7 @@ struct DashboardView: View {
                                             .padding(.leading, 100)
                                             .onTapGesture {
                                                 print("BPM CLICKED")
+                                                DetailJournal(ecg:i, date: Date())
                                             }
                                             
                                             VStack {
@@ -170,6 +171,7 @@ struct DashboardView: View {
                                             }.padding(.leading, 40)
                                                 .onTapGesture {
                                                     print("ECG CLICKED")
+                                                    DetailJournal(ecg:i, date: Date())
                                                 }
                                             
                                             VStack {
@@ -184,6 +186,7 @@ struct DashboardView: View {
                                             .padding(.trailing, 120)
                                             .onTapGesture {
                                                 print("ACTIVITY CLICKED")
+                                                DetailJournal(ecg:i, date: Date())
                                             }
                                         } //ForEach
                                     } //HStack
