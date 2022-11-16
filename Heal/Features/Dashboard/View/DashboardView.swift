@@ -140,54 +140,49 @@ struct DashboardView: View {
                                     
                                     HStack {
                                         ForEach(ecgToday){ i in
-                                            VStack {
-                                                Image(i.activities == " " ? "bpm aman" : "bpm gak normal")
-                                                Text( "\(Int(i.avgBPM)) BPM")
-                                                    .foregroundColor(.white)
-                                                    .font(.custom("SFProRounded-Semibold", size: 12))
-                                                    .frame(width: 50)
-                                                Text("Direkam : \(i.timeStampECG!, style: .time)")
-                                                    .frame(width: 72)
-                                                    .foregroundColor(.white)
-                                                    .font(.custom("SFProRounded-Semibold", size: 20))
-                                                    .minimumScaleFactor(0.01)
-                                                    .lineLimit(1)
-                                                
-                                                Spacer()
-                                            }
-                                            .padding(.leading, 100)
-                                            .onTapGesture {
-                                                print("BPM CLICKED")
-                                                DetailJournal(ecg:i, date: Date())
-                                            }
-                                            
-                                            VStack {
-                                                Image( "ecg kosong")
-                                                Text("N/A")
-                                                    .foregroundColor(.white)
-                                                    .font(.custom("SFProRounded-Semibold", size: 12))
-                                                    .frame(width: 50)
-                                                Spacer()
-                                            }.padding(.leading, 40)
-                                                .onTapGesture {
-                                                    print("ECG CLICKED")
-                                                    DetailJournal(ecg:i, date: Date())
+                                            NavigationLink(destination: DetailJournal(ecg:i.avgBPM, date: Date())) {
+                                                VStack {
+                                                    Image(i.activities == " " ? "bpm aman" : "bpm gak normal")
+                                                    Text( "\(Int(i.avgBPM)) BPM")
+                                                        .foregroundColor(.white)
+                                                        .font(.custom("SFProRounded-Semibold", size: 12))
+                                                        .frame(width: 50)
+                                                    Text("Direkam : \(i.timeStampECG!, style: .time)")
+                                                        .frame(width: 72)
+                                                        .foregroundColor(.white)
+                                                        .font(.custom("SFProRounded-Semibold", size: 20))
+                                                        .minimumScaleFactor(0.01)
+                                                        .lineLimit(1)
+                                                    
+                                                    Spacer()
                                                 }
+                                                .padding(.leading, 100)
+                                            }
                                             
-                                            VStack {
-                                                Image(i.activities == " " ? "aktivitas kosong" : "aktivitas aman")
-                                                Text(i.activities == " " ? "N/A" : "Aktivitas tercatat")
-                                                    .foregroundColor(.white)
-                                                    .font(.custom("SFProRounded-Semibold", size: 12))
-                                                    .frame(width: 50)
-                                                Spacer()
+                                            NavigationLink(destination: DetailJournal(ecg:i.avgBPM, date: Date())) {
+                                                VStack {
+                                                    Image( "ecg kosong")
+                                                    Text("N/A")
+                                                        .foregroundColor(.white)
+                                                        .font(.custom("SFProRounded-Semibold", size: 12))
+                                                        .frame(width: 50)
+                                                    Spacer()
+                                                }.padding(.leading, 40)
                                             }
-                                            .padding(.leading, 50)
-                                            .padding(.trailing, 120)
-                                            .onTapGesture {
-                                                print("ACTIVITY CLICKED")
-                                                DetailJournal(ecg:i, date: Date())
+                                            
+                                            NavigationLink(destination: DetailJournal(ecg:i.avgBPM, date: Date())) {
+                                                VStack {
+                                                    Image(i.activities == " " ? "aktivitas kosong" : "aktivitas aman")
+                                                    Text(i.activities == " " ? "N/A" : "Aktivitas tercatat")
+                                                        .foregroundColor(.white)
+                                                        .font(.custom("SFProRounded-Semibold", size: 12))
+                                                        .frame(width: 50)
+                                                    Spacer()
+                                                }
+                                                .padding(.leading, 50)
+                                                .padding(.trailing, 120)
                                             }
+                                            
                                         } //ForEach
                                     } //HStack
                                 } //VStack
