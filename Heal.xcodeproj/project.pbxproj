@@ -37,6 +37,8 @@
 		D8223A58291E5D5F00D9FF40 /* RitmeJantungView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8223A57291E5D5F00D9FF40 /* RitmeJantungView.swift */; };
 		D8223A5A291E5D7100D9FF40 /* ECGView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8223A59291E5D7100D9FF40 /* ECGView.swift */; };
 		D8223A5C291E5D7B00D9FF40 /* AritmiaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8223A5B291E5D7B00D9FF40 /* AritmiaView.swift */; };
+		DF472C97292384E200B11D86 /* DashboardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF472C94292384E200B11D86 /* DashboardViewModel.swift */; };
+		DF472C98292384E200B11D86 /* DashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF472C96292384E200B11D86 /* DashboardView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -92,6 +94,8 @@
 		D8223A57291E5D5F00D9FF40 /* RitmeJantungView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RitmeJantungView.swift; sourceTree = "<group>"; };
 		D8223A59291E5D7100D9FF40 /* ECGView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ECGView.swift; sourceTree = "<group>"; };
 		D8223A5B291E5D7B00D9FF40 /* AritmiaView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AritmiaView.swift; sourceTree = "<group>"; };
+		DF472C94292384E200B11D86 /* DashboardViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DashboardViewModel.swift; sourceTree = "<group>"; };
+		DF472C96292384E200B11D86 /* DashboardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DashboardView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -157,6 +161,7 @@
 		3017647928EC319300E14A7D /* Features */ = {
 			isa = PBXGroup;
 			children = (
+				DF472C92292384E200B11D86 /* Dashboard */,
 				D8223A55291E5D1A00D9FF40 /* InformasiUntukmu */,
 				3017647A28EC3BDE00E14A7D /* Onboarding */,
 				30E962F528F5536200A29E29 /* PreAlert */,
@@ -352,6 +357,31 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		DF472C92292384E200B11D86 /* Dashboard */ = {
+			isa = PBXGroup;
+			children = (
+				DF472C93292384E200B11D86 /* ViewModel */,
+				DF472C95292384E200B11D86 /* View */,
+			);
+			path = Dashboard;
+			sourceTree = "<group>";
+		};
+		DF472C93292384E200B11D86 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				DF472C94292384E200B11D86 /* DashboardViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		DF472C95292384E200B11D86 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				DF472C96292384E200B11D86 /* DashboardView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -525,7 +555,9 @@
 				D8223A5A291E5D7100D9FF40 /* ECGView.swift in Sources */,
 				305F29B529125E2800C4C76A /* Notification.swift in Sources */,
 				30F91E2628E2B5AB008F2C99 /* Heal.xcdatamodeld in Sources */,
+				DF472C98292384E200B11D86 /* DashboardView.swift in Sources */,
 				30E9630F2902A8EF00A29E29 /* HexColorExtension.swift in Sources */,
+				DF472C97292384E200B11D86 /* DashboardViewModel.swift in Sources */,
 				30FE0F4A290A4B3400AD1AAE /* HealthSymptoms.swift in Sources */,
 				308DECB1291A4A2F00623F96 /* OnboardingView.swift in Sources */,
 			);
@@ -687,10 +719,12 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Heal/Preview Content\"";
-				DEVELOPMENT_TEAM = 2RNK62DS26;
+				DEVELOPMENT_TEAM = 843V7URJY9;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Heal/Info.plist;
+				INFOPLIST_KEY_NSHealthShareUsageDescription = "We use HealthKit to Store your Journal and ECG datas.";
+				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "We use HealthKit to Store your Journal and ECG datas.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -702,7 +736,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = MacroBurger.Heal;
+				PRODUCT_BUNDLE_IDENTIFIER = Macro.heri;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -719,10 +753,12 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Heal/Preview Content\"";
-				DEVELOPMENT_TEAM = 2RNK62DS26;
+				DEVELOPMENT_TEAM = 843V7URJY9;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Heal/Info.plist;
+				INFOPLIST_KEY_NSHealthShareUsageDescription = "We use HealthKit to Store your Journal and ECG datas.";
+				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "We use HealthKit to Store your Journal and ECG datas.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -734,7 +770,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = MacroBurger.Heal;
+				PRODUCT_BUNDLE_IDENTIFIER = Macro.heri;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;

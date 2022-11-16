@@ -8,36 +8,29 @@
 import SwiftUI
 
 struct AritmiaView: View {
+    
+    init() {
+        UINavigationBar.appearance().largeTitleTextAttributes = [.foregroundColor: UIColor(named: "B2444E") as Any]
+        
+        UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: UIColor(named: "B2444E") as Any]
+    }
+    
     var body: some View {
-        NavigationView{
-            ZStack{
+        
+        ZStack{
+            
+            LinearGradient(colors: [.white, .white, Color(hex: "E37777")], startPoint: .top, endPoint: .bottom)
+                .ignoresSafeArea()
+            
+            VStack(alignment: .leading){
                 
-                LinearGradient(colors: [.white, .white, Color(hex: "E37777")], startPoint: .top, endPoint: .bottom)
-                    .ignoresSafeArea()
-                
-                VStack(alignment: .leading){
-                    
-                    HStack{
-                        Button(){
-                            //fungsi balik ke dashboard
-                        }label: {
-                            Image("chevron left")
-                        }.padding()
-                            .multilineTextAlignment(.leading)
-                        
-                        Text("Informasi Untukmu")
-                            .font(.system(size: 28, weight: .semibold, design: .rounded))
-                            .foregroundColor(Color(hex: "B2444E"))
-                            .multilineTextAlignment(.leading)
-                        Spacer()
-                    }
-                    
+                ScrollView{
                     VStack{
-                        Text("Apa itu Aritmia ?")
-                            .multilineTextAlignment(.center)
-                            .font(.system(size: 38, weight: .semibold, design: .rounded))
-                            .foregroundColor(Color(hex: "B2444E"))
-                            .frame(width: 400)
+                        //                            Text("Apa itu Aritmia ?")
+                        //                                .multilineTextAlignment(.center)
+                        //                                .font(.system(size: 38, weight: .semibold, design: .rounded))
+                        //                                .foregroundColor(Color(hex: "B2444E"))
+                        //                                .frame(width: 400)
                         
                         Group{
                             Text("")
@@ -62,7 +55,7 @@ struct AritmiaView: View {
                                 Text("Gejalanya ?").font(.system(size: 16, weight: .semibold, design: .rounded))
                                     .foregroundColor(Color(hex: "B2444E"))
                                     .frame(width: 314, alignment: .leading)
-                                    
+                                
                                 
                                 Text("")
                                 
@@ -83,13 +76,20 @@ struct AritmiaView: View {
                         Spacer()
                     }
                 }
+                
+                
             }
         }
+        .navigationTitle("Apa itu Aritmia ?")
+        
     }
 }
 
 struct AritmiaView_Previews: PreviewProvider {
     static var previews: some View {
-        AritmiaView()
+        NavigationView{
+            AritmiaView()
+        }
+        
     }
 }
