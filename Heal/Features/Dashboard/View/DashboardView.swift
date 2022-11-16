@@ -40,6 +40,8 @@ struct DashboardView: View {
         animation: .default)
     private var allEcgData: FetchedResults<Ecg>
     
+    @FetchRequest private var ecgThisMonth: FetchedResults<Ecg>
+    
     @FetchRequest private var ecgToday: FetchedResults<Ecg>
     
     init() {
@@ -52,6 +54,28 @@ struct DashboardView: View {
 
         request.fetchLimit = 1
         _ecgToday = FetchRequest(fetchRequest: request)
+        
+        let selectedYear = Int(DateFormatter.displayYear.string(from: Calendar.current.date(byAdding: .day, value: 0, to: Date())!))
+        let selectedMonth = Int(DateFormatter.displayMonthNumb.string(from: Calendar.current.date(byAdding: .day, value: 0, to: Date())!))
+            
+        var components = DateComponents()
+        components.month = selectedMonth
+        components.year = selectedYear
+        let startDateOfMonth = Calendar.current.date(from: components)
+
+        components.year = 0
+        components.month = 1
+        components.day = -1
+        let endDateOfMonth = Calendar.current.date(byAdding: components, to: startDateOfMonth!)
+        
+        let request2: NSFetchRequest<Ecg> = Ecg.fetchRequest()
+        request2.predicate = NSPredicate(format: "%K >= %@ && %K <= %@", "timeStampECG", startDateOfMonth! as NSDate, "timeStampECG", endDateOfMonth! as NSDate )
+
+        request2.sortDescriptors = [
+            NSSortDescriptor(keyPath: \Ecg.timeStampECG, ascending: true)
+        ]
+
+        _ecgThisMonth = FetchRequest(fetchRequest: request2)
     }
     
     let todayMonth = DateFormatter.displayMonth.string(from: Calendar.current.date(byAdding: .day, value: 0, to: Date())!)
@@ -106,25 +130,6 @@ struct DashboardView: View {
                     } //ZStack
                     .edgesIgnoringSafeArea(.top)
                     
-                //                HStack{
-                //                    ForEach(0..<4, id: \.self){ i in
-                //                        ZStack{
-                //                            Image("card tanggal")
-                //                                .opacity(i == 0 ? 1 : 0)
-                //
-                //                            VStack{
-                //                                Text(DateFormatter.displayDay.string(from: Calendar.current.date(byAdding: .day, value: i, to: Date())!))
-                //                                    .font(.custom("SFProRounded-Light", size: 20))
-                //                                    .foregroundColor(Color(hex: "B2444E"))
-                //                                Text(DateFormatter.displayDate.string(from: Calendar.current.date(byAdding: .day, value: i, to: Date())!))
-                //                                    .foregroundColor(Color(hex: "B2444E"))
-                //                                    .font(.custom("SFProRounded-Semibold", size: 20))
-                //                            }
-                //                        }
-                //                    }
-                //                }
-                //                .padding(EdgeInsets(top: -50, leading: 100, bottom: 0, trailing: 0))
-                    
                     VStack{
                         Group{
                             ZStack {
@@ -140,7 +145,10 @@ struct DashboardView: View {
                                     
                                     HStack {
                                         ForEach(ecgToday){ i in
-                                            NavigationLink(destination: DetailJournal(ecg:i.avgBPM, date: Date())) {
+                                            NavigationLink(destination:
+                                                            DetailJournal(ecg:i.avgBPM, date: Date())
+//                                                           EmptyView()
+                                            ) {
                                                 VStack {
                                                     Image(i.activities == " " ? "bpm aman" : "bpm gak normal")
                                                     Text( "\(Int(i.avgBPM)) BPM")
@@ -159,7 +167,10 @@ struct DashboardView: View {
                                                 .padding(.leading, 100)
                                             }
                                             
-                                            NavigationLink(destination: DetailJournal(ecg:i.avgBPM, date: Date())) {
+                                            NavigationLink(destination:
+                                                            DetailJournal(ecg:i.avgBPM, date: Date())
+//                                                           EmptyView()
+                                            ) {
                                                 VStack {
                                                     Image( "ecg kosong")
                                                     Text("N/A")
@@ -170,7 +181,10 @@ struct DashboardView: View {
                                                 }.padding(.leading, 40)
                                             }
                                             
-                                            NavigationLink(destination: DetailJournal(ecg:i.avgBPM, date: Date())) {
+                                            NavigationLink(destination:
+                                                            DetailJournal(ecg:i.avgBPM, date: Date())
+//                                                           EmptyView()
+                                            ) {
                                                 VStack {
                                                     Image(i.activities == " " ? "aktivitas kosong" : "aktivitas aman")
                                                     Text(i.activities == " " ? "N/A" : "Aktivitas tercatat")
@@ -223,7 +237,7 @@ struct DashboardView: View {
                                         
                                         
                                         Chart{
-                                            ForEach(allEcgData){ index in
+                                            ForEach(ecgThisMonth){ index in
                                                 PointMark(x: .value("Day", DateFormatter.displayDate.string(from: Calendar.current.date(byAdding: .day, value: 0, to: index.timeStampECG!)!)),
                                                           y: .value("ECG",index.avgBPM))
                                                 .foregroundStyle(Color(hex: "60D0B5"))
@@ -386,9 +400,7 @@ struct DashboardView: View {
 
 struct Dashboard_Previews: PreviewProvider {
     static var previews: some View {
-        NavigationStack{
-            DashboardView()
-        }
+        DashboardView()
     }
 }
 
@@ -408,6 +420,18 @@ extension DateFormatter {
     static let displayMonth: DateFormatter = {
          let formatter = DateFormatter()
          formatter.dateFormat = "MMMM"
+         return formatter
+    }()
+    
+    static let displayMonthNumb: DateFormatter = {
+         let formatter = DateFormatter()
+         formatter.dateFormat = "MM"
+         return formatter
+    }()
+    
+    static let displayYear: DateFormatter = {
+         let formatter = DateFormatter()
+         formatter.dateFormat = "YYYY"
          return formatter
     }()
 }
