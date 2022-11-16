@@ -140,7 +140,7 @@ struct DashboardView: View {
                                     
                                     HStack {
                                         ForEach(ecgToday){ i in
-                                            NavigationLink(destination: DetailJournal(ecg:i.avgBPM, date: Date())) {
+                                            NavigationLink(destination: DetailJournal(ecg:i.avgBPM, date: Date().toString(dateFormat: "dd MMMM YYYY"))) {
                                                 VStack {
                                                     Image(i.activities == " " ? "bpm aman" : "bpm gak normal")
                                                     Text( "\(Int(i.avgBPM)) BPM")
@@ -159,7 +159,7 @@ struct DashboardView: View {
                                                 .padding(.leading, 100)
                                             }
                                             
-                                            NavigationLink(destination: DetailJournal(ecg:i.avgBPM, date: Date())) {
+                                            NavigationLink(destination: DetailJournal(ecg:i.avgBPM, date: Date().toString(dateFormat: "dd MMMM YYYY"))) {
                                                 VStack {
                                                     Image( "ecg kosong")
                                                     Text("N/A")
@@ -170,7 +170,7 @@ struct DashboardView: View {
                                                 }.padding(.leading, 40)
                                             }
                                             
-                                            NavigationLink(destination: DetailJournal(ecg:i.avgBPM, date: Date())) {
+                                            NavigationLink(destination: DetailJournal(ecg:i.avgBPM, date: Date().toString(dateFormat: "dd MMMM YYYY"))) {
                                                 VStack {
                                                     Image(i.activities == " " ? "aktivitas kosong" : "aktivitas aman")
                                                     Text(i.activities == " " ? "N/A" : "Aktivitas tercatat")

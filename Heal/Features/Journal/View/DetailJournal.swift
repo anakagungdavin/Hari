@@ -14,8 +14,19 @@ struct DetailJournal: View {
     @State var isMuntah: Bool = false
     @State var isPusing: Bool = false
     @State var isNyeriDada: Bool = false
+    @State var isOlahraga: Bool = false
+    @State var isMakan: Bool = false
+    @State var isTidur: Bool = false
+    @State var isKerja: Bool = false
+    @State var isLainnya: Bool = false
+    @State var isYa: Bool = false
+    @State var isTidak: Bool = false
     var ecg: Double
     var date: String
+    @State var gejala: String = ""
+    @State var aktivitas: String = ""
+    @State var obat: String = ""
+    @State var catatan: String = ""
     var body: some View {
         VStack {
             Group {
@@ -62,21 +73,29 @@ struct DetailJournal: View {
                 HStack {
                     Button(action: {
                         self.isSesak.toggle()
+                        gejala = "Sesak"
+                        print(gejala)
                     }){
                         Image(self.isSesak == true ? "Sesak.fill":"Sesak")
                     }
                     Button(action: {
                         self.isMuntah.toggle()
+                        gejala = "Muntah"
+                        print(gejala)
                     }){
                         Image(self.isMuntah == true ? "Muntah.fill":"Muntah")
                     }
                     Button(action: {
                         self.isPusing.toggle()
+                        gejala = "Pusing"
+                        print(gejala)
                     }){
                         Image(self.isPusing == true ? "Pusing.fill":"Pusing")
                     }
                     Button(action: {
                         self.isNyeriDada.toggle()
+                        gejala = "Nyeri Dada"
+                        print(gejala)
                     }){
                         Image(self.isNyeriDada == true ? "NyeriDada.fill":"NyeriDada")
                     }
@@ -90,10 +109,51 @@ struct DetailJournal: View {
                     .foregroundColor(Color("ColorText"))
 
                 HStack {
-                    Image("Olahraga")
-                    Image("Makan")
-                    Image("Tidur")
-                    Image("Kerja")
+                    Button(action: {
+                        if (self.isMakan==false && self.isTidur==false && self.isKerja==false && isLainnya==false) {
+                            self.isOlahraga.toggle()
+                            aktivitas = "Olahraga"
+                            print(aktivitas)
+                        }
+                    }){
+                        Image(self.isOlahraga == true ? "Olahraga.fill":"Olahraga")
+                    }
+                    Button(action: {
+                        if (self.isOlahraga==false && self.isTidur==false && self.isKerja==false && isLainnya==false) {
+                            self.isMakan.toggle()
+                            aktivitas = "Makan"
+                            print(aktivitas)
+                        }
+                    }){
+                        Image(self.isMakan == true ? "Makan.fill":"Makan")
+                    }
+                    Button(action: {
+                        if (self.isMakan==false && self.isOlahraga==false && self.isKerja==false && isLainnya==false) {
+                            self.isTidur.toggle()
+                            aktivitas = "Tidur"
+                            print(aktivitas)
+                        }
+                    }){
+                        Image(self.isTidur == true ? "Tidur.fill":"Tidur")
+                    }
+                    Button(action: {
+                        if (self.isMakan==false && self.isTidur==false && self.isOlahraga==false && isLainnya==false) {
+                            self.isKerja.toggle()
+                            aktivitas = "Kerja"
+                            print(aktivitas)
+                        }
+                    }){
+                        Image(self.isKerja == true ? "Kerja.fill":"Kerja")
+                    }
+                    Button(action: {
+                        if (self.isMakan==false && self.isTidur==false && self.isKerja==false && isOlahraga==false) {
+                            self.isLainnya.toggle()
+                            aktivitas = "Lainnya"
+                            print(aktivitas)
+                        }
+                    }){
+                        Image(self.isLainnya == true ? "Lainnya.fill":"Lainnya")
+                    }
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .position(x:220, y:95)
@@ -104,8 +164,24 @@ struct DetailJournal: View {
                                 .foregroundColor(Color("ColorText"))
 
                 HStack {
-                    Image("Ya")
-                    Image("Tidak")
+                    Button(action: {
+                        if self.isTidak==false {
+                            self.isYa.toggle()
+                            obat = "Ya"
+                            print(obat)
+                        }
+                    }){
+                        Image(self.isYa == true ? "Ya.fill":"Ya")
+                    }
+                    Button(action: {
+                        if self .isYa == false {
+                            self.isTidak.toggle()
+                            obat = "Tidak"
+                            print(obat)
+                        }
+                    }){
+                        Image(self.isTidak == true ? "Tidak.fill":"Tidak")
+                    }
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .position(x:220, y:45)
@@ -115,6 +191,15 @@ struct DetailJournal: View {
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .position(x:220, y:25)
                 .foregroundColor(Color("ColorText"))
+            TextEditor(text: $catatan)
+                //.focused($inFocus, equals: 1)
+                .scrollContentBackground(.hidden)
+                .scrollDismissesKeyboard(.automatic)
+                .background(Color(UIColor(red: 0.623, green: 0.779, blue: 0.753, alpha: 1))).cornerRadius(6)
+                .frame(height: 100)
+                .overlay(RoundedRectangle(cornerRadius: 8)
+                    .stroke(.blue).opacity(0.5))
+                .ignoresSafeArea(.keyboard, edges: .bottom)
             
             Button {
                 exportPDF {
