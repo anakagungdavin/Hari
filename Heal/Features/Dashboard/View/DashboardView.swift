@@ -44,10 +44,17 @@ struct DashboardView: View {
     
     @FetchRequest private var ecgToday: FetchedResults<Ecg>
     
+    @FetchRequest private var jurnalIncomplete: FetchedResults<Ecg>
+    
+    @FetchRequest private var jurnalComplete: FetchedResults<Ecg>
+    
+//    private var jurnalCount: (Int, Int)
+    
+//    @FetchRequest private var tesEcgFilter: FetchedResults<Ecg>
+    
     init() {
         let request: NSFetchRequest<Ecg> = Ecg.fetchRequest()
         request.predicate = NSPredicate(format: "activities == %@", " ")
-
         request.sortDescriptors = [
             NSSortDescriptor(keyPath: \Ecg.timeStampECG, ascending: false)
         ]
@@ -70,12 +77,27 @@ struct DashboardView: View {
         
         let request2: NSFetchRequest<Ecg> = Ecg.fetchRequest()
         request2.predicate = NSPredicate(format: "%K >= %@ && %K <= %@", "timeStampECG", startDateOfMonth! as NSDate, "timeStampECG", endDateOfMonth! as NSDate )
-
         request2.sortDescriptors = [
             NSSortDescriptor(keyPath: \Ecg.timeStampECG, ascending: true)
         ]
 
         _ecgThisMonth = FetchRequest(fetchRequest: request2)
+        
+        let request3: NSFetchRequest<Ecg> = Ecg.fetchRequest()
+        request3.predicate = NSPredicate(format: "%K >= %@ && %K <= %@ && activities == %@", "timeStampECG", startDateOfMonth! as NSDate, "timeStampECG", endDateOfMonth! as NSDate, " ")
+        request3.sortDescriptors = [
+            NSSortDescriptor(keyPath: \Ecg.timeStampECG, ascending: false)
+        ]
+
+        _jurnalIncomplete = FetchRequest(fetchRequest: request3)
+        
+        let request4: NSFetchRequest<Ecg> = Ecg.fetchRequest()
+        request4.predicate = NSPredicate(format: "%K >= %@ && %K <= %@ && activities != %@", "timeStampECG", startDateOfMonth! as NSDate, "timeStampECG", endDateOfMonth! as NSDate, " ")
+        request4.sortDescriptors = [
+            NSSortDescriptor(keyPath: \Ecg.timeStampECG, ascending: false)
+        ]
+        
+        _jurnalComplete = FetchRequest(fetchRequest: request4)
     }
     
     let todayMonth = DateFormatter.displayMonth.string(from: Calendar.current.date(byAdding: .day, value: 0, to: Date())!)
@@ -265,7 +287,7 @@ struct DashboardView: View {
                                     
                                     VStack{
                                         VStack(alignment: .center){
-                                            Text("\(ecgComplete.count) / \(ecgNoActivities.count)")
+                                            Text("\(jurnalComplete.count) / \(jurnalIncomplete.count)")
                                                 .font(.custom("SFProRounded-Semibold", size: 20))
                                                 .foregroundColor(Color(hex: "B2444E"))
                                                 .frame(maxWidth: .infinity, alignment: .center)

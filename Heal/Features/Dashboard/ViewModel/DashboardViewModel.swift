@@ -49,4 +49,35 @@ class DashboardViewModel: ObservableObject {
         guard let activityTemp = item?.activities else { return }
         activity = activityTemp
     }
+    
+    func jurnalCountCompByMonth() -> (Int, Int) {
+        let selectedYear = Int(DateFormatter.displayYear.string(from: Calendar.current.date(byAdding: .day, value: 0, to: Date())!))
+        let selectedMonth = Int(DateFormatter.displayMonthNumb.string(from: Calendar.current.date(byAdding: .day, value: 0, to: Date())!))
+        
+        var components = DateComponents()
+        components.month = selectedMonth
+        components.year = selectedYear
+        let startDateOfMonth = Calendar.current.date(from: components)
+
+        components.year = 0
+        components.month = 1
+        components.day = -1
+        let endDateOfMonth = Calendar.current.date(byAdding: components, to: startDateOfMonth!)
+        
+        @FetchRequest(
+            sortDescriptors: [NSSortDescriptor(keyPath: \Ecg.timeStampECG, ascending: true)],
+            predicate: NSPredicate(format: "%K >= %@ && %K <= %@ && activities == %@", "timeStampECG", startDateOfMonth! as NSDate, "timeStampECG", endDateOfMonth! as NSDate, " "),
+            animation: .default)
+        var jurnalIncomplete: FetchedResults<Ecg>
+        
+        @FetchRequest(
+            sortDescriptors: [NSSortDescriptor(keyPath: \Ecg.timeStampECG, ascending: true)],
+            predicate: NSPredicate(format: "%K >= %@ && %K <= %@ && activities != %@", "timeStampECG", startDateOfMonth! as NSDate, "timeStampECG", endDateOfMonth! as NSDate, " "),
+            animation: .default)
+        var jurnalComplete: FetchedResults<Ecg>
+        
+        print("**************** \(jurnalComplete.count) \(jurnalIncomplete.count)")
+        
+        return (jurnalComplete.count, jurnalIncomplete.count)
+    }
 }
