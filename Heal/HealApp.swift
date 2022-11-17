@@ -16,6 +16,7 @@ struct HealApp: App {
 
     var body: some Scene {
         WindowGroup {
+        
 //            PreAlertView(notification: notification)
 //            PreAlertTest()
             MainContainer(heartRate: HKHeartRate())
