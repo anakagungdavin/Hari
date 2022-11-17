@@ -27,7 +27,7 @@ struct DetailJournal: View {
     var date: String
     var hour: String
     var coreDataItem : Ecg?
-    @State var gejala: String = ""
+    @State var gejala: [String] = []
     @State var aktivitas: String = ""
     @State var obat: String = ""
     var body: some View {
@@ -76,31 +76,51 @@ struct DetailJournal: View {
                 HStack {
                     Button(action: {
                         self.isSesak.toggle()
-                        gejala = "Sesak"
-                        print(gejala)
+                        if isSesak == true {
+                            gejala.append("Sesak")
+                        }
+                        else {
+                            gejala.remove(at: gejala.firstIndex(of: "Sesak")!)
+                        }
+                        journalData.gejalaku = gejala
                     }){
-                        Image(self.isSesak == true ? "Sesak.fill":"Sesak")
+                        Image(journalData.gejalaku.contains("Sesak") ? "Sesak.fill":"Sesak")
                     }
                     Button(action: {
                         self.isMuntah.toggle()
-                        gejala = "Muntah"
-                        print(gejala)
+                        if isMuntah == true {
+                            gejala.append("Muntah")
+                        }
+                        else {
+                            gejala.remove(at: gejala.firstIndex(of: "Muntah")!)
+                        }
+                        journalData.gejalaku = gejala
                     }){
-                        Image(self.isMuntah == true ? "Muntah.fill":"Muntah")
+                        Image(journalData.gejalaku.contains("Muntah") ? "Muntah.fill":"Muntah")
                     }
                     Button(action: {
                         self.isPusing.toggle()
-                        gejala = "Pusing"
-                        print(gejala)
+                        if isPusing == true {
+                            gejala.append("Pusing")
+                        }
+                        else {
+                            gejala.remove(at: gejala.firstIndex(of: "Pusing")!)
+                        }
+                        journalData.gejalaku = gejala
                     }){
-                        Image(self.isPusing == true ? "Pusing.fill":"Pusing")
+                        Image(journalData.gejalaku.contains("Pusing") ? "Pusing.fill":"Pusing")
                     }
                     Button(action: {
                         self.isNyeriDada.toggle()
-                        gejala = "Nyeri Dada"
-                        print(gejala)
+                        if isNyeriDada == true {
+                            gejala.append("NyeriDada")
+                        }
+                        else {
+                            gejala.remove(at: gejala.firstIndex(of: "NyeriDada")!)
+                        }
+                        journalData.gejalaku = gejala
                     }){
-                        Image(self.isNyeriDada == true ? "NyeriDada.fill":"NyeriDada")
+                        Image(journalData.gejalaku.contains("NyeriDada") ? "NyeriDada.fill":"NyeriDada")
                     }
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)

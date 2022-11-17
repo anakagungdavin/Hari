@@ -14,6 +14,7 @@ class DetailJournalViewModel: ObservableObject {
     @Published var catatanku = ""
     @Published var konsumsiObat = ""
     @Published var aktivitasku = ""
+    @Published var gejalaku:[String] = []
     @Published var updateItem : Ecg!
     
     func addItem(viewContext: NSManagedObjectContext) {
@@ -21,6 +22,7 @@ class DetailJournalViewModel: ObservableObject {
             updateItem.notes = catatanku
             updateItem.obat = konsumsiObat
             updateItem.activities = aktivitasku
+            updateItem.symptoms = gejalaku
             
             try! viewContext.save()
             updateItem = nil
@@ -31,6 +33,7 @@ class DetailJournalViewModel: ObservableObject {
         newItem.notes = catatanku
         newItem.obat = konsumsiObat
         newItem.activities = aktivitasku
+        newItem.symptoms = gejalaku
         
     }
     
@@ -42,6 +45,8 @@ class DetailJournalViewModel: ObservableObject {
         konsumsiObat = obatTemp
         guard let aktTemp = item?.activities else {return}
         aktivitasku = aktTemp
+        guard let symTemp = item?.symptoms else {return}
+        gejalaku = symTemp
         print(konsumsiObat)
         
     }
