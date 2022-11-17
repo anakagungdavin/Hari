@@ -3,7 +3,7 @@
 //  TesDashboard
 //
 //  Created by heri hermawan on 13/10/22.
-//
+//  swiftlint:disable force_try
 
 import SwiftUI
 import CoreData

@@ -185,7 +185,6 @@
 			isa = PBXGroup;
 			children = (
 				3017647B28EC3C0400E14A7D /* View */,
-				3017647C28EC3C0E00E14A7D /* ViewModel */,
 			);
 			path = Onboarding;
 			sourceTree = "<group>";
@@ -193,16 +192,9 @@
 		3017647B28EC3C0400E14A7D /* View */ = {
 			isa = PBXGroup;
 			children = (
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
-		3017647C28EC3C0E00E14A7D /* ViewModel */ = {
-			isa = PBXGroup;
-			children = (
 				305704EA291AC5DE00D5EF44 /* OnboardingView.swift */,
 			);
-			path = ViewModel;
+			path = View;
 			sourceTree = "<group>";
 		};
 		305704EC291B4B5000D5EF44 /* MainContainer */ = {

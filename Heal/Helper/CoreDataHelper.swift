@@ -27,7 +27,7 @@ class CoreHelper {
                     _ notes: String = "",
                     _ activities: String = "",
                     _ xAxis: [Double],
-                    _ yAxis: [Double]) {
+                    _ yAxis: [Double], _ symptomClass: Int) {
         withAnimation {
             let newItem = Ecg(context: viewContext)
             newItem.timeStampECG = resultDate
@@ -38,6 +38,7 @@ class CoreHelper {
             newItem.activities = activities
             newItem.xAxis = xAxis
             newItem.yAxis = yAxis
+            newItem.symptomsClass = Int32(symptomClass)
             // newItem.voltageECG = resultSample
 
             do {

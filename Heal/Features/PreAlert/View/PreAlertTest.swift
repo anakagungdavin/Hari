@@ -9,7 +9,8 @@ import SwiftUI
 
 struct PreAlertTest: View {
     @EnvironmentObject var authProc: HKAuthorize
-    
+    @ObservedObject var notification: NotificationHelper
+
     var body: some View {
         ZStack {
             LinearGradient(colors: [.white, Color(hex: "E37777")], startPoint: .top, endPoint: .bottom)
@@ -24,6 +25,8 @@ struct PreAlertTest: View {
                 Spacer()
             }
             .offset(CGSize(width: 100, height: 60))
+        }.onAppear(){
+            NotificationHelper().notifPermission()
         }
     }
 }
@@ -111,6 +114,6 @@ struct CardBigNew: View {
 
 struct PreAlertTest_Previews: PreviewProvider {
     static var previews: some View {
-        PreAlertTest().environmentObject(HKAuthorize())
+        PreAlertTest(notification: NotificationHelper()).environmentObject(HKAuthorize())
     }
 }

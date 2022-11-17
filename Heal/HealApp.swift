@@ -19,7 +19,8 @@ struct HealApp: App {
         
 //            PreAlertView(notification: notification)
 //            PreAlertTest()
-            MainContainer(heartRate: HKHeartRate())
+//            MainContainer(heartRate: HKHeartRate())
+            OnboardingView()
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
                 .environmentObject(authorizer)
         }
