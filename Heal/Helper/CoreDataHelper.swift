@@ -10,14 +10,14 @@ import CoreData
 import SwiftUI
 
 class CoreHelper {
-    
+
     @Environment(\.managedObjectContext) private var viewContext
     var ecgDates = [Date]()
     var counter = Int()
     var avgBpms = [Double]()
-    
+
     // var ecgSamples = [[(Double, Double)]]()
-    
+
     // Diaturin buat ngehandle klo nilai parameternya kosong gimana (entah di sini atau di sana)
     func addItemECG(_ viewContext: NSManagedObjectContext,
                     _ resultDate: Date,
@@ -39,7 +39,7 @@ class CoreHelper {
             newItem.xAxis = xAxis
             newItem.yAxis = yAxis
             // newItem.voltageECG = resultSample
-            
+
             do {
                 try viewContext.save()
                 print("***** TANGALAN \(String(describing: newItem.timeStampECG))")
@@ -61,14 +61,15 @@ class CoreHelper {
     }
 
     // Diaturin buat ngehandle klo nilai parameternya kosong gimana (entah di sini atau di sana)
-    func addItemProfile(_ viewContext: NSManagedObjectContext,
-                        _ name: String,
-                        _ age: Int32,
-                        _ doBirth: Date,
-                        _ weight: Int32,
-                        _ height: Int32,
-                        _ sex: String) {
-        
+    func addIaddtemProfile(_ viewContext: NSManagedObjectContext,
+                           _ name: String,
+                           _ age: Int32,
+                           _ doBirth: Date,
+                           _ weight: Int32,
+                           _ height: Int32,
+                           _ sex: String,
+                           _ commorbit: String) {
+
         let newItem = Profile(context: viewContext)
         newItem.name = name
         newItem.age = age
@@ -76,10 +77,11 @@ class CoreHelper {
         newItem.weight = weight
         newItem.height = height
         newItem.sex = sex
-        
+        newItem.commorbit = commorbit
+
         do {
             try viewContext.save()
-            
+
         } catch {
             // Replace this implementation with code to handle the error appropriately.
             // fatalError() causes the application to generate a crash log and terminate.
@@ -91,14 +93,15 @@ class CoreHelper {
     }
 
     func updateItem(profile: Profile) {
-        
+
         let newName = profile.name
         let newAge = profile.age
         let newdOBirth = profile.doBirth
         let newWeight = profile.weight
         let newHeight = profile.height
         let newGender = profile.sex
-        
+        let newCommorbit = profile.commorbit
+
         viewContext.performAndWait {
             profile.name = newName
             profile.age = newAge
@@ -106,9 +109,21 @@ class CoreHelper {
             profile.weight = newWeight
             profile.height = newHeight
             profile.sex = newGender
-            
+            profile.commorbit = newCommorbit
+
             try? viewContext.save()
         }
     }
-    
+
+    func updateECG(ecg: Ecg) {
+        
+        let newSymptoms = ecg.symptoms
+        
+        viewContext.performAndWait {
+            ecg.symptoms = newSymptoms
+            try? viewContext.save()
+
+
+        }
+    }
 }

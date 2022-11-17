@@ -19,18 +19,20 @@ class HKEcgs: ObservableObject {
     @Published var avgBpms = [Double]()
 
     var healthStore = HKHealthStore()
+    var queryAnchor: HKQueryAnchor?
     var ecgSamples = [[(Double, Double)]]()
     var xAxis = [Double]()
     var yAxis = [Double]()
+    var ecgClasses = [Int]()
+    var defaultsCount = UserDefaults.standard
 
-    func getECGs(counter: Int, completion: @escaping (Double, [(Double, Double)], Date) -> Void) {
+    func getECGs(counter: Int, completion: @escaping (Double, [(Double, Double)], Date, Int) -> Void) {
 
         var ecgSamples = [(Double, Double)]()
         let predicate = HKQuery.predicateForSamples(withStart: Date.distantPast,
                                                     end: Date.distantFuture,
                                                     options: .strictEndDate)
         let sortDescriptor = NSSortDescriptor(key: HKSampleSortIdentifierStartDate, ascending: false)
-
         let ecgQuery = HKSampleQuery(sampleType: HKObjectType.electrocardiogramType(),
                                      predicate: predicate,
                                      limit: HKObjectQueryNoLimit,
@@ -43,7 +45,7 @@ class HKEcgs: ObservableObject {
             print("******** Recent \(mostRecentSample)")
 
             let electroCardiogram = samples[counter] as! HKElectrocardiogram
-            let query = HKElectrocardiogramQuery(electroCardiogram) { [self] (query, result) in
+            let query = HKElectrocardiogramQuery(electroCardiogram) {(query, result) in
 
                 switch result {
                 case .error(let error):
@@ -56,10 +58,11 @@ class HKEcgs: ObservableObject {
 
                 case .done:
                     let averageBPM = electroCardiogram.averageHeartRate?.doubleValue(for: HKUnit.count().unitDivided(by: .minute())) ?? 0
+                    let classificationECG = electroCardiogram.classification.rawValue
                     // print("done")
 
                     DispatchQueue.main.async {
-                        completion(averageBPM, ecgSamples, samples[counter].startDate)
+                        completion(averageBPM, ecgSamples, samples[counter].startDate, classificationECG)
                     }
                 @unknown default:
                     return
@@ -67,6 +70,7 @@ class HKEcgs: ObservableObject {
             }
             self.healthStore.execute(query)
         }
+
 
         self.healthStore.execute(ecgQuery)
         // print("everything working here")
@@ -82,9 +86,11 @@ class HKEcgs: ObservableObject {
                                      limit: HKObjectQueryNoLimit,
                                      sortDescriptors: nil) {(query, samples, error) in
             guard let samples = samples
+
             else {
                 return
             }
+
             result = samples.count
             completion(result)
         }
@@ -95,54 +101,46 @@ class HKEcgs: ObservableObject {
         var counter = 0
 
         self.getECGsCount { (ecgsCount) in
+
             print("Result is \(ecgsCount)")
-            if ecgsCount < 1 {
+
+            var ecgsCountNew = abs(((self.defaultsCount.object(forKey: "countData")) as? Int ?? 0) - ecgsCount)
+            self.defaultsCount.set(ecgsCount, forKey: "countData")
+
+            if ecgsCountNew < 1 {
                 print("You have no ecgs available")
                 return
             } else {
-                for i in 0...ecgsCount - 1 {
-                    self.getECGs(counter: i) { (ecgBPM, ecgResults, ecgDate)  in
-                        DispatchQueue.main.async {
-                            self.ecgSamples.append(ecgResults)
-                            self.ecgDates.append(ecgDate)
-                            for j in 0...ecgResults.count - 1 {
-                                self.yAxis.append(ecgResults[j].0)
-                                self.xAxis.append(ecgResults[j].1)
-                            }
-                            CoreHelper().addItemECG(viewContext,
-                                                    ecgDate,
-                                                    counter,
-                                                    ecgBPM,
-                                                    " ",
-                                                    " ",
-                                                    " ",
-                                                    self.xAxis,
-                                                    self.yAxis)
-                            counter += 1
-                            print("************ \(ecgBPM)")
-                            print("************ \(ecgDate)")
-//                            print("\()")
-                            print("****AAAAA \(ecgResults.count)")
-                            print("****** \(ecgResults[0].0)")
 
-//                            // the last thread will enter here, meaning all of them are finished
-//                            if counter == ecgsCount {
-//
-//                                // sort ecgs by newest to oldest
-//
-//                                var newDates = self.ecgDates
-//                                newDates.sort { $0 > $1 }
-//                                for element in newDates {
-//                                    self.indices.append((self.ecgDates.firstIndex(of: element)!,
-                            // newDates.firstIndex(of: element)!))
-//                                }
-//
-//                                self.ecgDates = newDates
-//
-//                                // indices matrix is a tuple matrix with two categories
-//                                // the first is the sorted indice, and the second is the raw
-//                                // ecgSamples[indices[0].0] is the newest ecg
-//                            }
+                if ((self.defaultsCount.object(forKey: "countData") as? Int)!) <= ecgsCount {
+                    for i in 0...ecgsCountNew - 1 {
+                        self.getECGs(counter: i) { (ecgBPM, ecgResults, ecgDate, ecgClass)  in
+                            DispatchQueue.main.async {
+
+                                self.ecgSamples.append(ecgResults)
+                                self.ecgDates.append(ecgDate)
+                                self.ecgClasses.append(ecgClass)
+
+                                for j in 0...ecgResults.count - 1 {
+                                    self.yAxis.append(ecgResults[j].0)
+                                    self.xAxis.append(ecgResults[j].1)
+                                }
+                                CoreHelper().addItemECG(viewContext,
+                                                        ecgDate,
+                                                        counter,
+                                                        ecgBPM,
+                                                        " ",
+                                                        " ",
+                                                        " ",
+                                                        self.xAxis,
+                                                        self.yAxis)
+                                self.avgBpms.append(ecgBPM)
+                                counter += 1
+                                print("************ \(ecgBPM)")
+                                print("************ \(ecgDate)")
+                                print("****AAAAA \(ecgResults.count)")
+                                print("****** \(ecgResults[0].0)")
+                            }
                         }
                     }
                 }
