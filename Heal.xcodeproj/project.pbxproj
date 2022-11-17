@@ -7,8 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		302B9119291E281A00D1D6D3 /* HealthHearthRate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 302B9118291E281A00D1D6D3 /* HealthHearthRate.swift */; };
+		302B911C292129EE00D1D6D3 /* PreAlertTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 302B911B292129EE00D1D6D3 /* PreAlertTest.swift */; };
+		305704EB291AC5DE00D5EF44 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 305704EA291AC5DE00D5EF44 /* OnboardingView.swift */; };
+		305704EF291B4B8000D5EF44 /* MainContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 305704EE291B4B8000D5EF44 /* MainContainer.swift */; };
 		305F29B529125E2800C4C76A /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 305F29B429125E2800C4C76A /* Notification.swift */; };
-		308DECB1291A4A2F00623F96 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 308DECB0291A4A2F00623F96 /* OnboardingView.swift */; };
+		308DECAE2919577400623F96 /* ProfilePageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 308DECAD2919577400623F96 /* ProfilePageModel.swift */; };
 		30E962F328F4678600A29E29 /* HealthEcgs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30E962F228F4678600A29E29 /* HealthEcgs.swift */; };
 		30E962F828F5577E00A29E29 /* PreAlertPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30E962F728F5577E00A29E29 /* PreAlertPage.swift */; };
 		30E962FC28FAA64C00A29E29 /* CustomTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30E962FB28FAA64C00A29E29 /* CustomTabBar.swift */; };
@@ -60,8 +64,12 @@
 
 /* Begin PBXFileReference section */
 		3017647128EAB4C500E14A7D /* Heal.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Heal.entitlements; sourceTree = "<group>"; };
+		302B9118291E281A00D1D6D3 /* HealthHearthRate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthHearthRate.swift; sourceTree = "<group>"; };
+		302B911B292129EE00D1D6D3 /* PreAlertTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreAlertTest.swift; sourceTree = "<group>"; };
+		305704EA291AC5DE00D5EF44 /* OnboardingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = OnboardingView.swift; path = Heal/Features/Onboarding/View/OnboardingView.swift; sourceTree = SOURCE_ROOT; };
+		305704EE291B4B8000D5EF44 /* MainContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainContainer.swift; sourceTree = "<group>"; };
 		305F29B429125E2800C4C76A /* Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
-		308DECB0291A4A2F00623F96 /* OnboardingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
+		308DECAD2919577400623F96 /* ProfilePageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePageModel.swift; sourceTree = "<group>"; };
 		30E962F228F4678600A29E29 /* HealthEcgs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthEcgs.swift; sourceTree = "<group>"; };
 		30E962F428F4691300A29E29 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		30E962F728F5577E00A29E29 /* PreAlertPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreAlertPage.swift; sourceTree = "<group>"; };
@@ -163,6 +171,7 @@
 			children = (
 				DF472C92292384E200B11D86 /* Dashboard */,
 				D8223A55291E5D1A00D9FF40 /* InformasiUntukmu */,
+				305704EC291B4B5000D5EF44 /* MainContainer */,
 				3017647A28EC3BDE00E14A7D /* Onboarding */,
 				30E962F528F5536200A29E29 /* PreAlert */,
 				30E962F028F4672D00A29E29 /* HealthKitProvider */,
@@ -176,6 +185,7 @@
 			isa = PBXGroup;
 			children = (
 				3017647B28EC3C0400E14A7D /* View */,
+				3017647C28EC3C0E00E14A7D /* ViewModel */,
 			);
 			path = Onboarding;
 			sourceTree = "<group>";
@@ -183,9 +193,41 @@
 		3017647B28EC3C0400E14A7D /* View */ = {
 			isa = PBXGroup;
 			children = (
-				308DECB0291A4A2F00623F96 /* OnboardingView.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		3017647C28EC3C0E00E14A7D /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				305704EA291AC5DE00D5EF44 /* OnboardingView.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		305704EC291B4B5000D5EF44 /* MainContainer */ = {
+			isa = PBXGroup;
+			children = (
+				305704ED291B4B6A00D5EF44 /* View */,
+			);
+			path = MainContainer;
+			sourceTree = "<group>";
+		};
+		305704ED291B4B6A00D5EF44 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				30E962FB28FAA64C00A29E29 /* CustomTabBar.swift */,
+				305704EE291B4B8000D5EF44 /* MainContainer.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		308DECAF2919577B00623F96 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				308DECAD2919577400623F96 /* ProfilePageModel.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		30E962F028F4672D00A29E29 /* HealthKitProvider */ = {
@@ -204,6 +246,7 @@
 				30E9630028FE65AA00A29E29 /* HealthProfile.swift */,
 				30E962F228F4678600A29E29 /* HealthEcgs.swift */,
 				30FE0F49290A4B3400AD1AAE /* HealthSymptoms.swift */,
+				302B9118291E281A00D1D6D3 /* HealthHearthRate.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -220,7 +263,7 @@
 			isa = PBXGroup;
 			children = (
 				30E962F728F5577E00A29E29 /* PreAlertPage.swift */,
-				30E962FB28FAA64C00A29E29 /* CustomTabBar.swift */,
+				302B911B292129EE00D1D6D3 /* PreAlertTest.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -237,6 +280,7 @@
 			isa = PBXGroup;
 			children = (
 				30E9630B290256DC00A29E29 /* View */,
+				308DECAF2919577B00623F96 /* ViewModel */,
 			);
 			path = ProfilePage;
 			sourceTree = "<group>";
@@ -535,6 +579,9 @@
 			files = (
 				30E9630328FFBF3800A29E29 /* CoreDataHelper.swift in Sources */,
 				30F91E2328E2B5AB008F2C99 /* Persistence.swift in Sources */,
+				308DECAE2919577400623F96 /* ProfilePageModel.swift in Sources */,
+				302B9119291E281A00D1D6D3 /* HealthHearthRate.swift in Sources */,
+				302B911C292129EE00D1D6D3 /* PreAlertTest.swift in Sources */,
 				44CAC9372918E95F00FE0D8C /* CalenderView.swift in Sources */,
 				30FE0F4E290F830C00AD1AAE /* ProfilePageNew.swift in Sources */,
 				30E962F328F4678600A29E29 /* HealthEcgs.swift in Sources */,
@@ -558,8 +605,9 @@
 				DF472C98292384E200B11D86 /* DashboardView.swift in Sources */,
 				30E9630F2902A8EF00A29E29 /* HexColorExtension.swift in Sources */,
 				DF472C97292384E200B11D86 /* DashboardViewModel.swift in Sources */,
+				305704EB291AC5DE00D5EF44 /* OnboardingView.swift in Sources */,
+				305704EF291B4B8000D5EF44 /* MainContainer.swift in Sources */,
 				30FE0F4A290A4B3400AD1AAE /* HealthSymptoms.swift in Sources */,
-				308DECB1291A4A2F00623F96 /* OnboardingView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
