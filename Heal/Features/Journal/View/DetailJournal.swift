@@ -30,7 +30,6 @@ struct DetailJournal: View {
     @State var gejala: String = ""
     @State var aktivitas: String = ""
     @State var obat: String = ""
-    @State var catatan: String
     var body: some View {
         VStack {
             Group {
@@ -116,47 +115,72 @@ struct DetailJournal: View {
                     Button(action: {
                         if (self.isMakan==false && self.isTidur==false && self.isKerja==false && isLainnya==false) {
                             self.isOlahraga.toggle()
-                            aktivitas = "Olahraga"
-                            print(aktivitas)
+                            if isOlahraga==true{
+                                aktivitas = "Olahraga"
+                            }
+                            else{
+                                aktivitas = ""
+                            }
+                            journalData.aktivitasku = aktivitas
                         }
                     }){
-                        Image(self.isOlahraga == true ? "Olahraga.fill":"Olahraga")
+                        Image(journalData.aktivitasku == "Olahraga"  ? "Olahraga.fill":"Olahraga")
                     }
                     Button(action: {
                         if (self.isOlahraga==false && self.isTidur==false && self.isKerja==false && isLainnya==false) {
                             self.isMakan.toggle()
-                            aktivitas = "Makan"
-                            print(aktivitas)
+                            if isMakan==true{
+                                aktivitas = "Makan"
+                            }
+                            else{
+                                aktivitas = ""
+                            }
+                            journalData.aktivitasku = aktivitas
                         }
                     }){
-                        Image(self.isMakan == true ? "Makan.fill":"Makan")
+                        Image(journalData.aktivitasku == "Makan"  ? "Makan.fill":"Makan")
                     }
                     Button(action: {
                         if (self.isMakan==false && self.isOlahraga==false && self.isKerja==false && isLainnya==false) {
                             self.isTidur.toggle()
-                            aktivitas = "Tidur"
-                            print(aktivitas)
+                            if isTidur==true{
+                                aktivitas = "Tidur"
+                            }
+                            else{
+                                aktivitas = ""
+                            }
+                            journalData.aktivitasku = aktivitas
                         }
                     }){
-                        Image(self.isTidur == true ? "Tidur.fill":"Tidur")
+                        Image(journalData.aktivitasku == "Tidur"  ? "Tidur.fill":"Tidur")
                     }
                     Button(action: {
                         if (self.isMakan==false && self.isTidur==false && self.isOlahraga==false && isLainnya==false) {
                             self.isKerja.toggle()
-                            aktivitas = "Kerja"
-                            print(aktivitas)
+                            if isKerja==true{
+                                aktivitas = "Kerja"
+                            }
+                            else{
+                                aktivitas = ""
+                            }
+                            journalData.aktivitasku = aktivitas
                         }
                     }){
-                        Image(self.isKerja == true ? "Kerja.fill":"Kerja")
+                        Image(journalData.aktivitasku == "Kerja"  ? "Kerja.fill":"Kerja")
                     }
                     Button(action: {
                         if (self.isMakan==false && self.isTidur==false && self.isKerja==false && isOlahraga==false) {
                             self.isLainnya.toggle()
-                            aktivitas = "Lainnya"
-                            print(aktivitas)
+                            if isLainnya==true{
+                                aktivitas = "Lainnya"
+                            }
+                            else{
+                                aktivitas = ""
+                            }
+                            journalData.aktivitasku = aktivitas
                         }
                     }){
-                        Image(self.isLainnya == true ? "Lainnya.fill":"Lainnya")
+                        Image(journalData.aktivitasku == "Lainnya" ? "Lainnya.fill":"Lainnya")
                     }
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
@@ -171,20 +195,34 @@ struct DetailJournal: View {
                     Button(action: {
                         if self.isTidak==false {
                             self.isYa.toggle()
-                            obat = "Ya"
-                            print(obat)
+                            if isYa==true{
+                                obat = "Ya"
+                            }
+                            else {
+                                obat = ""
+                            }
                         }
+                        journalData.konsumsiObat = obat
+                        //print(obat)
+                        
+                        
                     }){
-                        Image(self.isYa == true ? "Ya.fill":"Ya")
+                        Image(journalData.konsumsiObat == "Ya" ? "Ya.fill":"Ya")
                     }
                     Button(action: {
                         if self .isYa == false {
                             self.isTidak.toggle()
-                            obat = "Tidak"
-                            print(obat)
+                            if isTidak == true {
+                                obat = "Tidak"
+                            }
+                            else {
+                                obat = ""
+                            }
+                            journalData.konsumsiObat = obat
+                            //print(obat)
                         }
                     }){
-                        Image(self.isTidak == true ? "Tidak.fill":"Tidak")
+                        Image(journalData.konsumsiObat == "Tidak" ? "Tidak.fill":"Tidak")
                     }
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
@@ -227,6 +265,9 @@ struct DetailJournal: View {
             }
 
         }//Batas Vstack
+        .onAppear() {
+            journalData.editItem(item: coreDataItem)
+        }
         
         .sheet(isPresented: $ShowShareSheet){
             PDFurl = nil

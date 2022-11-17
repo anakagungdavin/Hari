@@ -25,6 +25,7 @@ class CoreHelper {
                     _ bpmRate: Double,
                     _ symptoms: [String] = [],
                     _ notes: String = "",
+                    _ obat: String = "",
                     _ activities: String = "",
                     _ xAxis: [Double],
                     _ yAxis: [Double]) {

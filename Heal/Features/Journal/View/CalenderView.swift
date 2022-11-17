@@ -167,7 +167,7 @@ struct CalenderView: View {
                                             
                                             //Mark : Go To Detail View
                                             NavigationLink {
-                                                DetailJournal(journalData: calenderViewModel, ecg: cardd.avgBPM, date: cardd.timeStampECG!.toString(dateFormat: "dd MMMM YYYY"), hour:cardd.timeStampECG!.toString(dateFormat: "HH : mm"), coreDataItem: cardd, catatan: cardd.notes!)
+                                                DetailJournal(journalData: calenderViewModel, ecg: cardd.avgBPM, date: cardd.timeStampECG!.toString(dateFormat: "dd MMMM YYYY"), hour:cardd.timeStampECG!.toString(dateFormat: "HH : mm"), coreDataItem: cardd)
                                             } label: {
                                                 Text("Edit")
                                             }

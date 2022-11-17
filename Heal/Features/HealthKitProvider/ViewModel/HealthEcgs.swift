@@ -116,6 +116,7 @@ class HKEcgs: ObservableObject {
                                                     [],
                                                     " ",
                                                     " ",
+                                                    " ",
                                                     self.xAxis,
                                                     self.yAxis)
                             self.avgBpms.append(ecgBPM)
