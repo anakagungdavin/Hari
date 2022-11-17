@@ -11,8 +11,9 @@ import CoreData
 struct CalenderView: View {
     @FetchRequest(entity: Ecg.entity(), sortDescriptors: [NSSortDescriptor(keyPath: \Ecg.avgBPM, ascending: true)])
     var BPMValues: FetchedResults<Ecg>
-    @State var dictionaryDate: [Date: [Double]] = [:]
-    @State var hour: [String] = []
+    @Environment(\.managedObjectContext) private var viewContext
+    @StateObject var calenderViewModel = DetailJournalViewModel()
+    @State var dictionaryDate: [Date: [Ecg]] = [:]
     func change() {
         //Date
         let dateFormatter = DateFormatter()
@@ -24,13 +25,13 @@ struct CalenderView: View {
             let dates = dateFormatter.string(from: BPMValues[i].timeStampECG ?? Date())
             let dated = dateFormatter.date(from: dates)
             var bpms = dictionaryDate[dated ?? Date()] ?? []
-            bpms.append(BPMValues[i].avgBPM)
+            bpms.append(BPMValues[i])
             dictionaryDate[dated ?? Date()] = bpms
             
         }
         
-        print(dictionaryDate)
-        print(BPMValues[0].timeStampECG)
+        //print(dictionaryDate)
+        //print(BPMValues[0].timeStampECG)
     }
 
     //initialisation variabel "currentDate" from "JournalView.swift"
@@ -145,7 +146,7 @@ struct CalenderView: View {
                                 HStack {
                                     VStack {
                                         //Mark: BPM Value
-                                        Text(String(cardd))
+                                        Text(String(cardd.avgBPM))
                                             .font(.custom("SFProRounded-Bold", size: 20).bold())
                                             .foregroundColor(Color("ColorText"))
                                         Text("BPM")
@@ -159,15 +160,14 @@ struct CalenderView: View {
                                     VStack{
                                         HStack {
                                             //Date Card Journal
-                                            Text(currentDate.toString(dateFormat: "dd MMMM YYYY"))
+                                            Text(cardd.timeStampECG!.toString(dateFormat: "dd MMM YYYY"))
                                                 .foregroundColor(Color("ColorText"))
-                                            //Text("08 : 34")
-                                             //   .foregroundColor(Color("ColorText"))
+                                            Text(cardd.timeStampECG!.toString(dateFormat: "HH : mm"))
+                                                .foregroundColor(Color("ColorText"))
                                             
                                             //Mark : Go To Detail View
-                                            //NavigationLink("edit", destination: DetailJournal())
                                             NavigationLink {
-                                                DetailJournal(ecg: cardd, date: currentDate.toString(dateFormat: "dd MMMM YYYY"))
+                                                DetailJournal(journalData: calenderViewModel, ecg: cardd.avgBPM, date: cardd.timeStampECG!.toString(dateFormat: "dd MMMM YYYY"), hour:cardd.timeStampECG!.toString(dateFormat: "HH : mm"), coreDataItem: cardd, catatan: cardd.notes!)
                                             } label: {
                                                 Text("Edit")
                                             }
@@ -177,15 +177,6 @@ struct CalenderView: View {
                                             Image("Img_ECG")
                                             Image("Img_Act")
                                         }
-                                        /*
-                                        Button {
-                                            print(BPMValues.count)
-                                            print(BPMValues[0].avgBPM)
-                                            print(dictionaryDate)
-                                        }label: {
-                                            Text("Testing")
-                                        }
-                                        */
                                     }
                                 }
                             //}

@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct DetailJournal: View {
+    @Environment(\.managedObjectContext) private var viewContext
+    @ObservedObject var journalData: DetailJournalViewModel
     @State var PDFurl: URL?
     @State var ShowShareSheet: Bool = false
     @State var isSesak: Bool = false
@@ -23,10 +25,12 @@ struct DetailJournal: View {
     @State var isTidak: Bool = false
     var ecg: Double
     var date: String
+    var hour: String
+    var coreDataItem : Ecg?
     @State var gejala: String = ""
     @State var aktivitas: String = ""
     @State var obat: String = ""
-    @State var catatan: String = ""
+    @State var catatan: String
     var body: some View {
         VStack {
             Group {
@@ -34,7 +38,7 @@ struct DetailJournal: View {
                     Image("IconECG") //ECG Image Icon
                     Text(date) //Date
                     Text("|")
-                    Text("10:35") // Date ECG
+                    Text(hour) // Date ECG
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .position(x:210, y:45)
@@ -191,7 +195,7 @@ struct DetailJournal: View {
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .position(x:220, y:25)
                 .foregroundColor(Color("ColorText"))
-            TextEditor(text: $catatan)
+            TextEditor(text: $journalData.catatanku)
                 //.focused($inFocus, equals: 1)
                 .scrollContentBackground(.hidden)
                 .scrollDismissesKeyboard(.automatic)
@@ -200,6 +204,10 @@ struct DetailJournal: View {
                 .overlay(RoundedRectangle(cornerRadius: 8)
                     .stroke(.blue).opacity(0.5))
                 .ignoresSafeArea(.keyboard, edges: .bottom)
+            
+            Button("Save") {
+                journalData.addItem(viewContext: viewContext)
+            }
             
             Button {
                 exportPDF {
