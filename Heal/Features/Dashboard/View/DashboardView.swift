@@ -3,7 +3,7 @@
 //  TesDashboard
 //
 //  Created by heri hermawan on 13/10/22.
-//
+//  swiftlint:disable identifier_name
 
 import SwiftUI
 import CoreData
@@ -146,8 +146,8 @@ struct DashboardView: View {
                                     HStack {
                                         ForEach(ecgToday){ i in
                                             NavigationLink(destination:
-                                                            DetailJournal(ecg:i.avgBPM, date: Date())
-//                                                           EmptyView()
+//                                                            DetailJournal(ecg:i.avgBPM, date: Date())
+                                                           EmptyView()
                                             ) {
                                                 VStack {
                                                     Image(i.activities == " " ? "bpm aman" : "bpm gak normal")
@@ -168,8 +168,8 @@ struct DashboardView: View {
                                             }
                                             
                                             NavigationLink(destination:
-                                                            DetailJournal(ecg:i.avgBPM, date: Date())
-//                                                           EmptyView()
+//                                                            DetailJournal(ecg:i.avgBPM, date: Date())
+                                                           EmptyView()
                                             ) {
                                                 VStack {
                                                     Image( "ecg kosong")
@@ -182,8 +182,8 @@ struct DashboardView: View {
                                             }
                                             
                                             NavigationLink(destination:
-                                                            DetailJournal(ecg:i.avgBPM, date: Date())
-//                                                           EmptyView()
+//                                                            DetailJournal(ecg:i.avgBPM, date: Date())
+                                                           EmptyView()
                                             ) {
                                                 VStack {
                                                     Image(i.activities == " " ? "aktivitas kosong" : "aktivitas aman")
