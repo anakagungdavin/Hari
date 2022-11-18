@@ -32,6 +32,32 @@ struct DetailJournal: View {
     @State var obat: String = ""
     var body: some View {
         VStack {
+            HStack(spacing: 70) {
+                Text("      ")
+                Text("Detail Journal")
+                    .font(.title2.bold())
+                    .foregroundColor(Color("ColorText"))
+                Button() {
+                    exportPDF {
+                        self
+                    } completion: { status, url in
+                        if let url = url,status{
+                            self.PDFurl = url
+                            self.ShowShareSheet.toggle()
+                        }
+                        else{
+                            print("failer to produce PDF")
+                        }
+                    }
+                    //journalData.addItem(viewContext: viewContext)
+                } label: {
+                    Image(systemName: "square.and.arrow.up")
+                        .foregroundColor(Color("ColorText"))
+                }
+                //.padding(.leading)
+                .frame(alignment: .topLeading)
+            }
+            
             Group {
                 HStack {
                     Image("IconECG") //ECG Image Icon
@@ -40,7 +66,7 @@ struct DetailJournal: View {
                     Text(hour) // Date ECG
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
-                .position(x:210, y:45)
+                .position(x:210, y:25)
                 //Mark : Card Add ECG
                 VStack {
                     HStack {
@@ -52,19 +78,18 @@ struct DetailJournal: View {
                             .foregroundColor(Color("ColorText"))
                     }
                     .frame(maxWidth: .infinity, alignment: .leading)
-                    .position(x:240, y:45)
+                    .position(x:200, y:25)
                                 
                     Image("ECGraph")
-                        .position(x:195, y:95)
+                        .position(x:175, y:45)
                     Text("Ritme Sinus")//Status ECG
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                        .position(x:240, y:125)
+                        //.frame(maxWidth: .infinity, alignment: .leading)
+                        .position(x:70, y:35)
                         .bold()
                         .foregroundColor(Color("ColorText"))
                 }
-                            
-                .background(Color("bgCard").cornerRadius(10).frame(width: 360, height: 200).position(x:195, y: 110))
-                             
+                .overlay(RoundedRectangle(cornerRadius: 8).stroke(Color("bgCard")).opacity(1.5)).frame(width: 360, height: 200).position(x:195, y: 100)
+                                                         
                             
                 Text("Gejala Yang Dirasakan")
                     .frame(maxWidth: .infinity, alignment: .leading)
@@ -124,11 +149,11 @@ struct DetailJournal: View {
                     }
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
-                .position(x:220, y:135)
+                .position(x:220, y:140)
 
                 Text("Activitas Yang Dilakukan")
                     .frame(maxWidth: .infinity, alignment: .leading)
-                    .position(x:220, y:120)
+                    .position(x:220, y:130)
                     .foregroundColor(Color("ColorText"))
 
                 HStack {
@@ -204,11 +229,11 @@ struct DetailJournal: View {
                     }
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
-                .position(x:220, y:95)
+                .position(x:220, y:110)
 
                 Text("Konsumsi Obat")
                     .frame(maxWidth: .infinity, alignment: .leading)
-                                .position(x:220, y:75)
+                                .position(x:220, y:95)
                                 .foregroundColor(Color("ColorText"))
 
                 HStack {
@@ -246,41 +271,28 @@ struct DetailJournal: View {
                     }
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
-                .position(x:220, y:45)
+                .position(x:220, y:75)
 
             }//Group
             Text("Catatan")
                 .frame(maxWidth: .infinity, alignment: .leading)
-                .position(x:220, y:25)
+                .position(x:220, y:55)
                 .foregroundColor(Color("ColorText"))
             TextEditor(text: $journalData.catatanku)
                 //.focused($inFocus, equals: 1)
                 .scrollContentBackground(.hidden)
                 .scrollDismissesKeyboard(.automatic)
-                .background(Color(UIColor(red: 0.623, green: 0.779, blue: 0.753, alpha: 1))).cornerRadius(6)
-                .frame(height: 100)
+                .background(.white)
+                .frame(width: 350, height: 50, alignment: .center)
                 .overlay(RoundedRectangle(cornerRadius: 8)
-                    .stroke(.blue).opacity(0.5))
+                    .stroke(Color("bgCard")).opacity(1.5))
                 .ignoresSafeArea(.keyboard, edges: .bottom)
             
-            Button("Save") {
-                journalData.addItem(viewContext: viewContext)
-            }
-            
             Button {
-                exportPDF {
-                    self
-                } completion: { status, url in
-                    if let url = url,status{
-                        self.PDFurl = url
-                        self.ShowShareSheet.toggle()
-                    }
-                    else{
-                        print("failer to produce PDF")
-                    }
-                }
+                journalData.addItem(viewContext: viewContext)
             } label: {
-                Text("Export PDF")
+                Text("Simpan")
+                    .foregroundColor(Color("ColorText"))
 
             }
 
