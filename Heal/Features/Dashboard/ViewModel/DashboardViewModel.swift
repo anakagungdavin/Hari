@@ -82,6 +82,17 @@ class DashboardViewModel: ObservableObject {
         return ecgTemp.count
     }
     
+    func getSymptomClass(ecg: FetchedResults<Ecg>) -> Int{
+        let dateTemp = getStartEndDate()
+        
+        let ecgTemp = ecg.filter { data in
+            data.timeStampECG! >= dateTemp.startDate! && data.timeStampECG! <= dateTemp.endDate! &&
+            data.symptomsClass != 1
+        }
+        
+        return ecgTemp.count
+    }
+    
     func getStartEndDate() -> (startDate: Date?, endDate: Date?){
         let selectedYear = Int(DateFormatter.displayYear.string(from: Calendar.current.date(byAdding: .day, value: 0, to: Date())!))
         let selectedMonth = Int(DateFormatter.displayMonthNumb.string(from: Calendar.current.date(byAdding: .day, value: 0, to: Date())!))

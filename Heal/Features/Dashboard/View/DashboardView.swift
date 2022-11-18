@@ -228,7 +228,7 @@ struct DashboardView: View {
                                                 .padding(.trailing, 32)
                                             
                                             VStack(alignment: .center){
-                                                Text("8")
+                                                Text("\(dashboardViewModel.getSymptomClass(ecg: allEcgData))")
                                                     .font(.custom("SFProRounded-Semibold", size: 20))
                                                     .foregroundColor(Color(hex: "B2444E"))
                                                     .frame(maxWidth: .infinity, alignment: .center)
