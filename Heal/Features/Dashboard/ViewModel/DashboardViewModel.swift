@@ -50,7 +50,39 @@ class DashboardViewModel: ObservableObject {
         activity = activityTemp
     }
     
-    func jurnalCountCompByMonth() -> (Int, Int) {
+    func getEcgThisMonth(ecg: FetchedResults<Ecg>) -> [Ecg] {
+        let dateTemp = getStartEndDate()
+        
+        let ecgTemp = ecg.filter { data in
+            data.timeStampECG! >= dateTemp.startDate! && data.timeStampECG! <= dateTemp.endDate!
+        }
+        
+        return ecgTemp
+    }
+    
+    func getJurnalCompleteCount(ecg: FetchedResults<Ecg>) -> Int{
+        let dateTemp = getStartEndDate()
+        
+        let ecgTemp = ecg.filter { data in
+            data.timeStampECG! >= dateTemp.startDate! && data.timeStampECG! <= dateTemp.endDate! &&
+            data.activities != " "
+        }
+        
+        return ecgTemp.count
+    }
+    
+    func getJurnalIncompleteCount(ecg: FetchedResults<Ecg>) -> Int{
+        let dateTemp = getStartEndDate()
+        
+        let ecgTemp = ecg.filter { data in
+            data.timeStampECG! >= dateTemp.startDate! && data.timeStampECG! <= dateTemp.endDate! &&
+            data.activities == " "
+        }
+        
+        return ecgTemp.count
+    }
+    
+    func getStartEndDate() -> (startDate: Date?, endDate: Date?){
         let selectedYear = Int(DateFormatter.displayYear.string(from: Calendar.current.date(byAdding: .day, value: 0, to: Date())!))
         let selectedMonth = Int(DateFormatter.displayMonthNumb.string(from: Calendar.current.date(byAdding: .day, value: 0, to: Date())!))
         
@@ -64,20 +96,6 @@ class DashboardViewModel: ObservableObject {
         components.day = -1
         let endDateOfMonth = Calendar.current.date(byAdding: components, to: startDateOfMonth!)
         
-        @FetchRequest(
-            sortDescriptors: [NSSortDescriptor(keyPath: \Ecg.timeStampECG, ascending: true)],
-            predicate: NSPredicate(format: "%K >= %@ && %K <= %@ && activities == %@", "timeStampECG", startDateOfMonth! as NSDate, "timeStampECG", endDateOfMonth! as NSDate, " "),
-            animation: .default)
-        var jurnalIncomplete: FetchedResults<Ecg>
-        
-        @FetchRequest(
-            sortDescriptors: [NSSortDescriptor(keyPath: \Ecg.timeStampECG, ascending: true)],
-            predicate: NSPredicate(format: "%K >= %@ && %K <= %@ && activities != %@", "timeStampECG", startDateOfMonth! as NSDate, "timeStampECG", endDateOfMonth! as NSDate, " "),
-            animation: .default)
-        var jurnalComplete: FetchedResults<Ecg>
-        
-        print("**************** \(jurnalComplete.count) \(jurnalIncomplete.count)")
-        
-        return (jurnalComplete.count, jurnalIncomplete.count)
+        return (startDateOfMonth, endDateOfMonth)
     }
 }
