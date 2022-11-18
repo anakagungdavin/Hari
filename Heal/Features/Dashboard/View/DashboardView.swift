@@ -86,7 +86,11 @@ struct DashboardView: View {
                         VStack{
                             Group{
                                 ZStack {
-                                    Image(ecgToday[0].activities == " " ? "box blom lengkap" : "box lengkap")
+                                    if !ecgToday.isEmpty {
+                                        Image(ecgToday[0].activities == " " ? "box blom lengkap" : "box lengkap")
+                                    } else {
+                                        Image("box blom lengkap")
+                                    }
                                     
                                     VStack{
                                         Text("Lengkapi Jurnalmu")
@@ -125,7 +129,7 @@ struct DashboardView: View {
                                                                EmptyView()
                                                 ) {
                                                     VStack {
-                                                        Image( "ecg kosong")
+                                                        Image("ecg kosong")
                                                         Text("N/A")
                                                             .foregroundColor(.white)
                                                             .font(.custom("SFProRounded-Semibold", size: 12))
@@ -380,7 +384,6 @@ struct DashboardView: View {
                         }
                     }//VSTack
                 }//ScrollView
-                
             } //geometry
             .edgesIgnoringSafeArea(.top)
             .background(Color(hex: "FFFFFF"))
