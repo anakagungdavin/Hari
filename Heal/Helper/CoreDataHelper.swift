@@ -27,7 +27,8 @@ class CoreHelper {
                     _ notes: String = "",
                     _ activities: String = "",
                     _ xAxis: [Double],
-                    _ yAxis: [Double], _ symptomClass: Int) {
+                    _ yAxis: [Double],
+                    _ symptomClass: Int) {
         withAnimation {
             let newItem = Ecg(context: viewContext)
             newItem.timeStampECG = resultDate

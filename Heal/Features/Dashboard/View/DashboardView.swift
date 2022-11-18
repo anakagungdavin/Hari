@@ -4,6 +4,7 @@
 //
 //  Created by heri hermawan on 13/10/22.
 //  swiftlint:disable identifier_name
+//  swiftlint:disable line_length
 
 import SwiftUI
 import CoreData
@@ -80,16 +81,16 @@ struct DashboardView: View {
                                     .foregroundColor(Color(hex: "B2444E"))
                                     .minimumScaleFactor(0.01)
                                     .lineLimit(1)
-                            } //vstack
+                            } // vstack
                             .padding(EdgeInsets(top: 20, leading: 125, bottom: 0, trailing: 30))
-                            
-                            HStack{
+
+                            HStack {
                                 ForEach(0..<4, id: \.self){ i in
-                                    ZStack{
+                                    ZStack {
                                         Image("card tanggal")
                                             .opacity(i == 0 ? 1 : 0)
-                                        
-                                        VStack{
+
+                                        VStack {
                                             Text(DateFormatter.displayDay.string(from: Calendar.current.date(byAdding: .day, value: i, to: Date())!))
                                                 .font(.custom("SFProRounded-Light", size: 20))
                                                 .foregroundColor(Color(hex: "B2444E"))
@@ -107,7 +108,7 @@ struct DashboardView: View {
                         VStack{
                             Group{
                                 ZStack {
-                                    Image(ecgToday[0].activities == " " ? "box blom lengkap" : "box lengkap")
+                                    Image(ecgToday.isEmpty ? "box blom lengkap" : "box lengkap")
                                     
                                     VStack{
                                         Text("Lengkapi Jurnalmu")
@@ -232,19 +233,20 @@ struct DashboardView: View {
                                                     .font(.custom("SFProRounded-Light", size: 12))
                                                     .foregroundColor(Color(hex: "B2444E"))
                                                     .frame(maxWidth: .infinity, alignment: .center)
-                                                ProgressView(value: CGFloat(dashboardViewModel.getJurnalCompleteCount(ecg: allEcgData)), total: CGFloat(dashboardViewModel.getJurnalIncompleteCount(ecg: allEcgData)))
+                                                ProgressView(value: CGFloat(dashboardViewModel.getJurnalCompleteCount(ecg: allEcgData)),
+                                                             total: CGFloat(dashboardViewModel.getJurnalIncompleteCount(ecg: allEcgData)))
                                                     .tint(Color(hex: "F27D87"))
                                                     .background(Color(hex: "FFCED2"))
                                                     .padding(EdgeInsets(top: 0, leading: 9, bottom: 0, trailing: 9))
                                                     .scaleEffect(x: 1, y: 1.5, anchor: .center)
                                             }.frame(width: 90, height: 76)
-                                                .overlay{
+                                                .overlay {
                                                     RoundedRectangle(cornerRadius: 5)
                                                         .stroke(Color(hex: "FFCED2"))
                                                 }
                                                 .padding(.trailing, 32)
                                             
-                                            VStack(alignment: .center){
+                                            VStack(alignment: .center) {
                                                 Text("8")
                                                     .font(.custom("SFProRounded-Semibold", size: 20))
                                                     .foregroundColor(Color(hex: "B2444E"))
@@ -262,31 +264,31 @@ struct DashboardView: View {
                                                     .foregroundColor(Color(hex: "B2444E"))
                                                     .frame(maxWidth: .infinity, alignment: .center)
                                             }.frame(width: 90, height: 76)
-                                                .overlay{
+                                                .overlay {
                                                     RoundedRectangle(cornerRadius: 5)
                                                         .stroke(Color(hex: "FFCED2"))
                                                 }
                                                 .padding(.trailing, 32)
-                                        } //VStack
-                                    } //HStack
+                                        } // VStack
+                                    } // HStack
                                 }
                                 .padding(.leading, 20)
                                 .padding(.trailing, 26)
                             }
                             //                        .padding(EdgeInsets(top: 17, leading: 28, bottom: 0, trailing: 26))
                             
-                            Group{
-                                VStack{
+                            Group {
+                                VStack {
                                     Text("Informasi Untukmu")
                                         .foregroundColor(Color(hex: "B2444E"))
                                         .font(.custom("SFProRounded-Regular", size: 22))
                                         .frame(maxWidth: .infinity, alignment: .leading)
                                         .padding(.leading, 28)
                                         .padding(.trailing, 26)
-                                    
-                                    Grid(horizontalSpacing: 80){
+
+                                    Grid(horizontalSpacing: 80) {
                                         GridRow{
-                                            VStack(alignment: .center){
+                                            VStack(alignment: .center) {
                                                 Image("jenis aritmia ilus")
                                                 Text("Jenis")
                                                     .font(.custom("SFProRounded-Semibold", size: 10))
@@ -298,7 +300,7 @@ struct DashboardView: View {
 //                                                    .frame(maxWidth: .infinity, alignment: .center)
                                             }
 
-                                            VStack(alignment: .center){
+                                            VStack(alignment: .center) {
                                                 Image("jenis aritmia ilus")
                                                 Text("Jenis")
                                                     .font(.custom("SFProRounded-Semibold", size: 10))
@@ -309,7 +311,7 @@ struct DashboardView: View {
                                                     .foregroundColor(Color(hex: "B2444E"))
 //                                                    .frame(maxWidth: .infinity, alignment: .center)
                                             }
-                                    
+
                                             VStack(alignment: .center){
                                                 Image("jenis aritmia ilus")
                                                 Text("Jenis")
