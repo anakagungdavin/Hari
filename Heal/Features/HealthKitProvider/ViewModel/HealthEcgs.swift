@@ -135,6 +135,7 @@ class HKEcgs: ObservableObject {
                                                         self.xAxis,
                                                         self.yAxis,
                                                         ecgClass)
+                                print("INI TES ECG CLASS \(ecgClass)")
                                 self.avgBpms.append(ecgBPM)
                                 counter += 1
                                 print("************ \(ecgBPM)")

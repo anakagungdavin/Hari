@@ -10,23 +10,26 @@ import SwiftUI
 struct PreAlertTest: View {
     @EnvironmentObject var authProc: HKAuthorize
     @ObservedObject var notification: NotificationHelper
-
     var body: some View {
-        ZStack {
-            LinearGradient(colors: [.white, Color(hex: "E37777")], startPoint: .top, endPoint: .bottom)
-                .ignoresSafeArea()
-            CardBigNew().environmentObject(authProc)
-            VStack {
-                HStack {
-                    Image("Group 35")
-                        .resizable()
-                        .frame(width: 120, height: 120)
+        if UserDefaults.standard.object(forKey: "defaultsView") as? Int == 1 {
+            MainContainer(heartRate: HKHeartRate())
+        } else {
+            ZStack {
+                LinearGradient(colors: [.white, Color(hex: "E37777")], startPoint: .top, endPoint: .bottom)
+                    .ignoresSafeArea()
+                CardBigNew().environmentObject(authProc)
+                VStack {
+                    HStack {
+                        Image("Group 35")
+                            .resizable()
+                            .frame(width: 120, height: 120)
+                    }
+                    Spacer()
                 }
-                Spacer()
+                .offset(CGSize(width: 100, height: 60))
+            }.onAppear(){
+                notification.notifPermission()
             }
-            .offset(CGSize(width: 100, height: 60))
-        }.onAppear(){
-            NotificationHelper().notifPermission()
         }
     }
 }
@@ -34,6 +37,8 @@ struct PreAlertTest: View {
 struct CardBigNew: View {
     @EnvironmentObject var authProc: HKAuthorize
     @Environment(\.managedObjectContext) var viewContext
+    @State var isShowed = false
+    var defaultsView = UserDefaults.standard
 
     //    init() {
     //        authProc = HKAuthorize()
@@ -89,6 +94,9 @@ struct CardBigNew: View {
                     authProc.authorizeHealthKit(viewContext: viewContext, completion: { success, error in
                         if !success {
                             print("The error \(String(describing: error))")
+                        } else {
+                            isShowed.toggle()
+                            defaultsView.set(1, forKey: "defaultsView")
                         }
                     })
                 }, label: {
@@ -100,7 +108,11 @@ struct CardBigNew: View {
                         .background(Color(red: 255/255, green: 240/255, blue: 217/255))
                         .custCornerRadius(10, corners: .allCorners)
                     //                    .padding()
-            })
+                })
+                .fullScreenCover(isPresented: $isShowed, content: {
+                    MainContainer(heartRate: HKHeartRate())
+//                    DashboardView()
+                })
                 .multilineTextAlignment(.center)
                     .frame(maxWidth: .infinity)
                 Spacer(minLength: 50)
