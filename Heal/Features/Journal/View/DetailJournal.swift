@@ -30,6 +30,7 @@ struct DetailJournal: View {
     @State var gejala: [String] = []
     @State var aktivitas: String = ""
     @State var obat: String = ""
+    
     var body: some View {
         VStack {
             HStack(spacing: 70) {
@@ -90,13 +91,12 @@ struct DetailJournal: View {
                 }
                 .overlay(RoundedRectangle(cornerRadius: 8).stroke(Color("bgCard")).opacity(1.5)).frame(width: 360, height: 200).position(x:195, y: 100)
                                                          
-                            
                 Text("Gejala Yang Dirasakan")
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .position(x:220, y:160)
                     .foregroundColor(Color("ColorText"))
-                            
-
+                
+                
                 //Symptoms
                 HStack {
                     Button(action: {
@@ -150,12 +150,12 @@ struct DetailJournal: View {
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .position(x:220, y:140)
-
+                
                 Text("Activitas Yang Dilakukan")
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .position(x:220, y:130)
                     .foregroundColor(Color("ColorText"))
-
+                
                 HStack {
                     Button(action: {
                         if (self.isMakan==false && self.isTidur==false && self.isKerja==false && isLainnya==false) {
@@ -235,7 +235,6 @@ struct DetailJournal: View {
                     .frame(maxWidth: .infinity, alignment: .leading)
                                 .position(x:220, y:95)
                                 .foregroundColor(Color("ColorText"))
-
                 HStack {
                     Button(action: {
                         if self.isTidak==false {
@@ -272,8 +271,9 @@ struct DetailJournal: View {
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .position(x:220, y:75)
-
-            }//Group
+            }
+            // Group
+            
             Text("Catatan")
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .position(x:220, y:55)
@@ -293,15 +293,14 @@ struct DetailJournal: View {
             } label: {
                 Text("Simpan")
                     .foregroundColor(Color("ColorText"))
-
             }
-
+            
         }//Batas Vstack
         .onAppear() {
             journalData.editItem(item: coreDataItem)
         }
         
-        .sheet(isPresented: $ShowShareSheet){
+        .sheet(isPresented: $showShareSheet){
             PDFurl = nil
         } content: {
             if let PDFurl = PDFurl {
@@ -309,12 +308,12 @@ struct DetailJournal: View {
             }
             
         }
-         
-
-                    
+        
+        
+        
         
     }//batas scroll view
-        
+    
     
 }
 

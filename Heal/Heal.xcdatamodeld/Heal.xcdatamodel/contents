@@ -7,6 +7,7 @@
         <attribute name="notes" optional="YES" attributeType="String" defaultValueString=""/>
         <attribute name="obat" optional="YES" attributeType="String"/>
         <attribute name="symptoms" optional="YES" attributeType="Transformable" defaultValueString="" customClassName="[String]"/>
+        <attribute name="symptomsClass" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="timeStampECG" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="xAxis" optional="YES" attributeType="Transformable" customClassName="[Double]"/>
         <attribute name="yAxis" optional="YES" attributeType="Transformable" customClassName="[Double]"/>
@@ -19,6 +20,7 @@
     </entity>
     <entity name="Profile" representedClassName="Profile" syncable="YES" codeGenerationType="class">
         <attribute name="age" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="commorbit" optional="YES" attributeType="String"/>
         <attribute name="doBirth" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="height" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="name" optional="YES" attributeType="String"/>

@@ -52,7 +52,7 @@ struct OnboardingView: View {
             
             if currentView == 5 {
 //                Home()
-                PreAlertView(notification: notification)
+                PreAlertTest(notification: NotificationHelper())
                     .environmentObject(authorizer)
             }
         }

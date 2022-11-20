@@ -22,7 +22,7 @@ struct CustomTabBar: View {
 
         }
         .padding()
-        .background(Color.white)
+        .background(Color(hex: "F27D87"))
         .custCornerRadius(40, corners: .allCorners)
 //        .cornerRadius(40)
         .padding(.horizontal)
@@ -55,7 +55,7 @@ struct TabBarButton: View {
 
                 Image(systemName: image)
                     .font(.system(size: 25, weight: .semibold))
-                    .foregroundColor(selectedTab == image ? .green : .gray)
+                    .foregroundColor(selectedTab == image ? .white : Color(hex: "FFCED2"))
                     .offset(y: selectedTab == image ? -5 : 0)
             })
             // Max frame..

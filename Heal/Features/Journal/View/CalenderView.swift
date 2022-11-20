@@ -3,7 +3,7 @@
 //  Journal_Sympta
 //
 //  Created by Nur Mutmainnah Rahim on 11/10/22.
-//
+//  
 
 import SwiftUI
 import CoreData
@@ -104,7 +104,7 @@ struct CalenderView: View {
                 LazyVGrid(columns: columns,spacing: 15) {
                     //Mark: UI if Clicked Date
                     ForEach(extractDate()){value in
-                        CardView(value: value)
+                        cardView(value: value)
                             .background(
                                 Capsule()
                                     .fill(Color("bgCard"))
@@ -112,7 +112,7 @@ struct CalenderView: View {
                                     .opacity(isSameDay(date1: value.date, date2: currentDate) ? 1 : 0)
                                 
                             )
-            
+                        
                             .onTapGesture {
                                 currentDate = value.date
                             }
@@ -191,7 +191,7 @@ struct CalenderView: View {
                     }
                     
                 }
-
+                
             }
             
         }
@@ -205,10 +205,9 @@ struct CalenderView: View {
                 change()
             }
         }
- 
     }
     @ViewBuilder
-    func CardView(value: DateValue)-> some View{
+    func cardView(value: DateValue)-> some View{
         VStack {
             if value.day != -1{
                 //mark kalau ada card
@@ -231,7 +230,7 @@ struct CalenderView: View {
                         .frame(maxWidth: .infinity)
                 }
                 
-
+                
                 
             }
         }
@@ -285,8 +284,8 @@ struct CalenderView: View {
         }
         return days
     }
-
-     
+    
+    
     
 }
 

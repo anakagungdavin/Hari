@@ -11,7 +11,7 @@ import SwiftUI
 
 class HealthSymptoms {
 
-    var healthStore = HKHealthStore()
+//    var healthStore = HKHealthStore()
 
     func writeSymptoms(symptoms: [String], now: Date, completion: @escaping(Bool, Error?) -> Void) {
 
@@ -40,7 +40,7 @@ class HealthSymptoms {
 
             let value: HKCategoryValueSeverity = .moderate
             let symptomsSample = HKCategorySample(type: listSymptom, value: value.rawValue, start: now, end: now)
-            self.healthStore.save(symptomsSample) { success, error in
+            HKAuthorize().healthStore?.save(symptomsSample) { success, error in
                 if error != nil {
                     print("Error while saving")
                 }

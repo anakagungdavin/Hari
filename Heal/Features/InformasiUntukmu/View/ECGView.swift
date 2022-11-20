@@ -3,7 +3,7 @@
 //  Heal
 //
 //  Created by Joshia Felim Efraim on 11/11/22.
-//
+//  swiftlint:disable line_length
 
 import SwiftUI
 

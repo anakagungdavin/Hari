@@ -16,12 +16,11 @@ struct HealApp: App {
 
     var body: some Scene {
         WindowGroup {
- 
-            //DashboardView()
-            //ContentView()
-           JournalView()
-            //PreAlertView(notification: notification)
-
+        
+//            PreAlertView(notification: notification)
+//            PreAlertTest()
+//            MainContainer(heartRate: HKHeartRate())
+            OnboardingView()
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
                 .environmentObject(authorizer)
         }
