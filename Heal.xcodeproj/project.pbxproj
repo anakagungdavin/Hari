@@ -32,6 +32,7 @@
 		30F91E3C28E2B5AC008F2C99 /* HealUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30F91E3B28E2B5AC008F2C99 /* HealUITestsLaunchTests.swift */; };
 		30FE0F4A290A4B3400AD1AAE /* HealthSymptoms.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30FE0F49290A4B3400AD1AAE /* HealthSymptoms.swift */; };
 		30FE0F4E290F830C00AD1AAE /* ProfilePageNew.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30FE0F4D290F830C00AD1AAE /* ProfilePageNew.swift */; };
+		444A98272922C17F00DC8331 /* DetailJournalViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444A98262922C17F00DC8331 /* DetailJournalViewModel.swift */; };
 		44CAC9352918E95F00FE0D8C /* DetailJournal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44CAC9322918E95F00FE0D8C /* DetailJournal.swift */; };
 		44CAC9362918E95F00FE0D8C /* JournalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44CAC9332918E95F00FE0D8C /* JournalView.swift */; };
 		44CAC9372918E95F00FE0D8C /* CalenderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44CAC9342918E95F00FE0D8C /* CalenderView.swift */; };
@@ -93,6 +94,7 @@
 		30F91E3B28E2B5AC008F2C99 /* HealUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		30FE0F49290A4B3400AD1AAE /* HealthSymptoms.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthSymptoms.swift; sourceTree = "<group>"; };
 		30FE0F4D290F830C00AD1AAE /* ProfilePageNew.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePageNew.swift; sourceTree = "<group>"; };
+		444A98262922C17F00DC8331 /* DetailJournalViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailJournalViewModel.swift; sourceTree = "<group>"; };
 		44CAC9322918E95F00FE0D8C /* DetailJournal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailJournal.swift; sourceTree = "<group>"; };
 		44CAC9332918E95F00FE0D8C /* JournalView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JournalView.swift; sourceTree = "<group>"; };
 		44CAC9342918E95F00FE0D8C /* CalenderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalenderView.swift; sourceTree = "<group>"; };
@@ -368,6 +370,7 @@
 		4465826C291198CF00877839 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				444A98262922C17F00DC8331 /* DetailJournalViewModel.swift */,
 				44CAC93B2918E97F00FE0D8C /* DateValue.swift */,
 				44CAC93A2918E97F00FE0D8C /* EKGCardTest.swift */,
 				44CAC9382918E97400FE0D8C /* Extension.swift */,
@@ -580,6 +583,7 @@
 				30E963092902549600A29E29 /* CustomUI.swift in Sources */,
 				D8223A58291E5D5F00D9FF40 /* RitmeJantungView.swift in Sources */,
 				30E962FC28FAA64C00A29E29 /* CustomTabBar.swift in Sources */,
+				444A98272922C17F00DC8331 /* DetailJournalViewModel.swift in Sources */,
 				30F91E1C28E2B5A7008F2C99 /* ContentView.swift in Sources */,
 				D8223A5C291E5D7B00D9FF40 /* AritmiaView.swift in Sources */,
 				44CAC93C2918E97F00FE0D8C /* EKGCardTest.swift in Sources */,

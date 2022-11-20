@@ -13,6 +13,7 @@ import Charts
 struct DashboardView: View {
     @Environment(\.managedObjectContext) private var viewContext
     @StateObject var dashboardViewModel = DashboardViewModel()
+    @StateObject var calenderViewModel = DetailJournalViewModel()
     @State var isPresented = false
     
     @FetchRequest(

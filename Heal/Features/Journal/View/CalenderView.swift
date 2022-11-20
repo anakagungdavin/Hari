@@ -6,8 +6,34 @@
 //  
 
 import SwiftUI
+import CoreData
 //show UI Calender
 struct CalenderView: View {
+    @FetchRequest(entity: Ecg.entity(), sortDescriptors: [NSSortDescriptor(keyPath: \Ecg.avgBPM, ascending: true)])
+    var BPMValues: FetchedResults<Ecg>
+    @Environment(\.managedObjectContext) private var viewContext
+    @StateObject var calenderViewModel = DetailJournalViewModel()
+    @State var dictionaryDate: [Date: [Ecg]] = [:]
+    func change() {
+        //Date
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "YYY-MM-dd"
+        dateFormatter.locale = Locale(identifier: "en_US_POSIX")
+        dateFormatter.timeZone = TimeZone(identifier: "UTC")!
+        
+        for i in 0..<BPMValues.count {
+            let dates = dateFormatter.string(from: BPMValues[i].timeStampECG ?? Date())
+            let dated = dateFormatter.date(from: dates)
+            var bpms = dictionaryDate[dated ?? Date()] ?? []
+            bpms.append(BPMValues[i])
+            dictionaryDate[dated ?? Date()] = bpms
+            
+        }
+        
+        //print(dictionaryDate)
+        //print(BPMValues[0].timeStampECG)
+    }
+
     //initialisation variabel "currentDate" from "JournalView.swift"
     @Binding var currentDate: Date
     
@@ -113,43 +139,48 @@ struct CalenderView: View {
             HStack {
                 VStack {
                     //Mark : Card Journal
-                    if let card = cards.first(where: { card in
-                        return isSameDay(date1: card.cardDate, date2: currentDate)
+                    if let card = dictionaryDate.first(where: { card in
+                        return isSameDay(date1: card.key, date2: currentDate)
                     }){
-                        ForEach(card.cardList){ card in
-                            HStack {
-                                VStack {
-                                    //Mark: BPM Value
-                                    Text(card.BPM)
-                                        .font(.custom("SFProRounded-Bold", size: 20).bold())
-                                        .foregroundColor(Color("ColorText"))
-                                    Text("BPM")
-                                        .font(.custom("SFProRounded-Bold", size: 10).bold())
-                                        .foregroundColor(Color("ColorText"))
-                                }
-                                .frame(width: 70, height: 54)
-                                .background(.white).cornerRadius(10)
-                                .padding(.leading, 15)
-                                
-                                VStack{
-                                    HStack {
-                                        //Date Card Journal
-                                        Text("16 Oktober 2022")
+                        ForEach(card.value, id: \.self){ cardd in
+                                HStack {
+                                    VStack {
+                                        //Mark: BPM Value
+                                        Text(String(cardd.avgBPM))
+                                            .font(.custom("SFProRounded-Bold", size: 20).bold())
                                             .foregroundColor(Color("ColorText"))
-                                        Text("08 : 34")
+                                        Text("BPM")
+                                            .font(.custom("SFProRounded-Bold", size: 10).bold())
                                             .foregroundColor(Color("ColorText"))
-                                        
-                                        //Mark : Go To Detail View
-                                        NavigationLink("edit", destination: DetailJournal())
                                     }
-                                    HStack {
-                                        Image("Img_BPM")
-                                        Image("Img_ECG")
-                                        Image("Img_Act")
+                                    .frame(width: 70, height: 54)
+                                    .background(.white).cornerRadius(10)
+                                    .padding(.leading, 15)
+                                    
+                                    VStack{
+                                        HStack {
+                                            //Date Card Journal
+                                            Text(cardd.timeStampECG!.toString(dateFormat: "dd MMM YYYY"))
+                                                .foregroundColor(Color("ColorText"))
+                                            Text(cardd.timeStampECG!.toString(dateFormat: "HH : mm"))
+                                                .foregroundColor(Color("ColorText"))
+                                            
+                                            //Mark : Go To Detail View
+                                            NavigationLink {
+                                                DetailJournal(journalData: calenderViewModel, ecg: cardd.avgBPM, date: cardd.timeStampECG!.toString(dateFormat: "dd MMMM YYYY"), hour:cardd.timeStampECG!.toString(dateFormat: "HH : mm"), coreDataItem: cardd)
+                                            } label: {
+                                                Text("Edit")
+                                            }
+                                        }
+                                        HStack {
+                                            Image("Img_BPM")
+                                            Image("Img_ECG")
+                                            Image("Img_Act")
+                                        }
                                     }
                                 }
-                            }
-                        }
+                            //}
+                        }//batas foreach
                         .frame(width: 328, height: 80)
                         .background(Color("bgCard")).cornerRadius(10)
                         //.background(Color(UIColor(red: 846, green: 0.677, blue: 0.769, alpha: 1))).cornerRadius(10)
@@ -169,23 +200,27 @@ struct CalenderView: View {
             currentDate = getCurrentMonth()
             
         }
-        
+        .onAppear() {
+            if dictionaryDate == [:] {
+                change()
+            }
+        }
     }
     @ViewBuilder
     func cardView(value: DateValue)-> some View{
         VStack {
             if value.day != -1{
                 //mark kalau ada card
-                if let card = cards.first(where: { card in
-                    return isSameDay(date1: card.cardDate, date2: value.date)
+                if let card = dictionaryDate.first(where: { card in
+                    return isSameDay(date1: card.key, date2: value.date)
                 }){
                     Text("\(value.day)")
-                        .foregroundColor(isSameDay(date1: card.cardDate, date2: currentDate) ? .white: .primary)
+                        .foregroundColor(isSameDay(date1: card.key, date2: currentDate) ? .white: .primary)
                         .frame(maxWidth: .infinity)
                     
                     
                     Circle()
-                        .fill(isSameDay(date1: card.cardDate, date2: currentDate) ? .white: .blue)
+                        .fill(isSameDay(date1: card.key, date2: currentDate) ? .white: .blue)
                         .frame(width: 5, height: 5)
                 }
                 else {
@@ -256,7 +291,7 @@ struct CalenderView: View {
 
 struct CalenderView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        JournalView()
     }
 }
 
@@ -276,6 +311,12 @@ extension Date{
             
             return calendar.date(byAdding: .day, value: day - 1, to:startDate)!
         }
+    }
+    
+    func toString( dateFormat format  : String ) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = format
+        return dateFormatter.string(from: self)
     }
 }
 
