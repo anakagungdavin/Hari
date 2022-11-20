@@ -13,6 +13,7 @@ struct DashboardView: View {
     @Environment(\.managedObjectContext) private var viewContext
     @StateObject var dashboardViewModel = DashboardViewModel()
     @State var isPresented = false
+    @StateObject var calenderViewModel = DetailJournalViewModel()
     
     @FetchRequest(
         sortDescriptors: [NSSortDescriptor(keyPath: \Ecg.timeStampECG, ascending: true)],
@@ -105,9 +106,7 @@ struct DashboardView: View {
                                         
                                         HStack {
                                             ForEach(ecgToday){ i in
-                                                NavigationLink(destination:
-                                                                //                                                            DetailJournal(ecg:i.avgBPM, date: Date())
-                                                               EmptyView()
+                                                NavigationLink(destination: DetailJournal(journalData: calenderViewModel, ecg:i.avgBPM, date: Date().toString(dateFormat: "dd MMMM YYYY"), hour: Date().toString(dateFormat: "HH : mm"))
                                                 ) {
                                                     VStack {
                                                         Image(i.activities == " " ? "bpm aman" : "bpm gak normal")
@@ -127,9 +126,7 @@ struct DashboardView: View {
                                                     .padding(.leading, 100)
                                                 }
                                                 
-                                                NavigationLink(destination:
-                                                                //                                                            DetailJournal(ecg:i.avgBPM, date: Date())
-                                                               EmptyView()
+                                                NavigationLink(destination: DetailJournal(journalData: calenderViewModel, ecg:i.avgBPM, date: Date().toString(dateFormat: "dd MMMM YYYY"), hour: Date().toString(dateFormat: "HH : mm"))
                                                 ) {
                                                     VStack {
                                                         Image("ecg kosong")
@@ -141,9 +138,7 @@ struct DashboardView: View {
                                                     }.padding(.leading, 40)
                                                 }
                                                 
-                                                NavigationLink(destination:
-                                                                //                                                            DetailJournal(ecg:i.avgBPM, date: Date())
-                                                               EmptyView()
+                                                NavigationLink(destination: DetailJournal(journalData: calenderViewModel, ecg:i.avgBPM, date: Date().toString(dateFormat: "dd MMMM YYYY"), hour: Date().toString(dateFormat: "HH : mm"))
                                                 ) {
                                                     VStack {
                                                         Image(i.activities == " " ? "aktivitas kosong" : "aktivitas aman")
