@@ -15,6 +15,7 @@ struct DashboardView: View {
     @StateObject var dashboardViewModel = DashboardViewModel()
     @StateObject var calenderViewModel = DetailJournalViewModel()
     @State var isPresented = false
+    @StateObject var calenderViewModel = DetailJournalViewModel()
     
     @FetchRequest(
         sortDescriptors: [NSSortDescriptor(keyPath: \Ecg.timeStampECG, ascending: true)],
@@ -49,7 +50,8 @@ struct DashboardView: View {
                             
                             Image("maskot dashboard")
                                 .frame(maxWidth: .infinity, alignment: Alignment(horizontal: .leading, vertical: .bottom))
-                                .padding(EdgeInsets(top: 79, leading: -39, bottom: 0, trailing: 0))
+                                .padding(.leading, -39)
+                                .padding(.top, 79)
                             
                             VStack(alignment: .leading){
                                 Text("Halo!")
@@ -61,10 +63,11 @@ struct DashboardView: View {
                                     .foregroundColor(Color(hex: "B2444E"))
                                     .minimumScaleFactor(0.01)
                                     .lineLimit(1)
-                            } // vstack
-                            .padding(EdgeInsets(top: 20, leading: 125, bottom: 0, trailing: 30))
-
-                            HStack {
+                            } //vstack
+                            .padding(.top, 20)
+                            .padding(.leading, 125)
+                            
+                            HStack{
                                 ForEach(0..<4, id: \.self){ i in
                                     ZStack {
                                         Image("card tanggal")
@@ -81,7 +84,8 @@ struct DashboardView: View {
                                     }
                                 }
                             }
-                            .padding(EdgeInsets(top: 190, leading: 110, bottom: 0, trailing: 20))
+                            .padding(.top, 190)
+                            .padding(.leading, 110)
                         } //ZStack
                         .edgesIgnoringSafeArea(.top)
                         
@@ -104,9 +108,7 @@ struct DashboardView: View {
                                         
                                         HStack {
                                             ForEach(ecgToday){ i in
-                                                NavigationLink(destination:
-                                                                //                                                            DetailJournal(ecg:i.avgBPM, date: Date())
-                                                               EmptyView()
+                                                NavigationLink(destination: DetailJournal(journalData: calenderViewModel, ecg:i.avgBPM, date: Date().toString(dateFormat: "dd MMMM YYYY"), hour: Date().toString(dateFormat: "HH : mm"))
                                                 ) {
                                                     VStack {
                                                         Image(i.activities == " " ? "bpm aman" : "bpm gak normal")
@@ -126,9 +128,7 @@ struct DashboardView: View {
                                                     .padding(.leading, 100)
                                                 }
                                                 
-                                                NavigationLink(destination:
-                                                                //                                                            DetailJournal(ecg:i.avgBPM, date: Date())
-                                                               EmptyView()
+                                                NavigationLink(destination: DetailJournal(journalData: calenderViewModel, ecg:i.avgBPM, date: Date().toString(dateFormat: "dd MMMM YYYY"), hour: Date().toString(dateFormat: "HH : mm"))
                                                 ) {
                                                     VStack {
                                                         Image("ecg kosong")
@@ -140,9 +140,7 @@ struct DashboardView: View {
                                                     }.padding(.leading, 40)
                                                 }
                                                 
-                                                NavigationLink(destination:
-                                                                //                                                            DetailJournal(ecg:i.avgBPM, date: Date())
-                                                               EmptyView()
+                                                NavigationLink(destination: DetailJournal(journalData: calenderViewModel, ecg:i.avgBPM, date: Date().toString(dateFormat: "dd MMMM YYYY"), hour: Date().toString(dateFormat: "HH : mm"))
                                                 ) {
                                                     VStack {
                                                         Image(i.activities == " " ? "aktivitas kosong" : "aktivitas aman")
@@ -161,6 +159,7 @@ struct DashboardView: View {
                                     } //VStack
                                     .frame(width: 330, height: 130)
                                 } //Zstack
+                                .padding(.top, 33)
                             }
                             
                             Group{
@@ -221,7 +220,8 @@ struct DashboardView: View {
                                                              total: CGFloat(dashboardViewModel.getJurnalIncompleteCount(ecg: allEcgData)))
                                                     .tint(Color(hex: "F27D87"))
                                                     .background(Color(hex: "FFCED2"))
-                                                    .padding(EdgeInsets(top: 0, leading: 9, bottom: 0, trailing: 9))
+                                                    .padding(.leading, 9)
+                                                    .padding(.trailing, 9)
                                                     .scaleEffect(x: 1, y: 1.5, anchor: .center)
                                             }.frame(width: 90, height: 76)
                                                 .overlay {
@@ -257,9 +257,8 @@ struct DashboardView: View {
                                     } // HStack
                                 }
                                 .padding(.leading, 20)
-//                                .padding(.trailing, 26)
+                                .padding(.top, 17)
                             }
-                            //                        .padding(EdgeInsets(top: 17, leading: 28, bottom: 0, trailing: 26))
                             
                             Group {
                                 VStack {
@@ -279,11 +278,13 @@ struct DashboardView: View {
                                                     Text("Jenis")
                                                         .font(.custom("SFProRounded-Semibold", size: 20))
                                                         .foregroundColor(Color(hex: "B2444E"))
-                                                    //                                                    .frame(maxWidth: .infinity, alignment: .center)
+                                                        .frame(maxWidth: .infinity, alignment: .leading)
+                                                        .padding(.leading, 10)
                                                     Text("Aritmia")
                                                         .font(.custom("SFProRounded-Semibold", size: 20))
                                                         .foregroundColor(Color(hex: "B2444E"))
-                                                    //                                                    .frame(maxWidth: .infinity, alignment: .center)
+                                                        .frame(maxWidth: .infinity, alignment: .leading)
+                                                        .padding(.leading, 10)
                                                 }
                                                 .frame(width: 100, height: 100)
                                                 .overlay{
@@ -294,15 +295,17 @@ struct DashboardView: View {
 
                                             NavigationLink(destination: AritmiaView()){
                                                 VStack(alignment: .center){
-                                                    Image("jenis aritmia ilus")
-                                                    Text("Jenis")
+                                                    Image("apa itu aritmia ilus")
+                                                    Text("Apa itu")
                                                         .font(.custom("SFProRounded-Semibold", size: 20))
                                                         .foregroundColor(Color(hex: "B2444E"))
-                                                    //                                                    .frame(maxWidth: .infinity, alignment: .center)
+                                                        .frame(maxWidth: .infinity, alignment: .leading)
+                                                        .padding(.leading, 10)
                                                     Text("Aritmia")
                                                         .font(.custom("SFProRounded-Semibold", size: 20))
                                                         .foregroundColor(Color(hex: "B2444E"))
-                                                    //                                                    .frame(maxWidth: .infinity, alignment: .center)
+                                                        .frame(maxWidth: .infinity, alignment: .leading)
+                                                        .padding(.leading, 10)
                                                 }
                                                 .frame(width: 100, height: 100)
                                                 .overlay{
@@ -313,15 +316,17 @@ struct DashboardView: View {
                                     
                                             NavigationLink(destination: ECGView()){
                                                 VStack(alignment: .center){
-                                                    Image("jenis aritmia ilus")
-                                                    Text("Jenis")
+                                                    Image("apa itu EKG ilus")
+                                                    Text("Apa itu")
                                                         .font(.custom("SFProRounded-Semibold", size: 20))
                                                         .foregroundColor(Color(hex: "B2444E"))
-                                                    //                                                    .frame(maxWidth: .infinity, alignment: .center)
-                                                    Text("Aritmia")
+                                                        .frame(maxWidth: .infinity, alignment: .leading)
+                                                        .padding(.leading, 10)
+                                                    Text("EKG ?")
                                                         .font(.custom("SFProRounded-Semibold", size: 20))
                                                         .foregroundColor(Color(hex: "B2444E"))
-                                                    //                                                    .frame(maxWidth: .infinity, alignment: .center)
+                                                        .frame(maxWidth: .infinity, alignment: .leading)
+                                                        .padding(.leading, 10)
                                                 }
                                                 .frame(width: 100, height: 100)
                                                 .overlay{
@@ -331,60 +336,9 @@ struct DashboardView: View {
                                             }
                                         } //GridRow
                                     } //Grid
-                                    
-//                                    HStack(alignment: .center) {
-//                                        NavigationLink(destination: RitmeJantungView()){
-////                                            .frame(width: 100, height: 100)
-////                                                .overlay{
-////                                                    RoundedRectangle(cornerRadius: 5)
-////                                                        .stroke(Color(hex: "FFCED2"))
-////                                                }
-////                                                .padding(.trailing, 18)
-//                                        }
-//
-//                                        NavigationLink(destination: AritmiaView()){
-//                                            VStack(alignment: .center){
-//                                                Image("apa itu aritmia ilus")
-//                                                Text("Apa itu")
-//                                                    .font(.custom("SFProRounded-Semibold", size: 20))
-//                                                    .foregroundColor(Color(hex: "B2444E"))
-//                                                    .frame(maxWidth: .infinity, alignment: .center)
-//                                                Text("Aritmia?")
-//                                                    .font(.custom("SFProRounded-Semibold", size: 20))
-//                                                    .foregroundColor(Color(hex: "B2444E"))
-//                                                    .frame(maxWidth: .infinity, alignment: .center)
-//                                            }.frame(width: 100, height: 100)
-//                                                .overlay{
-//                                                    RoundedRectangle(cornerRadius: 5)
-//                                                        .stroke(Color(hex: "FFCED2"))
-//                                                }
-//                                                .padding(.trailing, 18)
-//                                        }
-//
-//                                        NavigationLink(destination: ECGView()){
-//                                            VStack(alignment: .center){
-//                                                Image("apa itu EKG ilus")
-//                                                Text("Apa itu")
-//                                                    .font(.custom("SFProRounded-Semibold", size: 20))
-//                                                    .foregroundColor(Color(hex: "B2444E"))
-//                                                    .frame(maxWidth: .infinity, alignment: .center)
-//                                                Text("EKG ?")
-//                                                    .font(.custom("SFProRounded-Semibold", size: 20))
-//                                                    .foregroundColor(Color(hex: "B2444E"))
-//                                                    .frame(maxWidth: .infinity, alignment: .center)
-//                                            }.frame(width: 100, height: 100)
-//                                                .overlay{
-//                                                    RoundedRectangle(cornerRadius: 5)
-//                                                        .stroke(Color(hex: "FFCED2"))
-//                                                }
-//                                        }
-//
-//                                        Spacer()
-//                                    } //HStack
                                 }
                                 .padding(.top, 17)
                             }
-                            //                        .padding(EdgeInsets(top: 17, leading: 26, bottom: 0, trailing: 26))
                         }
                     }//VSTack
                 }//ScrollView

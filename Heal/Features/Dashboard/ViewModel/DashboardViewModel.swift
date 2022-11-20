@@ -54,7 +54,7 @@ class DashboardViewModel: ObservableObject {
         let dateTemp = getStartEndDate()
         
         let ecgTemp = ecg.filter { data in
-            data.timeStampECG! >= dateTemp.startDate! && data.timeStampECG! <= dateTemp.endDate!
+            data.timeStampECG! >= dateTemp.startDate && data.timeStampECG! <= dateTemp.endDate
         }
         
         return ecgTemp
@@ -64,7 +64,7 @@ class DashboardViewModel: ObservableObject {
         let dateTemp = getStartEndDate()
         
         let ecgTemp = ecg.filter { data in
-            data.timeStampECG! >= dateTemp.startDate! && data.timeStampECG! <= dateTemp.endDate! &&
+            data.timeStampECG! >= dateTemp.startDate && data.timeStampECG! <= dateTemp.endDate &&
             data.activities != " "
         }
         
@@ -75,7 +75,7 @@ class DashboardViewModel: ObservableObject {
         let dateTemp = getStartEndDate()
         
         let ecgTemp = ecg.filter { data in
-            data.timeStampECG! >= dateTemp.startDate! && data.timeStampECG! <= dateTemp.endDate! &&
+            data.timeStampECG! >= dateTemp.startDate && data.timeStampECG! <= dateTemp.endDate &&
             data.activities == " "
         }
         
@@ -86,14 +86,14 @@ class DashboardViewModel: ObservableObject {
         let dateTemp = getStartEndDate()
         
         let ecgTemp = ecg.filter { data in
-            data.timeStampECG! >= dateTemp.startDate! && data.timeStampECG! <= dateTemp.endDate! &&
+            data.timeStampECG! >= dateTemp.startDate && data.timeStampECG! <= dateTemp.endDate &&
             data.symptomsClass != 1
         }
         
         return ecgTemp.count
     }
     
-    func getStartEndDate() -> (startDate: Date?, endDate: Date?){
+    func getStartEndDate() -> (startDate: Date, endDate: Date){
         let selectedYear = Int(DateFormatter.displayYear.string(from: Calendar.current.date(byAdding: .day, value: 0, to: Date())!))
         let selectedMonth = Int(DateFormatter.displayMonthNumb.string(from: Calendar.current.date(byAdding: .day, value: 0, to: Date())!))
         
@@ -107,6 +107,6 @@ class DashboardViewModel: ObservableObject {
         components.day = -1
         let endDateOfMonth = Calendar.current.date(byAdding: components, to: startDateOfMonth!)
         
-        return (startDateOfMonth, endDateOfMonth)
+        return (startDateOfMonth!, endDateOfMonth!)
     }
 }
