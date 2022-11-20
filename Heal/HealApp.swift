@@ -16,10 +16,6 @@ struct HealApp: App {
 
     var body: some Scene {
         WindowGroup {
-        
-//            PreAlertView(notification: notification)
-//            PreAlertTest()
-//            MainContainer(heartRate: HKHeartRate())
             OnboardingView()
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
                 .environmentObject(authorizer)

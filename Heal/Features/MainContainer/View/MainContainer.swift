@@ -19,7 +19,7 @@ struct MainContainer: View {
             case "house":
                 DashboardView()
             case "doc.text.below.ecg":
-                CalenderView(currentDate: $currentDate)
+                JournalView()
             case "books.vertical":
                 ProfilePageNew(notification: NotificationHelper(), ecgsViewModel: HKEcgs(), profile: Profile())
             default:

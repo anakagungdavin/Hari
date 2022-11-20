@@ -15,7 +15,6 @@ struct DashboardView: View {
     @StateObject var dashboardViewModel = DashboardViewModel()
     @StateObject var calenderViewModel = DetailJournalViewModel()
     @State var isPresented = false
-    @StateObject var calenderViewModel = DetailJournalViewModel()
     
     @FetchRequest(
         sortDescriptors: [NSSortDescriptor(keyPath: \Ecg.timeStampECG, ascending: true)],
@@ -340,6 +339,7 @@ struct DashboardView: View {
                                 .padding(.top, 17)
                             }
                         }
+                        Spacer(minLength: 100)
                     }//VSTack
                 }//ScrollView
             } //geometry

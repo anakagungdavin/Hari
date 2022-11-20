@@ -3,7 +3,8 @@
 //  Journal_Sympta
 //
 //  Created by Nur Mutmainnah Rahim on 11/10/22.
-//  
+//  swiftlint:disable identifier_name
+//  swiftlint:disable line_length
 
 import SwiftUI
 import CoreData

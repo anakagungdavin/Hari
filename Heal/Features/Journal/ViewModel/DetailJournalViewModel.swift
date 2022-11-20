@@ -3,7 +3,8 @@
 //  Heal
 //
 //  Created by Nur Mutmainnah Rahim on 15/11/22.
-//
+//  swiftlint:disable identifier_name
+//  swiftlint:disable force_try
 
 import SwiftUI
 import CoreData
