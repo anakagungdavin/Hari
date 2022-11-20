@@ -53,6 +53,7 @@ class HKAuthorize: ObservableObject {
                     }
                 }
             }
+            completion(success, error)
         })
     }
 }

@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import CoreData
 
 //model card
 
@@ -27,6 +28,7 @@ func getSampleDate(offset: Int)->Date{
     
     return date ?? Date()
 }
+
 
 //sample card
 var cards: [CardMetaData] = [ //tasks

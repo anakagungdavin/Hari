@@ -15,11 +15,9 @@ struct MainContainer: View {
 
     var body: some View {
         ZStack {
-//            VStack {
-//                Spacer()
             switch selectedTab {
             case "house":
-                PreAlertView(notification: NotificationHelper())
+                DashboardView()
             case "doc.text.below.ecg":
                 CalenderView(currentDate: $currentDate)
             case "books.vertical":
@@ -29,11 +27,11 @@ struct MainContainer: View {
             }
             VStack {
                 Spacer()
-                Button("Test") {
-                    for BPM in heartRate.heartData {
-                        print(BPM.heartRate)
-                    }
-                }
+//                Button("Test") {
+//                    for BPM in heartRate.heartData {
+//                        print(BPM.heartRate)
+//                    }
+//                }
                 CustomTabBar(selectedTab: $selectedTab)
             }
 //            }
