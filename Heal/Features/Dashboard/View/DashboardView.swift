@@ -25,7 +25,7 @@ struct DashboardView: View {
     
     init() {
         let request: NSFetchRequest<Ecg> = Ecg.fetchRequest()
-        request.predicate = NSPredicate(format: "activities == %@", " ")
+        request.predicate = NSPredicate(format: "activities == %@ && timeStampECG <= %@ && timeStampECG > %@", " ", Date() as NSDate, Calendar.current.date(byAdding: .day, value: -1, to: Date())! as NSDate)
         request.sortDescriptors = [
             NSSortDescriptor(keyPath: \Ecg.timeStampECG, ascending: false)
         ]
