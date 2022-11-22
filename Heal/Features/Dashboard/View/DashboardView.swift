@@ -13,7 +13,7 @@ struct DashboardView: View {
     @Environment(\.managedObjectContext) private var viewContext
     @StateObject var dashboardViewModel = DashboardViewModel()
     @State var isPresented = false
-//    @StateObject var calenderViewModel = DetailJournalViewModel()
+    @StateObject var calenderViewModel = DetailJournalViewModel()
     
     @FetchRequest(
         sortDescriptors: [NSSortDescriptor(keyPath: \Ecg.timeStampECG, ascending: true)],
@@ -131,10 +131,12 @@ struct DashboardView: View {
                                                 ) {
                                                     VStack {
                                                         Image("ecg aman")
-                                                        Text("N/A")
+                                                        Text("\(dashboardViewModel.getSymptomClassName(id: Int(i.symptomsClass)))")
                                                             .foregroundColor(.white)
-                                                            .font(.custom("SFProRounded-Semibold", size: 12))
+                                                            .font(.custom("SFProRounded-Semibold", size: 22))
                                                             .frame(width: 50)
+                                                            .minimumScaleFactor(0.01)
+                                                            .lineLimit(1)
                                                         Spacer()
                                                     }.padding(.leading, 40)
                                                 }
