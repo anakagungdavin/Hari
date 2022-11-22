@@ -104,24 +104,37 @@ struct ProfilePageNew: View {
                             height = String(authProc.getProfile.height)
                             weight = String(authProc.getProfile.weight)
                             doBirth = authProc.getProfile.dob
-                            // calling function autofill after tapped
-                            // brt masukin dulu healthkit profile
-                            // ke coredata yg profile, ntar tarik dari situ masukin ke state aja
                         }
                     }
                 }.padding()
             }.navigationTitle("Profile")
                 .navigationBarBackButtonHidden(true)
                 .navigationBarHidden(true)
+        }.onDisappear() {
+            CoreHelper().addIaddtemProfile(viewContext,
+                                           name,
+                                           0,
+                                           doBirth,
+                                           Int32(weight) ?? 0,
+                                           Int32(height) ?? 0,
+                                           gender,
+                                           commorbit)
         }
         .onAppear() {
-            ProfilePageModel().setHealthProfile(viewContext: viewContext, authProc: authProc)
-            gender = authProc.getProfile.sexs
-            height = String(authProc.getProfile.height)
-            weight = String(authProc.getProfile.weight)
-            doBirth = authProc.getProfile.dob
+            name = itemsProfile.last?.name ?? ""
+            doBirth = itemsProfile.last?.doBirth ?? Date()
+            weight = String(describing: itemsProfile.last?.weight ?? 0)
+            height = String(describing: itemsProfile.last?.height ?? 0)
+            gender = itemsProfile.last?.sex ?? ""
+            commorbit = itemsProfile.last?.commorbit ?? ""
 
-            print("************* ANJAYYYYY \(profileData.last?.avgBPM)")
+//            ProfilePageModel().setHealthProfile(viewContext: viewContext, authProc: authProc)
+//            gender = authProc.getProfile.sexs
+//            height = String(authProc.getProfile.height)
+//            weight = String(authProc.getProfile.weight)
+//            doBirth = authProc.getProfile.dob
+//
+//            print("************* ANJAYYYYY \(profileData.last?.avgBPM)")
         }
     }
 }

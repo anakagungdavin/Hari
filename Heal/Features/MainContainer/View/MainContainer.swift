@@ -11,29 +11,28 @@ struct MainContainer: View {
 
     @State var selectedTab = "house"
     @State var currentDate: Date = Date()
+    @EnvironmentObject var authProc: HKAuthorize
     @ObservedObject var heartRate: HKHeartRate
 
     var body: some View {
         ZStack {
-//            VStack {
-//                Spacer()
             switch selectedTab {
             case "house":
-                PreAlertView(notification: NotificationHelper())
+                DashboardView()
             case "doc.text.below.ecg":
-                CalenderView(currentDate: $currentDate)
+                JournalView()
             case "books.vertical":
                 ProfilePageNew(notification: NotificationHelper(), ecgsViewModel: HKEcgs(), profile: Profile())
             default:
-                PreAlertView(notification: NotificationHelper())
+                PreAlertTest(notification: NotificationHelper()).environmentObject(authProc)
             }
             VStack {
                 Spacer()
-                Button("Test") {
-                    for BPM in heartRate.heartData {
-                        print(BPM.heartRate)
-                    }
-                }
+//                Button("Test") {
+//                    for BPM in heartRate.heartData {
+//                        print(BPM.heartRate)
+//                    }
+//                }
                 CustomTabBar(selectedTab: $selectedTab)
             }
 //            }

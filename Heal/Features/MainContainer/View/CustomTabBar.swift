@@ -29,11 +29,11 @@ struct CustomTabBar: View {
     }
 }
 
-struct CustomTabBar_Previews: PreviewProvider {
-    static var previews: some View {
-        PreAlertView(notification: NotificationHelper())
-    }
-}
+//struct CustomTabBar_Previews: PreviewProvider {
+//    static var previews: some View {
+//        PreAlertView(notification: NotificationHelper())
+//    }
+//}
 
 struct TabBarButton: View {
 
@@ -56,7 +56,7 @@ struct TabBarButton: View {
                 Image(systemName: image)
                     .font(.system(size: 25, weight: .semibold))
                     .foregroundColor(selectedTab == image ? .white : Color(hex: "FFCED2"))
-                    .offset(y: selectedTab == image ? -5 : 0)
+//                    .offset(y: selectedTab == image ? -5 : 0)
             })
             // Max frame..
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
