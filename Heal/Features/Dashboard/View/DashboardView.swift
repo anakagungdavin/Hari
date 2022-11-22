@@ -13,7 +13,7 @@ struct DashboardView: View {
     @Environment(\.managedObjectContext) private var viewContext
     @StateObject var dashboardViewModel = DashboardViewModel()
     @State var isPresented = false
-    @StateObject var calenderViewModel = DetailJournalViewModel()
+//    @StateObject var calenderViewModel = DetailJournalViewModel()
     
     @FetchRequest(
         sortDescriptors: [NSSortDescriptor(keyPath: \Ecg.timeStampECG, ascending: true)],
@@ -121,7 +121,6 @@ struct DashboardView: View {
                                                             .font(.custom("SFProRounded-Semibold", size: 20))
                                                             .minimumScaleFactor(0.01)
                                                             .lineLimit(1)
-                                                        
                                                         Spacer()
                                                     }
                                                     .padding(.leading, 100)
@@ -131,7 +130,7 @@ struct DashboardView: View {
                                                                 DetailJournal(journalData: calenderViewModel, ecg:i.avgBPM, date: Date().toString(dateFormat: "dd MMMM YYYY"), hour: Date().toString(dateFormat: "HH : mm"))
                                                 ) {
                                                     VStack {
-                                                        Image("ecg kosong")
+                                                        Image("ecg aman")
                                                         Text("N/A")
                                                             .foregroundColor(.white)
                                                             .font(.custom("SFProRounded-Semibold", size: 12))
@@ -200,7 +199,6 @@ struct DashboardView: View {
                                             }
                                             .chartXScale(range: .plotDimension(padding: 5))
                                             .chartYScale(range: .plotDimension(padding: 5))
-                                            
                                         } //scrollview
                                         
                                         VStack{
