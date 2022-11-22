@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Charts
 
 struct DetailJournal: View {
     @Environment(\.managedObjectContext) private var viewContext
@@ -27,6 +28,8 @@ struct DetailJournal: View {
     var date: String
     var hour: String
     var coreDataItem : Ecg?
+    var xPoints: [Double]
+    var yPoints: [Double]
     @State var gejala: [String] = []
     @State var aktivitas: String = ""
     @State var obat: String = ""
@@ -89,8 +92,17 @@ struct DetailJournal: View {
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .position(x:200, y:25)
                         
-                        Image("ECGraph")
-                            .position(x:175, y:45)
+                        Chart {
+                            ForEach (0...2000, id: \.self) { points in
+                                LineMark(
+                                    x: .value("time", xPoints[points]),
+                                    y: .value("ecg", yPoints[points])
+                                )
+                            }
+                        }
+                        .frame(width: 300, height: 200, alignment: .center)
+                        .position(x:175, y:45)
+                        .foregroundColor(Color(.black))
                         Text("Ritme Sinus")//Status ECG
                         //.frame(maxWidth: .infinity, alignment: .leading)
                             .position(x:70, y:35)

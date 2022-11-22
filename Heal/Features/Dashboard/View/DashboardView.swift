@@ -107,7 +107,7 @@ struct DashboardView: View {
                                         
                                         HStack {
                                             ForEach(ecgToday){ i in
-                                                NavigationLink(destination: DetailJournal(journalData: calenderViewModel, ecg:i.avgBPM, date: Date().toString(dateFormat: "dd MMMM YYYY"), hour: Date().toString(dateFormat: "HH : mm"))
+                                                NavigationLink(destination: DetailJournal(journalData: calenderViewModel, ecg:i.avgBPM, date: Date().toString(dateFormat: "dd MMMM YYYY"), hour: Date().toString(dateFormat: "HH : mm"),xPoints: i.xAxis!, yPoints: i.yAxis!)
                                                 ) {
                                                     VStack {
                                                         Image(i.activities == " " ? "bpm aman" : "bpm gak normal")
@@ -127,7 +127,7 @@ struct DashboardView: View {
                                                     .padding(.leading, 100)
                                                 }
                                                 
-                                                NavigationLink(destination: DetailJournal(journalData: calenderViewModel, ecg:i.avgBPM, date: Date().toString(dateFormat: "dd MMMM YYYY"), hour: Date().toString(dateFormat: "HH : mm"))
+                                                NavigationLink(destination: DetailJournal(journalData: calenderViewModel, ecg:i.avgBPM, date: Date().toString(dateFormat: "dd MMMM YYYY"), hour: Date().toString(dateFormat: "HH : mm"),xPoints: i.xAxis!, yPoints: i.yAxis!)
                                                 ) {
                                                     VStack {
                                                         Image("ecg kosong")
@@ -139,7 +139,7 @@ struct DashboardView: View {
                                                     }.padding(.leading, 40)
                                                 }
                                                 
-                                                NavigationLink(destination: DetailJournal(journalData: calenderViewModel, ecg:i.avgBPM, date: Date().toString(dateFormat: "dd MMMM YYYY"), hour: Date().toString(dateFormat: "HH : mm"))
+                                                NavigationLink(destination: DetailJournal(journalData: calenderViewModel, ecg:i.avgBPM, date: Date().toString(dateFormat: "dd MMMM YYYY"), hour: Date().toString(dateFormat: "HH : mm"),xPoints: i.xAxis!, yPoints: i.yAxis!)
                                                 ) {
                                                     VStack {
                                                         Image(i.activities == " " ? "aktivitas kosong" : "aktivitas aman")
