@@ -11,6 +11,7 @@ struct MainContainer: View {
 
     @State var selectedTab = "house"
     @State var currentDate: Date = Date()
+    @EnvironmentObject var authProc: HKAuthorize
     @ObservedObject var heartRate: HKHeartRate
 
     var body: some View {
@@ -23,7 +24,7 @@ struct MainContainer: View {
             case "books.vertical":
                 ProfilePageNew(notification: NotificationHelper(), ecgsViewModel: HKEcgs(), profile: Profile())
             default:
-                PreAlertView(notification: NotificationHelper())
+                PreAlertTest(notification: NotificationHelper()).environmentObject(authProc)
             }
             VStack {
                 Spacer()
